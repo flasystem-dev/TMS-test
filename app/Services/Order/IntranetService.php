@@ -25,7 +25,6 @@ class IntranetService
 
     public static function makeBaljuData($order,OrderProduct $orderProduct,  $input)
     {
-
         $brand = DB::table('code_of_company_info')->where('brand_type_code', $order->brand_type_code)->first();
         $product = Product::find($order->item->product_id);
 
@@ -71,7 +70,7 @@ class IntranetService
             'rw_photourl'       => $order->goods_url,                // 이미지경로
             'rw_type'           => 'hosting',
             'rw_paymethod'      => 'card',
-            'rw_writer'         => $order->handler,
+            'rw_writer'         => Auth::user() -> name,
             'rw_dica'           => $input['rw_dica']? "Y" : "N",
             'rw_happycall'      => $input['rw_happycall']? "Y" : "N",
             //            'rw_item_name'      =>
@@ -97,8 +96,6 @@ class IntranetService
 
     public static function balju_order($data)
     {
-
-
         $url = "http://ext2intra.roseweb.co.kr/intranet_post.html";
 
         $response = Http::asForm()->post($url, $data);
