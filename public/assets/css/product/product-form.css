@@ -1,0 +1,28 @@
+
+.table>:not(caption)>*>* { padding: 5px; }
+
+.btn {
+    --bs-btn-padding-x: 13px;
+    --bs-btn-padding-y: 7px;
+    --bs-btn-font-size: 14px; }
+
+.card{margin-bottom: 2px; }
+
+.col-12{margin-bottom: -5px; }
+.col-6{margin-bottom: -5px !important; }
+
+.row { --bs-gutter-x: 0.25rem; }
+
+.price-add-btn { display: inline-block; margin-left: 10px; }
+
+#product-price-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;}
+.product-price-area { display: inline-block; width: calc(70% - 10px); }
+
+.input-group .price_type_select { background-color: #f5f6f8; flex: 0 0 150px; width: 100px;}
+
+#product-options-container .input-group-text { width: 80px; }
+
+.price-type-title { flex: 0 0 150px !important }
+
+.title-input { background-color: #f5f6f8; text-align: center !important; font-weight: bold; }
+.option-values .option-prices { text-align: end; flex: 0 0 120px }

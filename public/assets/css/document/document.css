@@ -1,0 +1,38 @@
+/* 리스트 th */
+/* 체크 */
+.th1 { width: 3% !important; }
+/* 번호 */
+.th2 { width: 8%; }
+/* 채널 */
+.th3 { width: 7%; }
+/* 주문일 */
+.th4 { width: 15%; }
+/* 주문자 */
+.th5 { width: 8%; }
+/* 주문상품 */
+.th6 {  }
+/* 결제상태 */
+.th7 { width: 6%; }
+/* 결제일 */
+.th8 { width: 8%; }
+/* 영수증 */
+.th9 { width: 6%; }
+/* 현금영수증 */
+.th10 { width: 6%; }
+/* 환불처리 */
+.th11 { width: 6%; }
+
+#order_date { display: inline-block; width: 150px; }
+.deli_date { width: 100% !important;}
+.orderer_name { width: 150px; color: #212121; font-weight: 600;}
+.center .gs_name { width: 100%; min-width: 150px; white-space: normal; }
+
+.payment_tbl th, .payment_tbl td { vertical-align: middle; text-align: center }
+.payment_tbl .tbl_radio { width: 10px; }
+.payment_tbl .tbl_num { width: 40px; padding: 5px;}
+.payment_tbl .tbl_type {width: 90px;}
+.payment_tbl .tbl_price {width: 100px;}
+.payment_tbl .tbl_name {max-width: 70px;}
+.payment_tbl .tbl_memo {max-width: 70px;}
+.payment_tbl .tbl_payment_radio { width: 15px; height: 15px; margin-top: 7px; }
+.pay_price { font-weight: bold; color: #964343; }

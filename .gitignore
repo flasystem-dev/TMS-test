@@ -1,0 +1,6 @@
+/node_modules
+app/Console/Kernel.php
+/storage/logs
+/.env
+.log
+public/assets/images

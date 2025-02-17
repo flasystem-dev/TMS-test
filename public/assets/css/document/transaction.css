@@ -1,0 +1,120 @@
+.th1 { width: 20px; }
+.th2 { width: 110px; }
+.th3 { width: 100px; }
+.th4 { width: 80px; }
+.th5 { width: 120px; }
+.th6 { width: 120px; }
+.th7 { width: 8%; }
+/*.th8 { width: 12%; }*/
+.th9 { width: 5%; }
+.th10 { width: 10%; }
+.th11 { width: 5%; }
+
+.main-content { min-width: 1500px !important; }
+.order_data_area { display: flex; }
+.order_cnt_cont { display: inline-block; }
+.table-hover>tbody>tr:hover>* { --bs-table-accent-bg : #032d7f14 !important }
+
+
+.order_title {
+    display: inline-block;
+    padding: 10px;
+    font-weight: bold;
+    height: 40px;
+    width: 80px;
+    vertical-align: middle;
+    border-radius: 15px 0 0 15px ;
+    background-color : #ddd;
+    border: 1px solid #ddd;
+}
+
+.all_order { background-color: #ff6f6f !important; border : 1px solid #ff6f6f !important; color: #fff !important;}
+.sel_order { background-color: #4e9cff !important; border : 1px solid #4e9cff !important; color: #fff !important;}
+
+
+.order_data {
+    position: relative;
+    left: -4px;
+    top: 2px;
+    height: 40px;
+    padding: 10px 25px 10px 20px;
+    border-radius: 0 15px 15px 0 ;
+    font-weight: bold;
+    border: 1px solid #ddd;
+}
+
+.allOrder_cnt { border-right: 1px solid #ddd }
+
+.card .card-body .search_none {
+    text-align: center;
+    padding: 50px;
+    font-size: 28px;
+}
+
+.card .card-body .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.card .card-body table.transaction {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 13px;
+}
+.transaction .input_text {
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.card .card-body .table td a {
+    cursor: pointer;
+}
+
+.deli_date { width: 80px !important; }
+.input_ribbon { width: 150px !important; }
+
+
+
+
+.send_document_area {
+    position: fixed;
+    bottom: 10px;
+    left: 400px;
+    box-sizing: border-box;
+    min-width: 1250px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    opacity: 0.9;
+    z-index: 100;
+    padding: 15px 20px;
+}
+
+.send_document_area .order_cnt_cont {
+    font-size: 13px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.send_document_area .order_cnt_cont span { display: inline-block; }
+
+.right_btn { float: right; }
+
+#issuance_id { width: 300px; height: 40px; position: relative; left: -4px; }
+.select2-container { left: -4px; }
+.select2-container--open .select2-dropdown--above { z-index: 999 }
+
+.transaction_send_container {
+
+}
+
+.transaction_send_area { display: inline-block;}
+.tran_title { line-height: 17px; }
+.transaction_send_area .form-select { display: inline-block; width: 120px; height: 40px; position: relative; top: 2px; left: -4px;}
+.transaction_send_area .form-select.tran_month { width: 80px; left: -15px }
+.transaction_send_area .btn { height: 40px }
+.transaction_send_area .btn.scroll_btn { width: 40px; height: 40px; font-size: 16px}

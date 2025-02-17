@@ -1,0 +1,67 @@
+.pagination { width: auto }
+.input-group-text { width: 110px; }
+
+.search_area_menu1 { display: flex; gap: 20px; }
+
+.search_area_menu1 .menu1 { flex-basis: 27%; }
+.search_area_menu1 .menu2 { flex-basis: 15%; }
+.search_area_menu1 .menu3 { flex-basis: 15%; }
+.search_area_menu1 .menu4 { flex-basis: 15%; }
+.search_area_menu1 .menu5 { flex-basis: 18%; }
+.search_area_menu1 .menu5 select { flex: 0 0 30%; }
+
+.select_brand { border:1px solid #d1d1d1; }
+
+.brand_btns input:checked + label.select_brand_BTCP { background-color: #f33737 !important; color: #fff; border: 1px solid #f33737}
+.brand_btns input:checked + label.select_brand_BTCC { background-color: #ffb500 !important; color: #fff; border: 1px solid #ffb500}
+.brand_btns input:checked + label.select_brand_BTSP { background-color: #2d73c3 !important; color: #fff; border: 1px solid #2d73c3}
+.brand_btns input:checked + label.select_brand_BTBR { background-color: #ef697b !important; color: #fff; border: 1px solid #ef697b}
+.brand_btns input:checked + label.select_brand_BTOM { background-color: #fd9a3c !important; color: #fff; border: 1px solid #fd9a3c}
+.brand_btns input:checked + label.select_brand_BTCS { background-color: #73bf43 !important; color: #fff; border: 1px solid #73bf43}
+.brand_btns input:checked + label.select_brand_BTFC { background-color: #34c28e !important; color: #fff; border: 1px solid #34c28e}
+
+.search_area_menu2 { display: flex; gap: 20px; }
+
+.search_area_menu2 .menu1 { flex-basis: 15%; }
+.search_area_menu2 .menu2 { flex-basis: 18%; }
+.search_area_menu2 .menu3 { flex-basis: 40%; }
+.search_area_menu2 .menu4 { flex-basis: 15%; }
+.search_area_menu2 .menu5 { flex-basis: 7%; text-align: end; }
+
+.search_area_menu3 { display: flex; gap: 20px; }
+
+.search_area_menu3 .menu1 { flex-basis: 15%; }
+.search_area_menu3 .menu2 { flex-basis: 15%; }
+.search_area_menu3 .menu3 { flex-basis: 15%; }
+.search_area_menu3 .menu4 { flex-basis: 15%; }
+
+.cancel_check_container { float: right; }
+
+.gs_name, .deli_date, .addr, .ribbon_left, .state_p { margin: 0 auto;}
+
+.payments_area { display: flow-root; align-items: center; }
+.span_PT { display: inline-block; padding: 3px; }
+.payments_area .deposit_name_text { font-size: 12px; display: -webkit-inline-box; width: 85%; text-align: left}
+
+.count_text {
+    margin: 0 5px 0 0;
+    background-color: #6d6d6d; /* 어두운 배경색 */
+    color: #c9c9c9; /* 흰색 텍스트 */
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px; /* 패딩을 추가하여 여유 공간 확보 */
+    border-radius: 4px; /* 모서리를 약간 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 가벼운 그림자 */
+    border: 1px solid #6d6d6d; /* 얇은 테두리 */
+    display: inline-block; /* 텍스트를 인라인 블록으로 */
+    letter-spacing: 0.5px; /* 글자 간격 */
+    text-align: center;
+}
+
+.count_text span { color: #fff; }
+
+.table tr th, .table tr td { padding: 0px 4px; }
+
+.mb-1 {margin-bottom: 3px; text-align: left; }
+
+.center { text-align: center; }

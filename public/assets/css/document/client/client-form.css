@@ -1,0 +1,55 @@
+.layout-wrapper { min-width: 550px; }
+
+label { text-align: center; }
+.check_brand { border:1px solid #d1d1d1; font-weight: bold }
+
+.brand_btns input:checked + label.check_brand_BTCP { background-color: #f33737 !important; color: #fff; border: 1px solid #f33737}
+.brand_btns input:checked + label.check_brand_BTCC { background-color: #ffb500 !important; color: #fff; border: 1px solid #ffb500}
+.brand_btns input:checked + label.check_brand_BTSP { background-color: #2d73c3 !important; color: #fff; border: 1px solid #2d73c3}
+.brand_btns input:checked + label.check_brand_BTBR { background-color: #ef697b !important; color: #fff; border: 1px solid #ef697b}
+.brand_btns input:checked + label.check_brand_BTOM { background-color: #fd9a3c !important; color: #fff; border: 1px solid #fd9a3c}
+.brand_btns input:checked + label.check_brand_BTCS { background-color: #73bf43 !important; color: #fff; border: 1px solid #73bf43}
+.brand_btns input:checked + label.check_brand_BTFC { background-color: #34c28e !important; color: #fff; border: 1px solid #34c28e}
+
+.form_row { display: flex; justify-content: space-between; gap:20px; }
+
+.end_text { width: 60px; }
+
+.add_btn { float: right; top: -10px; }
+
+.table thead tr th { text-align: center; }
+.table thead tr td { align-items: center; }
+.table tbody tr td p { margin: 0; }
+
+.select2-container { width: calc(100% - 100px) !important; }
+.select2-selection { min-height: 40px; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 38px !important; }
+.select2-results__option span, .select2-selection--single span { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;}
+.select2-results__option .user_channel, .select2-selection--single .user_channel{ width: 34%}
+.select2-results__option .user_name, .select2-selection--single .user_name { width: 34%}
+.select2-results__option .user_id, .select2-selection--single .user_id { width: 20%}
+.select2-results__option .user_vendor, .select2-selection--single .user_vendor{ width: 12%; text-align: end}
+
+.brand_type { width: 60px; text-align: center; }
+
+.form_row input:checked + label.is_default { background-color: #5b73e8; color: #fff; }
+
+td { vertical-align: center; text-align: center; }
+
+.default_text {
+    float: left;
+    margin: 0 5px 0 0;
+    background-color: #5b73e8; /* 어두운 배경색 */
+    color: #fff; /* 흰색 텍스트 */
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px; /* 패딩을 추가하여 여유 공간 확보 */
+    border-radius: 4px; /* 모서리를 약간 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 가벼운 그림자 */
+    border: 1px solid #5b73e8; /* 얇은 테두리 */
+    display: inline-block; /* 텍스트를 인라인 블록으로 */
+    letter-spacing: 0.5px; /* 글자 간격 */
+    text-align: center;
+}
+
+.default_name { text-align: left; }

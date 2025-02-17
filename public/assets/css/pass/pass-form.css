@@ -1,0 +1,8 @@
+.layout-wrapper { min-width: 550px; }
+
+.pass_form_row { display: flex; justify-content: space-between; gap:20px; }
+
+.end_text { width: 60px; }
+
+.check_dup { border : 1px solid red; }
+.check_ok { border : 1px solid #09d709; }

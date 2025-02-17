@@ -1,0 +1,28 @@
+
+.table>:not(caption)>*>* { padding: 5px; }
+
+.btn {
+    --bs-btn-padding-x: 13px;
+    --bs-btn-padding-y: 7px;
+    --bs-btn-font-size: 14px; }
+
+.pe-1 {
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+}
+
+.ps-1 {
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.card{margin-bottom: 2px; }
+
+.col-12{margin-bottom: -5px; }
+.col-6{margin-bottom: -5px !important; }
+
+.row { --bs-gutter-x: 0.25rem; }

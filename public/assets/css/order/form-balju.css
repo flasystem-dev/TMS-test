@@ -1,0 +1,72 @@
+.card .card-body .table { font-size: 14px; }
+.card .card-body .table th { width: 100px; height: 30px; padding: 5px 5px;}
+.card .card-body .table td { padding :2px 3px;}
+.card .card-body .table td input { height: 30px; padding: 3px 5px;}
+.card .card-body .table td select { height: 30px; padding: 3px 5px;}
+.card .card-body .table td .input_btn { height: 30px; width: 100px; padding: 3px 5px;}
+.card .card-body .table .delivery_long_text { display: inline-block; width: 300px;}
+.card .card-body .table .delivery_short_text { display: inline-block; width: 200px;}
+.card .card-body .table .delivery_addr_text { display: inline-block; width: 760px;}
+.card .card-body .table .shop_addr { width: 200px; }
+.card .card-body .table .event_text { display: inline-block; width: 300px; }
+.card .card-body .table .event_textarea { width: 100%; min-height: 80px; vertical-align: middle; }
+.card .card-body .table .memo { width: 310px; }
+.card .card-body .table td input.form_checkbox { height: 20px; width: 20px; padding: 0; margin-left: 10px;}
+.card .card-body .table td.td_checkbox { vertical-align: middle; padding: 0 5px; height: 25px; width: 150px;}
+.submit_btn { position: fixed; right: 0; bottom: 0;}
+
+.product-container { display: flex; flex-direction: column; }
+.product-table-row { display:flex; justify-content: space-between; align-items: center; gap: 15px; height: 35px; }
+.product-table-border { border-bottom: 1px solid #d1d1d1; }
+
+
+
+.row-result { background-color: #fff0f0 }
+.product-name { flex-grow: 1; }
+.product-price { flex-basis: 150px;}
+.product-price-padding { padding-right: 35px; }
+.product-vendor-price { flex-basis: 120px;}
+.price-input { text-align: end; padding-right: 10px; height: 25px; }
+.text-input { height: 25px; text-align: center; }
+.product-balju-price { flex-basis: 120px;}
+.product-etc { flex-basis: 35px; padding-right: 10px;}
+.balju-result { color: #0a53be }
+.option-result { color: #b5b504 }
+
+.balju-container { display:flex; justify-content: space-between; align-items: center; gap: 10px; padding: 5px 0 5px 0; }
+.product-balju { flex-grow: 1;}
+.product-balju-text { flex-basis: 95px; text-align: end; }
+.product-balju-amount { flex-basis: 90px;}
+.option-btn { width: 25px; height: 25px; line-height: 1; padding: 5px; }
+
+
+.option_table { padding:10px 0; }
+.card .card-body .option_table td { padding: 5px; }
+.card .card-body .option_table .price_title { font-weight: bold; width: 300px; text-align: center; }
+.card .card-body .option_table .option_title { font-weight: bold; width: 300px; padding-left: 30px; font-size: 13px; color: #9a9a9a }
+.card .card-body .option_table .price_text { width: 120px; text-align: right; padding-right: 20px;}
+.card .card-body .option_table .option_ratio { width: 100px; text-align: right}
+.card .card-body .option_table .option_ratio_icon { padding-right: 15px !important }
+.card .card-body .option_table .balju_amount { padding-left: 30px; width: 150px; text-align: right;}
+.card .card-body .option_table .option_check { padding-left: 20px; text-align: center; }
+.card .card-body .option_table td input.option_checkbox { height: 20px; width: 20px; margin: 2px; padding: 0; vertical-align: middle}
+
+.dis_price_text { width: 130px; text-align: end }
+.thead_border_bottom { border-bottom: 1px solid #d1d1d1 !important; }
+.shop_request { width: 300px; }
+.handler_text { width: 100%; position: relative; top: -5px; }
+.order_price_text { margin-top: 10px; margin-bottom: 0px; padding-left: 20px; font-weight: bold; color: #fd7979; position: relative; top:-15px; font-size: 13px;}
+
+.card {--bs-card-spacer-y: 0.25rem;}
+
+tbody, td, tfoot, th, thead, tr {margin-top: 2px;}
+
+
+.total-text { font-size: 13px; font-weight: bold; }
+.total-balju-price { flex-grow: 1; text-align:center; }
+.total-calculate-price { flex-basis: 80px; text-align:center; }
+.total-balju-symbol { flex-basis: 30px; text-align:center; }
+
+.total-balju-price .form-control { height: 25px; display: inline-block; text-align: end; width: 120px;}
+input.sale_amount { height: 20px; width: 20px; margin: 2px; padding: 0;}
+.sale_amount_label { vertical-align: middle; font-size: 13px; font-weight: bold; position: relative; top: -2px;}

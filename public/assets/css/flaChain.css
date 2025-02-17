@@ -1,0 +1,25 @@
+#page-topbar{
+    left:0 !important;
+}
+#input_did_num { cursor: pointer }
+
+.btn_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.btn_container .btn {
+    flex: 0 0 30%;
+}
+
+a.file_exist { width: 150px; font-weight: bold; color: #5b73e8 }
+
+.recommend_text { height: 35px; }
+.recommend_area .select2-container { width: calc( 100% - 100px ) !important; display: flex; }
+.recommend_area .select2-container .selection { width: 100%; }
+.recommend_area .select2-container .select2-selection--single { height: 35px; border-radius: 0 4px 4px 0 }
+.select2-results__option span, .select2-selection--single span {display: inline-block; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;}
+.select2-results__option .shop_name , .select2-selection--single .shop_name { width: 40% }
+.select2-results__option .rep_name , .select2-selection--single .rep_name { width: 30% }
+.select2-results__option .partner_name, .select2-selection--single .partner_name { width: 30% }

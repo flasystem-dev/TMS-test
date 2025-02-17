@@ -1,0 +1,59 @@
+#sales_table th, #sales_table td { border: 1px solid #efefef !important;  padding: 5px 10px; }
+
+#sales_table tr th { background-color: #f8f8f8 !important; text-align: center;}
+#sales_table tr td.brand_name { font-weight: 700; background-color: #fff !important; }
+#sales_table td.amount { text-align: right; color:#495057; }
+#sales_table th.amount { color:#495057; font-weight: bold; }
+
+#sales_table tr td.BTCP { color: #f33737; }
+#sales_table tr td.BTCC { color: #ffb500; }
+#sales_table tr td.BTSP { color: #2d73c3; }
+#sales_table tr td.BTBR { color: #ef697b; }
+#sales_table tr td.BTOM { color: #fd9a3c; }
+#sales_table tr td.BTCS { color: #73bf43; }
+#sales_table tr td.BTFC { color: #34c28e; }
+
+#sales_table td.today_data { background-color: #E3F2FD }
+#sales_table td.monthly_data { background-color: #E8F5E9 }
+#sales_table td.yearly_data { background-color: #FFF3E0 }
+#sales_table td.yearAgo_data { background-color: #ECEFF1 }
+
+.brand_btn_container { display: flex; justify-content: space-between; gap: 5px;}
+.brand_btn_container .btn { display: inline-block; width: 100%; }
+.brand_btn_container label { background-color: #fff !important; }
+.brand_btn_container label.BTCP { color: #f33737; }
+.brand_btn_container label.BTCC { color: #ffb500; }
+.brand_btn_container label.BTSP { color: #2d73c3; }
+.brand_btn_container label.BTBR { color: #ef697b; }
+.brand_btn_container label.BTOM { color: #fd9a3c; }
+.brand_btn_container label.BTCS { color: #73bf43; }
+.brand_btn_container label.BTFC { color: #34c28e; }
+
+.brand_btn_container input:checked + label { font-weight: bold; }
+.brand_btn_container input:checked + label.BTCP { background-color: #f33737 !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTCC { background-color: #ffb500 !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTSP { background-color: #2d73c3 !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTBR { background-color: #ef697b !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTOM { background-color: #fd9a3c !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTCS { background-color: #73bf43 !important; color: #fff; border: 1px solid }
+.brand_btn_container input:checked + label.BTFC { background-color: #34c28e !important; color: #fff; border: 1px solid }
+
+.calendar_top { display: flex; justify-content: end }
+.month_sales_title { margin-right: 10px; color: #ff6c6c }
+.monthly_sales_data { margin-right: 20px; text-align: center; font-size: 18px; line-height: 30px; font-weight: bold;}
+.month_sales_text { font-weight: 500; }
+.brand_search_container { text-align: end; }
+.brand_search_container .date_type , .brand_search_container .date_type_input { height: 30px; }
+.brand_search_container .date_type_input { position: relative; top: 2px; }
+
+.fc-toolbar-title, .fc .fc-toolbar h2 {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+.fc-day div a { color: #696969; }
+.fc-day-sun div a { color: red; }
+.fc-day-sat div a { color: blue; }
+
+.order_amount { display: inline-block; font-weight: bold; }

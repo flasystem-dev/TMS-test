@@ -1,0 +1,83 @@
+[tooltip]::before,
+[tooltip]::after { font-size: 16px; }
+
+.table tr th, .table tr td { padding: 5px 10px; }
+
+.pagination { display: flex; justify-content: space-around; width: 50%; margin: 0 auto; font-weight: bold;}
+
+.excel_modal_select { display: inline-block; width: 150px; }
+.excel_modal_date_input { display: inline-block; width: 140px; }
+.excel_modal_date_btn { height: 25px; line-height: 8px; font-size: 12px; padding: 6px; margin: 0 3px 0 0; }
+.excel_modal_checkbox { display: inline-block }
+.excel_modal_brand_checkbox { margin: 0 auto; background: none; border-radius: 3px; border: solid 1px; font-weight: bold; font-size: 14px; width: 60px;  }
+.brand_checkbox:checked + .brand_BTCP { color: #f33737; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTCC { color: #ffb500; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTSP { color: #2d73c3; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTBR { color: #ef697b; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTOM { color: #fd9a3c; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTCS { color: #73bf43; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTFC { color: #34c28e; border: solid 1px; }
+
+.select_perPage { display: inline-block; width: 100px; height: 29px; font-size: 12px; padding: 3px 10px;}
+
+.icon_insu { background-color: #ffff70 }
+.icon_photo { background-color: #e5e5e5; }
+
+.deposit_name_text {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.addr, .ribbon_left, .gs_name { margin: 0 auto; }
+
+.today_delivery { background-color: #ffebef !important }
+.tomorrow_delivery { background-color: #fffbd7 !important }
+
+.inflow_check{
+    position: absolute;
+    top: 3px;
+    right: -6px;
+    color: #71dd65;
+    border-radius: 2px;
+    padding: 1px;
+}
+
+.icon_font_size { font-size: 16px; }
+
+.date_container { padding-right: 20px; }
+.span_date { display: inline-block; width: 160px; }
+
+.popover {
+    font-size: 16px; /* 폰트 크기 */
+    background-color: #333; /* 배경색 */
+    color: #fff; /* 글자색 */
+    --bs-popover-bg : #333;
+    opacity: 0.9;
+}
+
+.popover-body {
+    color: #fff;
+}
+
+.card { margin-bottom: 0.25rem; }
+
+.count_text {
+    margin: 0 5px 0 0;
+    background-color: #6d6d6d; /* 어두운 배경색 */
+    color: #c9c9c9; /* 흰색 텍스트 */
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px; /* 패딩을 추가하여 여유 공간 확보 */
+    border-radius: 4px; /* 모서리를 약간 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 가벼운 그림자 */
+    border: 1px solid #6d6d6d; /* 얇은 테두리 */
+    display: inline-block; /* 텍스트를 인라인 블록으로 */
+    letter-spacing: 0.5px; /* 글자 간격 */
+    text-align: center;
+}
+
+.count_text span { color: #fff; }
+

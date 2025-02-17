@@ -1,0 +1,18 @@
+body { min-height: 0 !important; }
+.calendar_container { padding: 10px 20px; }
+
+.calendar_top { display: flex; justify-content: end }
+.month_sales_title { margin-right: 10px; color: #ff6c6c }
+.monthly_sales_data { margin-right: 20px; text-align: center; font-size: 18px; line-height: 30px; font-weight: bold;}
+.month_sales_text { font-weight: 500; }
+
+.fc-toolbar-title, .fc .fc-toolbar h2 {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+}
+
+.fc-day div a { color: #696969; }
+.fc-day-sun div a { color: red; }
+.fc-day-sat div a { color: blue; }
+.order_amount { display: inline-block; font-weight: bold; }

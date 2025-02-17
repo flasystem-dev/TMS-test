@@ -1,0 +1,18 @@
+.table_border { border: 2px solid #333; border-collapse: collapse; }
+.table_border th, .table_border td { border: 1px solid #ddd; }
+
+.table_border th[colspan="2"].text-center,
+.table_border th[colspan="3"].text-center,
+.table_border th[colspan="5"].text-center,
+.table_border th[colspan="4"].text-center,
+.table_border th[colspan="2"].text-center,
+.table_border td.border_right, .table_border th.border_right
+{
+    border-right: 2px solid #333;
+}
+
+.table tr th.basic_text { background-color: #dfdfdf }
+.table tr th.revenue_title { background-color: #ffb3b3 }
+.table tr th.deduction_title { background-color: #c6c6ff }
+.table tr th.profit_title { background-color: #bcffbc }
+.table tr th.sales_title { background-color: #FFF3E0 }

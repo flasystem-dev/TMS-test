@@ -1,0 +1,36 @@
+.goods_modal {
+    width:650px;
+}
+
+.input-group-text {
+    width: 100px;
+    padding: 5px 10px;
+}
+
+.goods_sub_text {
+    font-size: 0.8em;
+}
+
+.input-group .goods_list { width: 60px;}
+
+.goods_sub_name { width: 60px;}
+
+.ctgy_type1 { width: 32%; }
+.ctgy_type2 { width: 49%; }
+
+.select2-results__option span, .select2-selection--single span { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;}
+.select2-results__option .did_number, .select2-selection--single .did_number{ width: 20%}
+.select2-results__option .shop_name, .select2-selection--single .shop_name { width: 35%}
+.select2-results__option .gen_number, .select2-selection--single .gen_number { width: 25%}
+.select2-results__option .rep_name, .select2-selection--single .rep_name{ width: 20%}
+
+.product_select_table tr { max-height: 25px !important;}
+.product_select_table tr td, .product_select_table tr th { padding: 5px 10px; max-height: 25px !important; }
+.product_select_table .price_radio { font-size: 20px; vertical-align: middle; text-align: center; width: 180px;}
+.product_select_table .price_type_text { font-size: 13px;}
+.product_select_table td.product_img { width: 100px; height: 100%; vertical-align: middle }
+.product_select_table td.product_name { width: 300px; vertical-align: middle; }
+.product_select_table td .product_option_text { width: 60px; height: 35px; font-size: 14px; vertical-align: middle }
+.product_select_table td .product_option_select { height: 35px; font-size: 14px; padding: 0 10px; vertical-align: middle }
+
+.admin_memo_area { position: fixed; bottom: 0; right: 0; width: 500px; height: 203px; z-index: 10; border-radius: 15px 15px 0 0; opacity: 0.9; padding: 0; }

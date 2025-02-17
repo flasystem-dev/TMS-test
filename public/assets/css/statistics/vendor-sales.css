@@ -1,0 +1,35 @@
+.page_top { display: flex; justify-content: space-between; }
+.vendors_info { flex-basis: 75%; display: flex; gap: 100px; }
+.sales_info { flex-basis: 25%; }
+
+.vendors_brand { display: flex; gap: 30px; align-items: center;}
+.vendors_brand p { margin: 0; }
+.vendors_brand_text { font-size: 16px; font-weight: bold; }
+
+.new_vendors_text { font-size: 13px; font-weight: 500; text-align: center; }
+.vendors_count { font-size: 18px; font-weight: bold; }
+
+.sales_info { display: flex; gap: 20px; align-items: center;}
+.date_type { height: 35px; line-height: 25px; }
+.select_month_container { display: flex; }
+.select_year, .select_month { display: inline-block; width: 80px; height: 35px; line-height: 15px; margin-right: 5px;}
+.search_btn { width: 60px; height: 35px; line-height: 25px; font-size: 16px; }
+
+.vendor_type_text { color: #495957; border: 1px solid; }
+
+.btn-check:checked+.vendor_BTFCB { color: #fff; background-color: #34c28e }
+.btn-check:checked+.vendor_BTFCC { color: #fff; background-color: #34c28e }
+.btn-check:checked+.vendor_BTCS { color: #fff; background-color: #73bf43 }
+
+.search_reset { position: relative; float:right; }
+
+#vendor_tbl tr th { text-align: center; color: #fff; }
+#vendor_tbl tr th.tbl_th_BTCS { background-color: #73bf43 }
+#vendor_tbl tr th.tbl_th_BTFCC { background-color: #34c28e }
+#vendor_tbl tr th.tbl_th_BTFCB { background-color: #34c28e }
+
+#vendor_tbl tr td { padding: 6px 20px 6px 20px; }
+
+
+.possible_click { cursor: pointer }
+.possible_click:hover { font-weight: bold; color: #3b3be3; }

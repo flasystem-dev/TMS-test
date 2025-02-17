@@ -1,0 +1,62 @@
+.goods_modal {
+    min-width:800px;
+}
+
+.input-group-text {
+    width: 110px;
+    padding: 5px 10px;
+}
+
+.goods_sub_text {
+    font-size: 0.8em;
+}
+
+.input-group .goods_list { width: 60px;}
+
+.goods_sub_name { width: 60px;}
+
+.ctgy_type1 { width: 32%; }
+.ctgy_type2 { width: 49%; }
+
+.select2-results__option span, .select2-selection--single span { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;}
+.select2-results__option .did_number, .select2-selection--single .did_number{ width: 15%}
+.select2-results__option .shop_name, .select2-selection--single .shop_name { width: 35%}
+.select2-results__option .gen_number, .select2-selection--single .gen_number { width: 20%}
+.select2-results__option .rep_name, .select2-selection--single .rep_name{ width: 25%}
+.select2-results__option .is_valid, .select2-selection--single .is_valid{ width: 5%}
+
+.select2-results__option .user_id, .select2-selection--single .user_id{ width: 25%}
+.select2-results__option .user_name, .select2-selection--single .user_name { width: 35%}
+.select2-results__option .user_phone, .select2-selection--single .user_phone { width: 40%}
+
+.admin_memo_area { position: fixed; bottom: -50px; right: 0; width: 400px; height: 203px; z-index: 10; border-radius: 15px 15px 0 0; opacity: 0.9; padding: 0; }
+#goods_list_tbody td {vertical-align: middle;}
+
+.location_btn { height: 39px; margin-left: 5px; }
+.document_select { font-size: 13px; }
+#select_location_area .select2-container .select2-selection--single { height: 40px !important; }
+#select_location_area .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 38px; }
+#select_location_area .select2-container--default .select2-selection--single .select2-selection__arrow { top: 5px; }
+#select_location_area .select2-container { font-size: 16px; }
+#loc_price_text { margin-left: 15px; color: #ff7070; }
+
+#admin_memo { height: 50px; }
+
+.card {margin-bottom: 5px; !important; }
+
+.price-type-text {
+    margin-left: 5px;
+    background-color: #6d6d6d;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid #6d6d6d;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.product_option .product-option-select { height: 30px; font-size: 14px; padding: 5px 10px; line-height: 1; }

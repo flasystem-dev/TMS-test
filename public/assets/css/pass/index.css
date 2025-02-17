@@ -1,0 +1,36 @@
+p { margin-bottom: 3px; }
+
+.select_brand { border:1px solid #d1d1d1; }
+
+.brand_btns input:checked + label.select_brand_BTCP { background-color: #f33737 !important; color: #fff; border: 1px solid #f33737}
+.brand_btns input:checked + label.select_brand_BTCC { background-color: #ffb500 !important; color: #fff; border: 1px solid #ffb500}
+.brand_btns input:checked + label.select_brand_BTSP { background-color: #2d73c3 !important; color: #fff; border: 1px solid #2d73c3}
+.brand_btns input:checked + label.select_brand_BTBR { background-color: #ef697b !important; color: #fff; border: 1px solid #ef697b}
+.brand_btns input:checked + label.select_brand_BTOM { background-color: #fd9a3c !important; color: #fff; border: 1px solid #fd9a3c}
+.brand_btns input:checked + label.select_brand_BTCS { background-color: #73bf43 !important; color: #fff; border: 1px solid #73bf43}
+.brand_btns input:checked + label.select_brand_BTFC { background-color: #34c28e !important; color: #fff; border: 1px solid #34c28e}
+
+.search_area_menu1 { display: flex; gap: 20px; }
+
+.search_area_menu1 .menu1 { flex-basis: 35%; }
+.search_area_menu1 .menu2 { flex-basis: 28%; }
+.search_area_menu1 .menu3 { flex-basis: 20%; }
+.search_area_menu1 .menu3 select { flex: 0 0 40%; }
+
+.search_area_menu2 { display: flex; gap: 20px; }
+
+.search_area_menu2 .menu1 { flex-basis: 90%; }
+.search_area_menu2 .menu2 { flex-basis: 10%; text-align: end; }
+
+.input_text {
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.table tr th, .table tr td { text-align: center; align-items: center; }
+
+.tbl_name { max-width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.tbl_memo { max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }

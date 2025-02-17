@@ -1,0 +1,32 @@
+
+.table>:not(caption)>*>* { padding: 5px; }
+
+.btn {
+    --bs-btn-padding-x: 13px;
+    --bs-btn-padding-y: 7px;
+    --bs-btn-font-size: 12px; }
+
+.pe-1 {
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+}
+
+.ps-1 {
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-control { padding: 8px 6px;}
+
+element.style { height: 25px !important; }
+
+.col-2 { width: 260px; }
+.col-4 { width: 33%; }
+
+.fs-3{font-size: 20px !important;}
+
+.card{margin-bottom: 2px; }

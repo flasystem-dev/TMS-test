@@ -1,0 +1,15 @@
+.excel_modal_select { display: inline-block; width: 145px; }
+.excel_modal_date_input { display: inline-block; width: 138px; }
+.excel_modal_date_btn { height: 25px; line-height: 8px; font-size: 12px; padding: 6px; margin: 0 3px 0 0; }
+.excel_modal_checkbox { display: inline-block }
+.excel_modal_brand_checkbox { margin: 0 auto; background: none; border-radius: 3px; border: solid 1px; font-weight: bold; font-size: 14px; width: 60px;  }
+.brand_checkbox:checked + .brand_BTCP { color: #f33737; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTCC { color: #ffb500; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTSP { color: #2d73c3; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTBR { color: #ef697b; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTOM { color: #fd9a3c; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTCS { color: #73bf43; border: solid 1px; }
+.brand_checkbox:checked + .brand_BTFC { color: #34c28e; border: solid 1px; }
+
+.excel_footer { margin-top: 20px; display: flex; justify-content: space-between; vertical-align: middle; }
+.info_text { font-size: 16px; line-height: 38px; font-weight: bold; color: indianred }

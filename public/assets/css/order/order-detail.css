@@ -1,0 +1,189 @@
+.vertical-menu{
+    display:none;
+}
+.main-content{
+    margin-right:530px;
+    margin-left:0 !important;
+}
+#page-topbar{
+    left:0 !important;
+}
+body[data-sidebar-size=sm]{
+    min-height: 0;
+}
+body[data-sidebar-size=sm] .main-content{
+    margin-left:0;
+}
+body[data-sidebar-size=sm] #page-topbar{
+    left:0;
+}
+
+.input-group-text{
+    padding:6px;
+    width: 101px;
+}
+.footer{
+    display:none;
+}
+.brand_type{
+    width:50px;
+    padding:7px;
+    text-align: center;
+}
+.card .card-body .product_change_btn {
+    height: 25px;
+    line-height: 0;
+    margin-left: 10px;
+    margin-top: -3px;
+    font-size: 13px;
+}
+
+.main_top_bar { display: none !important; }
+.product_change_btn:hover { background-color: #495057 !important; color: #fff !important; }
+
+table.payment_table td { padding: 5px 10px; }
+.document_type { width: 70px }
+.payment_table .deposit_text { margin: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 80px; text-align: center }
+.option_text { margin:0; font-size: 12px; color: #8b8b8b }
+
+.document_area { width: 220px; }
+.document_area select { display: inline-block; width: 49%; height: 30px; font-size: 12px; line-height: 1 }
+.payment_time_input { height: 24px; font-size: small;}
+.select2-container { width: calc(100% - 100px) !important; }
+.select2-selection { min-height: 40px; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 38px !important; }
+.select2-results__option span, .select2-selection--single span { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow:ellipsis;}
+.select2-results__option .did_number, .select2-selection--single .did_number{ width: 15%}
+.select2-results__option .shop_name, .select2-selection--single .shop_name { width: 35%}
+.select2-results__option .gen_number, .select2-selection--single .gen_number { width: 25%}
+.select2-results__option .rep_name, .select2-selection--single .rep_name{ width: 20%}
+
+.select2-results__option .user_id, .select2-selection--single .user_id{ width: 25%}
+.select2-results__option .user_name, .select2-selection--single .user_name { width: 35%}
+.select2-results__option .user_phone, .select2-selection--single .user_phone { width: 40%}
+.pay_amount_input { width: 80px !important; text-align: end; }
+.payment_amount { text-align: end; }
+
+.form-control:disabled { background-color: #e5e5e5; }
+
+.option_table { padding:10px 0; }
+.option_table td { padding: 5px; }
+.option_table .price_title { font-weight: bold; width: 300px; max-width: 300px; text-align: center; }
+.option_table .option_title { font-weight: bold; width: 300px; max-width: 300px; text-align: center; font-size: 13px; color: #9a9a9a }
+.option_table .price_text { width: 900px; max-width: 90px; text-align: right; font-weight: 500; padding-right: 20px !important;}
+.option_table .balju_amount { padding-left: 30px; width: 120px; max-width: 120px; }
+.option_table .balju_amount input { text-align: end }
+
+#template_area { margin-top: 10px; }
+
+.payment_product_th { background-color: #dbdbdb !important }
+.payment_th { background-color: #dbdbdb !important }
+.payment_total_tbl td { text-align: end; width: calc(100%/6); vertical-align: middle;}
+.payment_row { text-align: center;vertical-align: middle; height: 65px }
+
+.table tr > th, .table tr > td { padding: 1px; padding-left: 10px; padding-right: 10px;  }
+.pay_amount_check td { height: 35px;}
+.need_check { background-color: #f59d9d }
+.option_text { color:#8b8b8b; margin: 0; font-size: 11px; }
+
+.payment_tbl th, .payment_tbl td { vertical-align: middle; text-align: center }
+.payment_tbl .tbl_radio { width: 10px; }
+.payment_tbl .tbl_num { width: 40px; padding: 5px;}
+.payment_tbl .tbl_type {width: 90px;}
+.payment_tbl .tbl_price {width: 100px;}
+.payment_tbl .tbl_name {max-width: 70px;}
+.payment_tbl .tbl_memo {max-width: 70px;}
+.payment_tbl .tbl_payment_radio { width: 15px; height: 15px; margin-top: 7px; }
+.pay_price { font-weight: bold; color: #964343; }
+
+.state_p { margin: 0 auto; }
+
+.thead_border_bottom { border-bottom: 1px solid #d1d1d1 !important; }
+
+.modal-body .option_table tr > th { width: 100px; height: 30px; padding :10px 5px !important;}
+.modal-body .option_table tr > td { padding :10px 3px; vertical-align: middle;}
+
+.card .card-body p.balju_price_text { display: inline-block; width: 100px; font-weight: bold; margin: 0; text-align: center}
+.balju_price_input { display: inline-block; width: calc(100% - 110px); text-align: end; height: 25px; }
+
+.inflow_text { width: 80px; }
+.payment_refund { margin: 0; font-size: 12px; display: flex; justify-content: space-between; padding: 0 5px 0 5px;}
+.refund_text { color: #eb849b }
+.refund_amount { color: #eb849b }
+
+#refund_area input:read-only { background-color: #dfdfdf; }
+
+.sub_text { display: inline-block; width: 200px; font-weight: bold; }
+
+.delivery_info_top { display: flex; }
+.deli_top1 { flex-basis: 65%; }
+.deli_top2 { flex-basis: 35%; }
+
+.deli_info2_area { display: flex; justify-content: space-between;}
+.insu_text { font-weight: bold; color: #0068ff}
+.deli_info2_photo { text-align: end; }
+
+.etc_icon { font-size: 20px; }
+
+.price-type-text {
+    margin-left: 5px;
+    background-color: #6d6d6d;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid #6d6d6d;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.form_radio_group { border: 1px solid #ced4da;  }
+.form_radio_group .input-group-text { border-top: 0; border-bottom: 0; border-left: 0; }
+
+.form_radio { display: inline-block; margin-right: 20px; }
+.modal_label_text { width: 120px; }
+
+.advance_payment_container { margin-left: 5px; }
+
+.form-control {padding: .0rem .5rem;}
+
+.mt-1 {margin-top: 0.4rem !important;}
+.mb-2 {margin-bottom: 0px !important;}
+.mb-3 {margin-bottom: 0.4rem !important;}
+.mb-4 {margin-bottom: 0.5rem !important;}
+
+.row{--bs-gutter-x: 6px;}
+
+.card {margin-bottom: 0.4rem; --bs-card-spacer-y: 15px; --bs-card-spacer-x: 15px;}
+
+.btn {--bs-btn-font-weight: 800;}
+
+.btn-group-sm>.btn, .btn-sm {--bs-btn-padding-y: 0.5px; --bs-btn-padding-x: 5px; --bs-btn-font-size: 12px;}
+
+.display_option {margin-top: -20px;}
+
+.table {margin-bottom: 0.4rem;}
+
+.table th {vertical-align: bottom;}
+
+.gs_name_v {width: auto;}
+
+.w60 {width: -webkit-fill-available;}
+
+.col-md-12 {width: auto;}
+
+.page-content {padding: calc(70px + 1.25rem) .625rem 0px;}
+
+.bg-light {background-color: #ffffff !important;}
+
+hr {margin-bottom: -10px; }
+
+.form-select{padding: 0rem 0.75rem 0rem 0.75rem;}
+
+.py-1{padding-top: 0rem !important; padding-bottom: 0rem !important;}
+
+.fs-5{font-size: 0.9rem !important;}
+

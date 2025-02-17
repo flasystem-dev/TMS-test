@@ -1,0 +1,9 @@
+#page-topbar{ left:0 !important; }
+
+.sp_input_lg { text-align: end; height: 24px; }
+.sp_input_sm { display: inline-block; width: 50px; font-size: 13px; text-align: end; height: 24px;}
+.sp_input_cd { width: 120px; font-size: 13px; text-align: end; margin: 0 auto; height: 24px; }
+.sp_input_cd_fee { display: inline-block; width: 120px; font-size: 13px; text-align: end; height: 24px; }
+.sp_input_sm_span { width: 60px; height: 24px;}
+.sp_input_icon { font-size: 16px; }
+.sp_input_date { display: inline-block; width: 100px; font-size: 13px; text-align: end; }

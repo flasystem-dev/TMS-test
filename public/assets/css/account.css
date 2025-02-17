@@ -1,0 +1,20 @@
+.card .card-body .brand_type {
+    display: inline-block;
+    width: 120px;
+}
+
+.card .card-body .table td {
+    vertical-align: middle;
+}
+
+    /* 채널 */
+.MLGM{ color: #00ba1d; border: solid 1px;}
+.MLAC{ color: #f32f35; border: solid 1px;}
+.ML11{ color: #ec5c64; border: solid 1px;}
+.MLNV{ color: #1cc200; border: solid 1px;}
+.MLKK{ color: #f7e111; border: solid 1px;}
+.MLCP{ color: #dd2128; border: solid 1px;}
+.MLPL{ color: #7e7e7e; border: solid 1px;}
+.MLMS{ color: #7e7e7e; border: solid 1px;}
+.MLMW{ color: #7e7e7e; border: solid 1px;}
+.MLIT{ color: #1666f7; border: solid 1px;}

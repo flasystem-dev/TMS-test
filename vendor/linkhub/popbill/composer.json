@@ -1,0 +1,34 @@
+{
+    "name": "linkhub/popbill",
+    "description": "Popbill SDK for php7",
+    "version": "1.63.4",
+    "type": "library",
+    "keywords": [
+        "linkhub",
+        "popbill"
+    ],
+    "homepage": "https://www.linkhub.co.kr/",
+    "license": "MIT",
+    "author":[
+      {
+        "name":"Linkhub Corp",
+        "email":"code@linkhubcorp.com",
+        "homepage":"https://github.com/linkhub-sdk/",
+        "role":"Developer"
+      }
+    ],
+    "support": {
+      "email": "code@linkhubcorp.com",
+      "issues": "https://github.com/linkhub-sdk/linkhub.auth.php7/issues",
+      "source": "https://github.com/linkhub-sdk/linkhub.auth.php7"
+    },
+    "require": {
+        "php": ">=7.1.3",
+        "linkhub/linkhub": "1.5.0"
+    },
+    "autoload": {
+      "psr-4": {
+        "Linkhub\\Popbill\\": "src/"
+      }
+    }
+}

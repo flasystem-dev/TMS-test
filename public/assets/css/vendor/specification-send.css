@@ -1,0 +1,10 @@
+.top_menu_container { display: flex; justify-content: space-between}
+.menu_1 { flex-basis: 65% }
+.menu_2 { flex-basis: 35%; text-align: end }
+
+.select_date { display: inline-block; width: 100px; height: 30px; padding-top: 5px; padding-bottom: 5px; line-height: initial;}
+.input_word { display: inline-block; width: 150px; height: 30px; padding-top: 5px; padding-bottom: 5px; line-height: initial; }
+.search_btn { height: 30px; margin: 0; line-height: 12px; position: relative; top: -2px;}
+.icon_specification { font-weight: bold; font-size: 15px; margin-left: 3px; }
+.select_checkbox { font-size: 15px; }
+.checked { background-color: #d1e3ff !important }

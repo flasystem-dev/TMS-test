@@ -1,0 +1,976 @@
+/* date 타입 달력 안보이게 */
+input[type="date"]::-webkit-calendar-picker-indicator { opacity: 0; position: absolute; left: 0; top: 0; z-index: 0; }
+.layout-wrapper{
+    scroll-behavior:smooth;
+}
+/* input type=number 화살표 제거 */
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox  */
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+/* showToast 위치 디테일 */
+.sweetAlert2-custom-position { top: 70px !important; }
+
+/***************************************/
+/* datepicker */
+/***************************************/
+#ui-datepicker-div { z-index: 999999 !important; }
+
+.ui-widget-header { border: 0px solid #dddddd; background: #fff !important; }
+
+.ui-datepicker-calendar>thead>tr>th { font-size: 14px !important; }
+
+.ui-datepicker .ui-datepicker-header { position: relative; padding: 10px 0 !important; }
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active { border: 0px solid #c5c5c5; background-color: transparent; font-weight: normal; color: #454545; text-align: center !important; }
+
+.ui-datepicker .ui-datepicker-title { margin: 0 0em; line-height: 16px; text-align: center; font-size: 14px; padding: 0px; font-weight: bold !important; }
+
+.ui-datepicker { display: none; background-color: #fff !important; border-radius: 4px; margin-top: 10px; margin-left: 0px; margin-right: 0px; padding: 20px; padding-bottom: 10px; width: 300px; box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.1) !important; }
+
+.ui-widget.ui-widget-content { border: 1px solid #eee !important; }
+
+#datepicker:focus>.ui-datepicker { display: block !important; }
+
+.ui-datepicker-prev,
+.ui-datepicker-next { cursor: pointer !important; }
+
+.ui-datepicker-next { float: right !important; }
+
+.ui-state-disabled { cursor: auto; color: hsla(0, 0%, 80%, 1) !important; }
+
+.ui-datepicker-title { text-align: center; padding: 10px; font-weight: 100; font-size: 20px !important; }
+
+.ui-datepicker-calendar { width: 100% !important; }
+
+.ui-datepicker-calendar>thead>tr>th { padding: 5px; font-size: 20px; font-weight: 400 !important; }
+
+.ui-datepicker-calendar>tbody>tr>td>a { color: #000; font-size: 12px !important; font-weight: bold !important; text-decoration: none !important;}
+
+.ui-datepicker-calendar>tbody>tr>.ui-state-disabled:hover { cursor: auto; background-color: #fff !important; }
+
+.ui-datepicker-calendar>tbody>tr>td { border-radius: 100%; width: 44px; height: 30px; cursor: pointer; padding: 5px; font-weight: 100; text-align: center; font-size: 12px !important; }
+
+.ui-datepicker-calendar>tbody>tr>td:hover { background-color: transparent; opacity: 0.6 !important; }
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus { border: 0px solid #cccccc; background-color: transparent; font-weight: normal; color: #2b2b2b !important; }
+
+.ui-widget-header .ui-icon { background-image: url('./btns.png') !important; }
+
+.ui-icon-circle-triangle-e { background-position: -20px 0px; background-size: 36px !important; }
+
+.ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px !important; }
+
+.ui-datepicker-calendar>tbody>tr>td:first-child a { color: red !important; }
+
+.ui-datepicker-calendar>tbody>tr>td:last-child a { color: #0099ff !important; }
+
+.ui-datepicker-calendar>thead>tr>th:first-child span { color: red !important; }
+
+.ui-datepicker-calendar>thead>tr>th:last-child span { color: #0099ff !important; }
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight { border: 0px; background: #e7e5e5; border-radius: 50%; padding-top: 5px; padding-bottom: 5px !important; }
+
+/***********************************************************************************************************************************************************/
+
+.top_menu_in_block { display: inline-block; }
+
+/* 체크박스 토글 */
+.checkbox_toggle { position: absolute; left: -1000%; }
+label.checkbox_toggle_label {
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 21px;
+    background: #d3d3d3;
+    border-radius: 60px;
+    transition: background 0.4s;
+    margin: 0 auto;
+}
+
+label.checkbox_toggle_label::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    width: 17px;
+    height: 17px;
+    border-radius: 100%;
+    background-color: #fff;
+    transform: translateY(-50%);
+    box-shadow: 1px 3px 4px rgba(0,0,0,0.1);
+    transition: all 0.4s;
+}
+
+label.checkbox_toggle_label::before {
+    content: "OFF";
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.4s;
+}
+
+.checkbox_toggle:checked + label {
+    background: #7aaaff
+}
+
+.checkbox_toggle:checked + label::after {
+    left: calc(100% - 19px);
+}
+
+.checkbox_toggle:checked + label::before {
+    content: "ON";
+    color: #fff;
+    left: 5px;
+}
+
+.form-control:disabled { background: #f5f5f5; }
+
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 4px solid #161616;
+    border-left-color: #fff;
+    animation: spin 3s linear infinite;
+}
+
+/*기타 CSS*/
+#loading {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.6;
+    background: white;
+    z-index: 99999 !important;
+    text-align: center;
+}
+
+#loading > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+}
+
+.w-80 { width: 80% !important}
+.w-90 { width: 90% !important}
+.w-95 { width: 95% !important}
+.center{
+    text-align: center;
+    vertical-align: middle;
+}
+.left{
+    text-align: left;
+    vertical-align: middle;
+}
+.right{
+    text-align: right;
+    vertical-align: middle;
+}
+
+.checkBox_active {
+    background-color: #ebf7fd;
+}
+
+.brand_btn{
+    outline: none!important;
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid;
+    color: #8f8f8f;
+    margin-bottom: 6px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.cursor_p { cursor: pointer; }
+
+/* 브랜드 타입 */
+.BTCP{ color:#f33737; border: solid 1px;}
+.BTCC{ color:#ffb500; border: solid 1px;}
+.BTSP{ color:#2d73c3; border: solid 1px;}
+.BTBR{ color:#ef697b; border: solid 1px;}
+.BTOM{ color:#fd9a3c; border: solid 1px;}
+.BTCS{ color:#73bf43; border: solid 1px;}
+.BTFC{ background-color:#34c28e !important; color:#fff; border: solid 1px #34c28e !important;}
+.BTFCB{ color: #048564; border: solid 1px;}
+.BTFCC{ color: #67c2ab; border: solid 1px;}
+.BTEM{ color:#1e1f22; border: solid 1px;}
+
+/* 브랜드 버튼 */
+.btn-check:checked + .checkbox_BTCP { color:#f33737; border: solid 1px; }
+.btn-check:checked + .checkbox_BTCC { color:#ffb500; border: solid 1px; }
+.btn-check:checked + .checkbox_BTSP { color:#2d73c3; border: solid 1px; }
+.btn-check:checked + .checkbox_BTBR { color:#ef697b; border: solid 1px; }
+.btn-check:checked + .checkbox_BTOM { color:#fd9a3c; border: solid 1px; }
+.btn-check:checked + .checkbox_BTCS { color:#73bf43; border: solid 1px; }
+.btn-check:checked + .checkbox_BTFC { background-color:#34c28e !important; color:#fff; border: solid 1px #34c28e !important; }
+
+/* 결제 상태 */
+.PSDN{ background-color: #b5b5b5;}
+.PSWC{ background-color: #ff8181;}
+.PSCR{ background-color: #ff0000;}
+.PSCC{ background-color: #eb849b;}
+.PSRC{ background-color: #A289B0FF;}
+.PSRR{ background-color: #ff0000;}
+.PSUD{ background-color: #fbac64;}
+.PSOC{ background-color: #f862c4;}
+.PSER{ background-color: #ff0000;}
+.PSEC{ background-color: #a3a737;}
+.PSNP{ background-color: #fbac64;}
+
+/* 배송 상태 */
+.DLCC{ background-color: #da8397;}
+.DLSP{ background-color: #afc2eb;}
+.DLDN{ background-color: #999999;}
+.DLUD{ background-color: #ffa600;}
+
+/* 채널 */
+.MLGM{ color: #7e7e7e; border: solid 1px;}
+.MLAC{ color: #7e7e7e; border: solid 1px;}
+.ML11{ color: #7e7e7e; border: solid 1px;}
+.MLNV{ color: #7e7e7e; border: solid 1px;}
+.MLKK{ color: #7e7e7e; border: solid 1px;}
+.MLCP{ color: #7e7e7e; border: solid 1px;}
+.MLPL{ color: #7e7e7e; border: solid 1px;}
+.MLMS{ color: #7e7e7e; border: solid 1px;}
+.MLMW{ color: #7e7e7e; border: solid 1px;}
+
+
+/* 결제 타입 */
+.PTOP { background-color: #a0d281; }
+.PTVA { background-color: #5281b9; }
+.PTCD { background-color: #c49b1e; }
+.PTBT { background-color: #8b32cc; }
+.PTMN { background-color: #7a7a7a; }
+.PTTD { background-color: #ad7bff; }
+.PTDB { background-color: #2cc577; }
+.PTDP { background-color: #bbaf6d; }
+
+
+.order_top_data_container { display: flex; justify-content: space-between; }
+.order_top_data1 { flex-basis: 20%; }
+.order_top_data2 { flex-basis: 16% }
+.order_top_data3 { flex-basis: 16% }
+.order_top_data4 { flex-basis: 16% }
+.order_top_data5 { flex-basis: 16% }
+.order_top_data6 { flex-basis: 16% }
+
+.etc_icon {
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 10px;
+    padding: 3px;
+}
+
+.number_option{
+    color: #ff6e6e;
+    font-weight: bold;
+}
+
+.check_circle{
+    position: absolute;
+    right: 190px;
+    margin-top: 4px;
+}
+
+.fixed_btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: fixed !important;
+    bottom: 5% !important;
+    right: 25px !important;
+    z-index: 1000 !important;
+    width: 50px !important;
+    height: 50px !important;
+    margin: 0 !important;
+    text-align: center !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    border: 2px solid #5b73e8 !important;
+}
+
+.fixed_btn_icon {
+    font-size: 35px !important;
+    margin-left: 3px !important;
+    margin-bottom: 10px !important;
+    width: 35px !important;
+    height: 45px !important;
+    color: #5b73e8 !important;
+}
+
+.fixed_btn_text {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    color: #5b73e8 !important;
+    overflow: hidden !important;
+    transition-delay: 2s !important;
+    white-space:nowrap !important;
+}
+
+.fixed_btn:hover {
+    width: 150px !important;
+    border-radius: 20px !important;
+    transition: all .3s ease-in-out !important;
+}
+
+.input-group-text {
+    width: 100px;
+    padding: 5px 10px;
+}
+/*
+.input-group .form-control {
+   padding: 5px 10px;
+}*/
+@keyframes blink-effect {
+    50% {
+        opacity: 0;
+    }
+}
+
+.new_order{
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    border-radius: 3px;
+    color: #de1e1e;
+    background-color: #ffdfdf;
+    /*animation: blink-effect 2s step-end infinite;*/
+}
+.input-group .datepicker {
+    border: 1px solid #ced4da;
+    padding-left: 10px;
+}
+
+.input_msg {
+    padding: 5px;
+}
+
+.unit_text {
+    width: 40px !important;
+}
+
+.card-body .input-group .input_textarea{
+    height: 100px;
+}
+
+.radio_text {
+    border : 1px solid #ced4da;
+}
+.deli_date{
+    font-weight: 600;
+    color: #454194;
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:170px;
+    margin: 0 auto;
+}
+.addr{
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:180px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.all_price{
+    font-weight: 600;
+    color: #4e4a88;
+    font-size:13px;
+    margin-bottom: 0px;
+    text-overflow: ellipsis;
+    margin-top:3.5px;
+}
+.all_price_title{
+    font-weight: 600;
+    color: #000000;
+    font-size:11.5px;
+    text-overflow: ellipsis;
+    padding:1px;
+    width:60px;
+    margin:2px;
+    background-color: #efefef;
+    border-radius: 3px;
+}
+.gs_name{
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:120px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    white-space: nowrap;
+    color: #212121;
+}
+.ribbon_left{
+    font-size:13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:180px;
+    margin-bottom: 0px;
+    text-align: center;
+    white-space: nowrap;
+    color: #525252;
+}
+.gs_name_v{
+    font-size:12px;
+   /*overflow: hidden;
+    text-overflow: ellipsis;*/
+    width:190px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    /*white-space: nowrap;*/
+}
+.amount{
+    font-size:12px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    color:#f63d3d;
+}
+.amount_v{
+     font-size:14px;
+     font-weight: 600;
+     margin-bottom: 0px;
+     text-align: center;
+     color:#f63d3d;
+}
+.brand_type{
+    margin: 0 auto;
+    background: none;
+    border-radius: 3px;
+    border:solid 1px;
+    font-weight:bold;
+    font-size:14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90px;
+    /*padding: 0 5px 0 5px;*/
+}
+.state_p{
+    text-align: center;
+    padding: 4px 5px;
+    border-radius: 3px;
+    font-size:12px;
+    color: #fff;
+    white-space: nowrap;
+    width: 70px;
+    margin: 0 auto;
+    font-weight: bold;
+}
+.state_add {
+    display: inline-block;
+    margin: 3px 0 0 0;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-size:10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.display_option{
+    white-space: pre-line;
+}
+
+
+
+.goods_cnt_btn {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.goods_cnt_input {
+    width: 30px !important;
+    height: 25px !important;
+}
+.fixed{
+    position: fixed;
+    top: 89px;
+    width: 540px;
+    right: 5px;
+    margin-left: -5px;
+}
+.w165{
+    width:165px;
+}
+.w44{
+    width:44px;
+}
+.w60{
+    width:60px;
+}
+.fixed_cs{
+    position: fixed;
+    width: 540px;
+    top:350px;
+    right: 5px;
+    margin-left: -5px;
+}
+
+.top_fixed{
+    position:fixed;
+    top:23px;
+    left:90px;
+    z-index: 9999;
+}
+.top_fixed_right{
+    width: 40%;
+    position:fixed;
+    top:15px;
+    right:30px;
+    text-align: end;
+    z-index: 9999;
+}
+
+.top_fixed .order_dropdown_menu { padding: 15px 20px; }
+
+.mall_type{
+    margin-left:5px;
+    margin-bottom:0px;
+    background: none;
+    border-radius: 3px;
+    border:1px solid;
+    padding:7px;
+    text-align: center;
+    font-weight:bold;
+}
+.update_btn{
+    left:10px;
+}
+.top_fixed_Toast{
+    position:fixed;
+    top:65px;
+    right:10px;
+    z-index: 9999;
+}
+.channel_type{
+    margin-top:2px;
+
+}
+
+
+.delivery_time_sel {
+    padding: .47rem 1.7rem .47rem .4rem;
+}
+
+.memo_btns {
+    display: inline-block !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding : 4px 4px;
+}
+
+.spacer_zero{
+    padding:0px !important;
+}
+/* START TOOLTIP STYLES */
+[tooltip] {
+    position: relative; /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+    text-transform: none; /* opinion 2 */
+    font-size: .9em; /* opinion 3 */
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+}
+[tooltip]::before {
+    content: '';
+    border: 5px solid transparent; /* opinion 4 */
+    z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+    content: attr(tooltip); /* magic! */
+
+    /* most of the rest of this is opinion */
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+
+    /*
+      Let the content set the size of the tooltips
+      but this will also keep them from being obnoxious
+      */
+    min-width: 11em;
+    /*max-width: 21em;*/
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+    padding: 1ch 1.5ch;
+    border-radius: .3ch;
+    box-shadow: 0 1em 2em -.5em rgba(0, 0, 0, 0.35);
+    background: #333;
+    color: #fff;
+    z-index: 1000; /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+    display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+    display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+    bottom: 100%;
+    border-bottom-width: 0;
+    border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+    bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+    left: 50%;
+    transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+    top: 100%;
+    border-top-width: 0;
+    border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+    top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+    left: 50%;
+    transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+    top: 50%;
+    border-right-width: 0;
+    border-left-color: #333;
+    left: calc(0em - 5px);
+    transform: translate(-.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+    top: 50%;
+    right: calc(100% + 5px);
+    transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+    top: 50%;
+    border-left-width: 0;
+    border-right-color: #333;
+    right: calc(0em - 5px);
+    transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+    top: 50%;
+    left: calc(100% + 5px);
+    transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+    to {
+        opacity: .9;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes tooltips-horz {
+    to {
+        opacity: .9;
+        transform: translate(0, -50%);
+    }
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+    animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+    animation: tooltips-horz 300ms ease-out forwards;
+}
+
+
+.red_zone{
+    background-color: #ffefef;
+    border: 1px #ff8a8a solid;
+}
+.memo_check{
+    position: absolute;
+    top: 19px;
+    right: -6px;
+    color: #6598dd;
+    border-radius: 2px;
+    padding: 1px;
+}
+.top_fixed_center{
+    position:fixed;
+    top:15px;
+    right:280px;
+    z-index: 9999;
+}
+
+.btn-app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 5%;
+    right: 25px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #2146d9;
+    color:#fff;
+    cursor: pointer;
+}
+
+.offcanvas-body>div{
+    margin-left:8px;
+}
+
+.select{
+    padding: 0 10px;
+    border-radius: 3px;
+    height: 30px;
+    color: #74788d;
+    border: 1px #74788d solid;
+}
+
+.app_text{
+    padding: 0 5px;
+    border-radius: 3px;
+    height: 30px;
+    color: #74788d;
+    border: 1px #74788d solid;
+}
+
+.explain{
+    color: #a2a2a2;
+    font-size:11px;
+    margin-left: 5px;
+}
+
+.w80{
+    width:80px;
+}
+
+#order_quantity { background-color: #fff; font-size: 13px !important;}
+
+.input_select input[type=radio]{
+    display: none;
+}
+
+.input_select input[type=radio]+label{
+    cursor: pointer;
+    margin-left:20px;
+    border: 1px solid #cdd3d9;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.input_select input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+
+.input_select input[type=radio]:checked+label{
+    background-color: #4a7ee0;
+    color: #fff;
+}
+
+label{
+    margin-bottom: 0px;
+}
+
+.cal-table{
+    font-size:11px;
+}
+
+.cal-input{
+    height: 24px;
+    width: 75px;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+}
+
+.cal-p{
+    margin-bottom:0px;
+    height: 23px;
+    padding-top:2px;
+    border-radius:4px;
+
+}
+.nowrap-100{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:70px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    font-size:13px;
+    border-collapse: collapse;
+}
+.container th, .container td {
+    border: 1px solid black;
+    padding: 8px;
+}
+.container th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+.no-border {
+    border: none;
+}
+.highlight {
+    font-weight: bold;
+    color: red;
+}
+.underline {
+    position: relative;
+    display: inline-block;
+}
+.underline::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #1e1f22;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.ft-10{
+    font-size:10px;
+}
+.ft-11{
+    font-size:11px;
+}
+.ft-12{
+    font-size:12px;
+}
+.ft-13{
+    font-size:13px;
+}
+
+.checkboxLabel { display: inline-block; width: 100%; min-height: 65px; vertical-align: middle }
+.checkboxLabel input { position: relative; top: 25px; }
+
+.brand_session_area { display: flex; }
+/*.session_area1 { flex-basis: 60% }*/
+.session_area2 { flex-basis: 100% }
+
+.order_index_btns { display: flex; }
+.front_btns { flex-basis: 60%;}
+.end_btns { flex-basis: 40%; text-align: end;}
+
+.table .ordersTable_tr:hover { background-color: #eafff6 }
+.table .orders_checked { background-color: #cefcff; }
+.is_highlight { background-color: #fff9de }
+.not_view { background-color: #fff3f3;}
+
+.session_label { display: flex; align-items: center; justify-content: center; }
+
+.product_select_table th, .product_select_table td { vertical-align: middle; padding: 3px 10px; }
+.product_select_table form { display: flex; }
+.product_select_table .form-control { padding: .0rem .5rem; }
+.product_select_table .product_main { width: 50%; }
+.product_select_table .product_main2 { width: 87%; }
+.product_select_table .product_option { width: 37%; }
+.product_select_table .product_btn { padding: 10px; width: 13%; }
+.product_select_table .product_btn2 { width: 13%; }
+.product_select_table .product_main td.product_img, .product_select_table .product_main2 td.product_img { width: 100px; height: 100%; vertical-align: middle }
+.product_select_table .product_main .product-price { width: 100px; display: inline-block; text-align: end; }
+.product_select_table .product_main .add-option-btn { width: 45px; height: 25px; line-height: 1; font-size: 12px; padding: 3px 5px; text-align: center; margin-left: 5px;}
+.product_select_table .product_option .custom-option-name { display: inline-block; width: 150px; height: 25px; padding: 3px 5px;}
+.product_select_table .product_option .custom-option-name::placeholder { color: #d1d1d1; }
+.product_select_table .product_option .custom-option-price { display: inline-block; width: 100px; height: 25px; padding: 3px 5px; text-align: end;}
+.product_select_table .product_option .custom-option-delete { width: 20px; height: 20px; padding: 0; line-height: 1;}
