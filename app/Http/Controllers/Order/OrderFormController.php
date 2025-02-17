@@ -73,8 +73,6 @@ class OrderFormController extends Controller
         // 주문 create를 위한 input 데이터 가공
         $input = OrderService::makeInput($input, $orderProduct);
 
-        dd($input);
-
         OrderData::create($input);
         OrderDelivery::create($input);
         OrderPayment::create($input);
