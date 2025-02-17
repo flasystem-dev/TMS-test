@@ -119,6 +119,7 @@ class IntranetService
         $order -> balju_amount = $orderProduct -> balju_price;
         $order -> vendor_amount = $orderProduct -> vendor_price;
         $order -> is_new = 0;
+        $order -> handler = Auth::user() -> name;
 
         $order -> delivery -> delivery_state_code = "DLSP";
         $order -> delivery -> is_balju = 1;
