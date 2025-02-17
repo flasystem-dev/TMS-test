@@ -126,7 +126,7 @@ class NicePayController extends Controller
 
                 $result = json_decode($response, true);
 
-                $is_done = PaymentService::updateOrderData_nicePay($response);
+                $is_done = PaymentService::updateOrderData_nicePay($result);
 
                 if($is_done) {
 
