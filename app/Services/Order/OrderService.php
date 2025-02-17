@@ -98,11 +98,14 @@ class OrderService
     {
         $order = OrderData::with('item','payments')->find($order_idx);
 
-        $order->total_amount = $order->calculateTotalAmount();
-        $order->updatePaymentState();
+        if($order->group_code !== "openMarket") {
+            $order->total_amount = $order->calculateTotalAmount();
+            $order->updatePaymentState();
 
-        self::auto_update_order_log($order);
-        $order -> save();
+            self::auto_update_order_log($order);
+            $order -> save();
+        }
+
     }
 
 ########################################################################################################################
