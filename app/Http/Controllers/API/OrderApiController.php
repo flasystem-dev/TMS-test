@@ -187,7 +187,7 @@ class OrderApiController extends Controller
         OrderItem::insert([
             'id' => $item_id,
             'order_id' => $order_idx,
-            'product_name' => $order['goods_name'],
+            'product_name' => $order_delivery['goods_name'],
             'item_total_amount' => $order['total_amount'],
             'product_price' => $order['total_amount'],
         ]);
