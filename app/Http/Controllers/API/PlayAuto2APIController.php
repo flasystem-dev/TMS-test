@@ -529,7 +529,7 @@ class PlayAuto2APIController extends Controller
             $order -> od_id                     = $od_id;
             $order -> brand_type_code           = self::check_brand($result_data);
             $order -> mall_code                 = self::check_mall($result_data);
-            $order -> group_name                = "openMarket";
+            $order -> group_code                = "openMarket";
             $order -> order_number              = $order_number;
             $order -> order_time                = $result_data['ord_time'];
             $order -> orderer_mall_id           = $result_data['order_id'];
