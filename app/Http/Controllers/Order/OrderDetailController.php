@@ -35,9 +35,10 @@ class OrderDetailController extends Controller
     ############################################## 주문 상세 뷰 ##########################################################
     public function order_detail($order_idx){
         $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
+        OrderDetailService::isNotNew($order);
+        
         $order -> channel = $order->channel();
 
-        OrderDetailService::isNotNew($order);
 
         $order->item_url = CodeOfCompanyInfo::goodsUrl($order->mall_code,$order->brand_type_code);
 

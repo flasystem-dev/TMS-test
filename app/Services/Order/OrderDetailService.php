@@ -19,9 +19,9 @@ use App\Utils\Common;
 class OrderDetailService
 {
     ##############################################  주문 - 미확인 체크해제  ################################################
-    public static function isNotNew(OrderData $order){
+    public static function isNotNew($order){
         if(Auth::user() -> auth < 8) {
-            $order -> is_now = 0;
+            $order -> is_new = 0;
             $order -> save();
         }
     }
