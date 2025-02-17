@@ -161,7 +161,7 @@ class NewrunAPIController extends Controller
                         'log_content' => '뉴런 주문 전송 성공'
                     ]);
 
-                if($order -> group === "openMarket") {
+                if($order -> group_code === "openMarket") {
                     PlayAuto2APIController::setDeliveryState($order);
 //                    if($result != "SUCCESS") {
 //                        return "[플레이오토 에러 발생]".$result;

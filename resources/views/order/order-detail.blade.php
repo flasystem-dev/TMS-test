@@ -194,7 +194,7 @@
 
                                     <!-- 번호 -->
                                     <td data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus hover" data-bs-placement="right" data-bs-content="{{$payment->order_number}}">
-                                        <p class="m-0 {{ empty($payment->order_number)? "":"cursor_p" }}" @if(!empty($payment->order_number)) data-data="{{$payment->order_number}}" onclick="copyData(event)" @endif>{{$payment->payment_number}}</p>
+                                        <p class="m-0 {{ empty($payment->payment_pid)? "":"cursor_p" }}" @if(!empty($payment->payment_pid)) data-data="{{$payment->payment_pid}}" onclick="copyData(event)" @endif>{{$payment->payment_number}}</p>
                                     </td>
                                     <!-- 결제수단 -->
                                     <td>
