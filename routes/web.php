@@ -41,7 +41,6 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('order/form/memo', [App\Http\Controllers\Order\OrderFormController::class, 'insert_memo'])->name('memo-insert');
     Route::delete('order/form/memo', [App\Http\Controllers\Order\OrderFormController::class, 'delete_memo'])->name('memo-delete');
     Route::put('order/form/memo', [App\Http\Controllers\Order\OrderFormController::class, 'update_memo'])->name('memo-update');
-    Route::post('order/form/product', [App\Http\Controllers\Order\OrderFormController::class, 'select_product']);
     Route::get('order/form/ribbon', [App\Http\Controllers\Order\OrderFormController::class, 'previous_ribbon']);
     Route::post('order/pay/after', [App\Http\Controllers\Order\OrderFormController::class, 'order_pay_progress']);
     Route::get('order/form/users', [App\Http\Controllers\Order\OrderFormController::class, 'get_shop_user']);
