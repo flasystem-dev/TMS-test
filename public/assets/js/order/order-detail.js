@@ -595,10 +595,10 @@ function delete_payment(e) {
 // 주문서 복제
 function open_copyForm() {
     var order_idx = document.getElementById('order-idx').value;
-    var brand = document.getElementById('brand-code').value;
-    let url = main_url + "/order/form-order/" + brand + "?order_idx=" + order_idx;
+    var brand = document.getElementById('brand').value;
+    let url = main_url + "/order/" + brand + "/form?order_idx=" + order_idx;
 
-    open(url, 950, 900, 500, 50);
+    open_win(url, 'order-form' , 950, 900, 500, 50);
 }
 
 // 알림톡 모달 보여주기 기본 값 가져오기

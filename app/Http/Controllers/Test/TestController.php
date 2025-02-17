@@ -57,7 +57,7 @@ class TestController extends Controller
     {
         set_time_limit(600);
 
-        $year_month = "2025-02";
+        $year_month = "2024-11";
 //
         $start = $year_month . "-01 00:00:00";
 //
@@ -99,6 +99,17 @@ class TestController extends Controller
                                     $product_price = $price_data->product_price;
                                 }
                             }
+                        }
+
+                        $flag = false;
+                        if($product_id === 0) {
+                            if(DB::table('order_items')->where('order_id', $order->order_idx)->exists()) {
+                                $flag = true;
+                            }
+                        }
+
+                        if($flag) {
+                            continue;
                         }
 
                         $options_amount = 0;
