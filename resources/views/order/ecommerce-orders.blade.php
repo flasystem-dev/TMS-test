@@ -373,7 +373,7 @@
                                         @if($order -> order_quantity > 1)
                                             <p class="new_order" id="order_quantity">({{$order -> sub_index()}}/{{$order -> order_quantity}})</p>
                                         @endif
-                                        @if($order->new_order_yn==="Y")
+                                        @if($order->is_new)
                                             <p class="new_order" id="new_order{{$order->order_idx}}">미확인</p>
                                         @endif
                                     </td>
