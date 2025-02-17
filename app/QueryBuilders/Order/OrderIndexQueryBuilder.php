@@ -18,7 +18,7 @@ class OrderIndexQueryBuilder
             'orderer_name',             'orderer_tel',          'orderer_phone',        'payment_type_code',        'payment_state_code',
             'payment_time',             'total_amount',         'discount_amount',      'admin_memo',               'create_ts',
             'goods_url',    'new_order_yn',         'is_view',              'is_highlight',             'inflow',
-            'order_quantity',           'order_time',
+            'order_quantity',           'order_time',  'handler'
         );
         return $query;
     }
@@ -59,7 +59,7 @@ class OrderIndexQueryBuilder
             'order_data.total_amount as total_amount', 'order_data.discount_amount as discount_amount', 'order_data.payment_time as payment_time',
             'order_data.payment_state_code as payment_state_code', 'order_data.payment_type_code as payment_type_code',
             'order_data.is_highlight as is_highlight', 'order_data.new_order_yn as new_order_yn', 'order_data.admin_memo as admin_memo', 'order_data.is_view as is_view',
-            'order_data.order_quantity as order_quantity', 'order_data.goods_url as goods_url', 'order_data.inflow as inflow', 'order_data.order_time as order_time',
+            'order_data.order_quantity as order_quantity', 'order_data.goods_url as goods_url', 'order_data.inflow as inflow', 'order_data.order_time as order_time', 'order_data.handler as handler',
 
             'order_delivery.delivery_date as delivery_date', 'order_delivery.delivery_time as delivery_time',
             'order_delivery.receiver_name as receiver_name', 'order_delivery.receiver_phone as receiver_phone', 'order_delivery.receiver_tel as receiver_tel',

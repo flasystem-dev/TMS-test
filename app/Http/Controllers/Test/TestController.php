@@ -49,27 +49,28 @@ use Illuminate\Support\Facades\Mail;
 class TestController extends Controller
 {
     public static function test() {
-
+        $order = OrderData::find(3145896);
+        dd($order);
     }
 
     public static function test2(Request $request)
     {
         set_time_limit(600);
 
-        $year_month = "2024-10";
+        $year_month = "2025-02";
 //
-//        $start = $year_month . "-01 00:00:00";
-
+        $start = $year_month . "-01 00:00:00";
+//
 //        $endOfMonth = Carbon::parse($start)->day(15)->format('Y-m-d');
-//        $endOfMonth = Carbon::parse($start)->endOfMonth()->format('Y-m-d');
-//        $end = $endOfMonth. " 23:59:59";
+        $endOfMonth = Carbon::parse($start)->endOfMonth()->format('Y-m-d');
+        $end = $endOfMonth. " 23:59:59";
 //        $brand = "BTFC";
 
 //        $order_index = 3110964;
 
         OrderData::with('delivery:order_idx,goods_name,pr_idx,send_name', 'payments:order_idx,payment_item', 'carts', 'vendor')
-//            ->whereBetween('create_ts',[$start, $end])
-            ->where('order_idx', $order_index)
+            ->whereBetween('create_ts',[$start, $end])
+//            ->where('order_idx', $order_index)
             ->chunk(1000, function ($orders) {
                 DB::transaction(function () use ($orders) {
                     foreach ($orders as $order) {
@@ -79,7 +80,7 @@ class TestController extends Controller
 
                         $price_type = 1;
                         $product_id = 0;
-                        $product_name = $order->delivery->goods_name;
+                        $product_name = $order->delivery->goods_name ?? '';
                         $product_price = 0;
 
                         if($order->vendor) {
@@ -129,7 +130,6 @@ class TestController extends Controller
                                 'vendor_options_amount' => $vendor_options_amount
                             ]
                         );
-                        \Log::info("OrderItem ID: " . $item->id);
 //                $item -> product_id = $product_id;
 //                $item -> price_type_id = $price_type;
 //                $item -> product_name = $product_name;
@@ -219,7 +219,7 @@ class TestController extends Controller
 
                         $order -> goods_url = $order -> open_market_goods_url;
                         $order -> is_new = $order -> new_order_yn === 'Y' ? 1 : 0;
-                        $order -> handler = $order -> delivery -> send_name;
+                        $order -> handler = $order -> delivery -> send_name ?? "";
                         $order -> save();
                     }
                 });
@@ -293,6 +293,9 @@ class TestController extends Controller
                     $order->payments[0] -> payment_item = $order->delivery->goods_name;
                 }
 
+                if($order->delivery === NULL) {
+                    \Log::error("주문 인덱스 : " . $order->order_idx);
+                }
 
                 $price_type = 1;
                 $product_id = 0;
@@ -401,7 +404,7 @@ class TestController extends Controller
 
                 $order -> goods_url = $order -> open_market_goods_url;
                 $order -> is_new = $order -> new_order_yn === 'Y' ? 1 : 0;
-                $order -> handler = $order -> delivery -> send_name;
+                $order -> handler = $order -> delivery -> send_name ?? "";
                 $order -> save();
             }
         });
