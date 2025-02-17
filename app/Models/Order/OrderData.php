@@ -279,7 +279,7 @@ class OrderData extends Model
         $this->misu_amount = $calc_data['misu_amount'];
         $this->refund_amount = $calc_data['refund_amount'];
 
-        if ($payment_cnt === $calc_data['canceled_count']) {
+        if ($payment_cnt !== 0 && $payment_cnt === $calc_data['canceled_count']) {
             $this->payment_state_code = "PSCC";
         } elseif ($this->total_amount !== $this->pay_amount + $this->misu_amount) {
             $this->payment_state_code = "PSOC";
