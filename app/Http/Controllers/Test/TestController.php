@@ -49,7 +49,28 @@ use Illuminate\Support\Facades\Mail;
 class TestController extends Controller
 {
     public static function test() {
-        $order = OrderData::find(3145896);
+        $order = OrderData::find(3146050);
+
+        $item_id = OrderItem::max('id') + 1;
+
+        OrderItem::insert([
+            'id' => $item_id,
+            'order_id' => 3146050,
+            'product_name' => "축하화환 3단(기본형)",
+            'item_total_amount' => 84900,
+            'product_price' => 64900
+        ]);
+
+        OrderItemOption::insert([
+            'order_item_id' => $item_id,
+            'option_type_id' => 9,
+            'option_type_name' => "지역추가금",
+            'option_name' => "전북/충북/제주/강원",
+            'option_price' => 20000,
+            'balju_option_price' => 20000,
+            'vendor_option_price' => 20000,
+        ]);
+
         dd($order);
     }
 
