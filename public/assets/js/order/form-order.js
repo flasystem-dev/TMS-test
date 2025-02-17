@@ -277,18 +277,16 @@ $('#channel-vendor').on('change', function(){
 $(document).on('click', '#search_btn', function(e){
     e.preventDefault();
 
-    var form = document.getElementById('product-form')
+    var form = document.getElementById('product-search-form')
     const formData = new FormData(form);
     formData.append('brand_type_code',document.getElementById('brand').value);
     formData.append('price_type',document.getElementById('price_type').value);
 
+    const queryString = new URLSearchParams(formData).toString();
+
     $.ajax({
         type: 'get',
-        url: main_url + "/order/form/products",
-        data: formData,
-        async: false,
-        processData: false,
-        contentType: false,
+        url: main_url + "/order/form/products?" + queryString,
         success : function(data) {
             $('#product-list').html(data);
         },
