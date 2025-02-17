@@ -142,7 +142,7 @@ class NewrunAPIController extends Controller
             if ($res['resultCode'] == '0000') {
 
                 $order -> is_new = 0;
-                $order -> handler = Auth::user()->name;
+                $order -> handler = $register;
                 $order -> save();
 
                 $delivery -> delivery_state_code_before = DB::raw('delivery_state_code');
