@@ -2,6 +2,7 @@
 namespace App\Services\Order;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\DTOs\OrderProduct;
@@ -34,6 +35,7 @@ class OrderService
         $input['balju_amount'] = $orderProduct -> balju_price;
         $input['vendor_amount'] = $orderProduct -> vendor_price;
         $input['goods_url'] = $orderProduct->product_img;
+        $input['handler'] = Auth::user()->name;
 
         // order_delivery
         $input['delivery_time'] = self::makeDeliveryTime($input);
