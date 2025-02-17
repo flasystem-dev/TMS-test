@@ -717,6 +717,11 @@ class NicePayController extends Controller
     public static function webhook(Request $request) {
         $data = $request -> getContent();
 
+        DB::table('test_table') -> insert([
+            'test1' => '나이스페이 웹훅',
+            'test2' => $data
+        ]);
+        
         parse_str($data, $response);
 
         $result = array();
@@ -725,16 +730,14 @@ class NicePayController extends Controller
             $result[$key] = iconv('EUC-KR', 'UTF-8', $value);
         }
 
-        DB::table('test_table') -> insert([
-            'test1' => '나이스페이 웹훅',
-            'test2' => $data
-        ]);
 
         try{
             $payment = OrderPayment::where('payment_pid', $result['MOID'])->first();
             $orders = OrderData::with('payments')->where('order_number', $payment->order_idx) -> get();
 
-            self::insertPaymentJSON($payment -> order_idx, $response);
+            $json = json_encode($result, JSON_UNESCAPED_UNICODE);
+
+            self::insertPaymentJSON($payment -> order_idx, $json);
 
             PaymentService::updateOrderData_webhook($orders, $payment, $result);
 
