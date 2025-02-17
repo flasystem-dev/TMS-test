@@ -87,7 +87,7 @@
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','관리자메모','admin_memo');">관리자메모</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','보내는분','delivery_ribbon_left');">보내는분</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','배송요청사항','delivery_message');">배송요청사항</a>
-                                                <a class="dropdown-item" href="javascript:select_btn('sw_1','담당자','send_name');">담당자</a>
+                                                <a class="dropdown-item" href="javascript:select_btn('sw_1','담당자','handler');">담당자</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','사업자명','rep_name');">사업자명</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','Pass명','name');">Pass명</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_1','입금자명','deposit_name');">입금자명</a>
@@ -118,7 +118,7 @@
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_2','관리자메모','admin_memo');">관리자메모</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_2','보내는분','delivery_ribbon_left');">보내는분</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_2','배송요청사항','delivery_message');">배송요청사항</a>
-                                                <a class="dropdown-item" href="javascript:select_btn('sw_2','담당자','send_name');">담당자</a>
+                                                <a class="dropdown-item" href="javascript:select_btn('sw_2','담당자','handler');">담당자</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_2','사업자명','rep_name');">사업자명</a>
                                                 <a class="dropdown-item" href="javascript:select_btn('sw_2','입금자명','deposit_name');">입금자명</a>
                                             </div>
