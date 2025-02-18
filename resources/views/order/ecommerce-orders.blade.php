@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    전체주문관리 Test2
+    전체주문관리
 @endsection
 @section('content')
 @php

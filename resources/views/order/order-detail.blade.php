@@ -113,9 +113,8 @@
                                <td>{{$order->od_id}}</td>
                                <td>{{$order->order_number}}</td>
                                <td>
-                                   <a href='javascript:void(0);' onclick="market_open('{{$order->item_url}}{{$order->open_market_goods_url}}');">
+                                   <a href='javascript:void(0);' onclick="market_open('{{$order->item_url}}{{$order->goods_url}}');">
                                        <p class="gs_name_v">{{$order->item->product_name}}<span class="option_text"> ({{number_format($order->item->product_price)}})</span></p>
-
                                        @if($order->item && $order->item->options->isNotEmpty())
                                            @foreach($order->item->options as $option)
                                                <p class="gs_name_v option_text">{{$option->option_name . " (+".number_format($option->option_price).")"}}</p>

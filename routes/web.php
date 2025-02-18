@@ -76,6 +76,8 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('/order/excel/download/individual', [App\Http\Controllers\Excel\OrderExcelController::class, 'download_order_excel']);
     Route::view('/order/excel/download','order.popup.excel-batchDownload');
     Route::post('/order/excel/download/batch', [App\Http\Controllers\Excel\OrderExcelController::class, 'download_batch_orderExcel']);
+    Route::get('/order/excel/files', [App\Http\Controllers\Excel\OrderExcelController::class, 'index']);
+    Route::get('/order/excel/file/{id}', [App\Http\Controllers\Excel\OrderExcelController::class, 'download_file']);
 
 // 주문 상세
     Route::get('order/order-detail/{order_idx}', [App\Http\Controllers\Order\OrderDetailController::class, 'order_detail']);

@@ -1,0 +1,18 @@
+p { margin: 0; }
+
+.div-container { display: flex; flex-direction: row; gap: 50px;}
+
+.item-container { width: 150px; border: 2px solid #d1d1d1; padding: 5px 10px; border-radius: 10px; cursor: pointer}
+
+.processing { background-color: #ffffcc }
+.completed { background-color: #bfffd1 }
+.failed { background-color: #ffc2c2 }
+
+.file-name { font-size: 14px;}
+
+.status { font-weight: bold; text-align: center }
+p.processing { color: #a7a704 }
+p.completed { color: #068d2c }
+p.failed { color: #ff0000 }
+
+.user-name { font-weight: bold; text-align: right; }

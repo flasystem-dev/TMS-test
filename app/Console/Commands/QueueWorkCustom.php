@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class QueueWorkCustom extends Command
 {
+    public $timeout = 600;
+
     /**
      * The name and signature of the console command.
      *
@@ -30,6 +32,10 @@ class QueueWorkCustom extends Command
      */
     public function handle()
     {
+        set_time_limit(0); // PHP 스크립트 실행 제한 해제
+        ini_set('memory_limit', '-1'); // 메모리 제한 해제
+
+
         // 제외할 큐 가져오기
         $exceptQueue = $this->option('except');
 
@@ -61,6 +67,8 @@ class QueueWorkCustom extends Command
         Artisan::call('queue:work', [
             '--queue' => $queueNames,
             '--tries' => 3,
+            '-timeout' => $this->timeout,
+            '--memory' => 1024,
         ]);
     }
 }

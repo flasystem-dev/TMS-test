@@ -321,8 +321,8 @@ $(document).on('change', '#product_ctgy', function(){
 
 // 상품 검색 input 엔터키 처리
 $('input[name="search_word"]').on('keydown',function(e){
-    e.preventDefault();
-    if(event.keyCode === 13) {
+    if(e.keyCode === 13) {
+        e.preventDefault();
         var form = document.getElementById('product-search-form')
         const formData = new FormData(form);
         formData.append('brand_type_code',document.getElementById('brand').value);

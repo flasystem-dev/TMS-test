@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Excel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Order\OrderData;
@@ -19,6 +21,27 @@ use App\Models\Order\OrderExcelDownload;
 
 class OrderExcelController extends Controller
 {
+
+    public function index()
+    {
+        $data['files'] = OrderExcelDownload::orderBy('updated_at', 'desc') -> get();
+
+        return view('excel.order.index', $data);
+    }
+
+    public function download_file($id)
+    {
+
+        $fileName = DB::table('order_excel_download') -> where('id', $id) -> value('file_name');
+        $filePath = "excel/order/{$fileName}";
+
+        if (!Storage::exists($filePath)) {
+            abort(404, '파일을 찾을 수 없습니다.');
+        }
+
+        return Storage::download($filePath);
+    }
+
     public function download_order_excel(Request $request) {
         $order_idx = $request -> order_idx;
 
@@ -45,9 +68,6 @@ class OrderExcelController extends Controller
             'requester' => Auth::user()->name
         ]);
 
-//        $result = Excel::store(new OrderExport($order_idx), $filePath, 'excel');
-
-//        dd($result);
         // 백그라운드 큐 실행
         OrderExportJob::dispatch($order_idx, $fileName, $filePath, $download->id);
 
