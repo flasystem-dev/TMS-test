@@ -50,7 +50,7 @@
                     <table class="table m-0">
                         <tr>
                             <th>상품명</th>
-                            <td style="width: 60%;"><input type="text" class="form-control" name="product_name" value="{{$order->item->product_name}}" disabled></td>
+                            <td style="width: 60%;"><input type="text" class="form-control" name="intranet_product_name" value="{{$order->item->product_name}}"></td>
                             <th>수량</th>
                             <td><input type="text" class="form-control text-end px-3" name="rw_qty" value="1" disabled></td>
                         </tr>

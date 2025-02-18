@@ -373,7 +373,8 @@ function change_state(state) {
             },
             success: function(data) {
                 if(data.state){
-                    location.href = data.url;
+                    opener.location.reload();
+                    location.reload();
                 }
             },
             error: function(e) {

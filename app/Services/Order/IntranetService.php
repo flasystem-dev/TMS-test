@@ -50,7 +50,7 @@ class IntranetService
             'rw_bdate'          => $order->delivery->delivery_date,         // 배송일
             'rw_btime'          => $order->delivery->delivery_time,         // 배송시간
             'rw_menucode'       => self::set_menuCode($product),    // 상품코드
-            'rw_menu_etc'       => $product->name,               // 상품 추가 설명
+            'rw_menu_etc'       => $input['intranet_product_name'],               // 상품 추가 설명
             'rw_qty'            => 1,                // 수량
             'rw_price'          => $orderProduct->balju_price + $orderProduct->balju_options_amount,          // 결제금액, 발주금액
             'rw_origin_price'   => $input['price_view_none'] ? 1 : $order->total_amount,  // 원청금액
