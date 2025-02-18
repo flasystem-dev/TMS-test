@@ -366,13 +366,6 @@ class OrderDetailController extends Controller
         $deleted -> fill($delivery->toArray());
         $deleted -> log_name = Auth::user()->name;
 
-        if(DB::table('order_cart') -> where('order_idx', $order_idx) -> exists()) {
-            $carts = OrderCart::where('order_idx', $order_idx) -> get();
-            $deleted -> order_cart = $carts -> toJson();
-
-            DB::table('order_cart') -> where('order_idx', $order_idx) -> delete();
-        }
-
         if(DB::table('order_payment') -> where('order_idx', $order_idx) -> exists()) {
             $payments = OrderPayment::where('order_idx', $order_idx) -> get();
             $deleted -> order_cart = $payments -> toJson();

@@ -13,11 +13,11 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CodeOfCompanyInfo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 
+use App\Services\Order\OrderService;
 use App\Services\Order\OrderIndexService;
 use App\Services\Order\OrderDetailListService;
 use App\QueryBuilders\OrderDetailList;
@@ -279,7 +279,7 @@ class OrderController extends Controller
                 "log_content" => $contents
             ]);
 
-            Common::check_OrderAmount_state($idx);
+            OrderService::amountStateVerification($idx);
         }
 
         Session::flash('alert', 1);
