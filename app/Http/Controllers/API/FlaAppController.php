@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -67,6 +66,7 @@ class FlaAppController extends Controller
         $request -> tmp_id = $tmp_id;
 
         $kakao = new KakaoTalkController();
+
         $res = $kakao -> SendLink($request);
         $result = json_decode($res -> getContent());
         if($result -> code != 200) {

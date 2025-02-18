@@ -152,7 +152,7 @@ function formatResult(state){
 
 // 간편주문 링크 보내기
 function link_send(){
-    var brand_type_code = $('#brand_type_code').val();
+    var brand_type_code = $('#brand').val();
     var od_name=$('#orderer_name').val();
     var od_hp=$('#send_phone_num').val();
     var od_b_name=$('#receiver_name').val();
@@ -162,7 +162,7 @@ function link_send(){
     var od_addr=$('#delivery_address').val();
     var od_msg_left=$('#delivery_ribbon_left').val();
     var od_msg_right=$('#delivery_ribbon_right').val();
-    var od_register=$('#admin_regist').val();
+    var od_register=$('#handler').val();
     var token = $("input[name=_token]").val();
     var goods_id = document.querySelector('select[name="goods_select"]').value;
     $.ajax({
