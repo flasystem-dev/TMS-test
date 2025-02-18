@@ -1,14 +1,16 @@
 p { margin: 0; }
 
-.div-container { display: flex; flex-direction: row; gap: 50px;}
+.div-container { display: flex; flex-wrap: wrap; flex-direction: row; gap: 50px; }
 
-.item-container { width: 150px; border: 2px solid #d1d1d1; padding: 5px 10px; border-radius: 10px; cursor: pointer}
+.item-container { width: 250px; border: 2px solid #d1d1d1; padding: 5px 10px; border-radius: 10px; cursor: pointer}
 
 .processing { background-color: #ffffcc }
 .completed { background-color: #bfffd1 }
 .failed { background-color: #ffc2c2 }
 
 .file-name { font-size: 14px;}
+
+.time-data { font-size: 13px; text-align: right; }
 
 .status { font-weight: bold; text-align: center }
 p.processing { color: #a7a704 }

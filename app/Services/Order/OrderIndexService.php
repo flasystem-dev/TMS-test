@@ -83,8 +83,8 @@ class OrderIndexService
     // 주문 데이터 벌크 다운로드 용 조회
     public static function order_bulk_excelDownload($search) {
         $order_sql = DB::table('order_data')
-            -> where('is_view', 1)
-            -> where('brand_type_code', $search['excel_brand']);
+            -> where('brand_type_code', $search['excel_brand'])
+            -> where('is_view', 1);
 
         $query = DB::table('order_data')
             -> fromSub($order_sql, 'order_data')

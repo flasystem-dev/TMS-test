@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Order\OrderData;
 use App\Exports\OrderExport;
 use Carbon\Carbon;
+use Hashids\Hashids;
 
 use App\Services\Order\OrderIndexService;
 use App\Jobs\OrderExportJob;
@@ -29,13 +30,14 @@ class OrderExcelController extends Controller
         return view('excel.order.index', $data);
     }
 
-    public function download_file($id)
+    public function download_file($encode_id)
     {
+        $decode_id = (new Hashids('flasystem-dev'))->decode($encode_id)[0] ?? null;
 
-        $fileName = DB::table('order_excel_download') -> where('id', $id) -> value('file_name');
+        $fileName = DB::table('order_excel_download') -> where('id', $decode_id) -> value('file_name') ?? "";
         $filePath = "excel/order/{$fileName}";
 
-        if (!Storage::exists($filePath)) {
+        if (empty($fileName) || !Storage::exists($filePath)) {
             abort(404, '파일을 찾을 수 없습니다.');
         }
 
@@ -57,16 +59,24 @@ class OrderExcelController extends Controller
         $search = $request -> all();
         $order_idx = OrderIndexService::order_bulk_excelDownload($search);
 
-        $now = Carbon::now() -> format('ymdHis');
-        $fileName = "order_".$now.".xlsx";
+        count($order_idx);
+
+        $brand = BrandAbbr($search['excel_brand']);
+        $now = Carbon::now();
+        $formattedTime = $now -> format('ymdHis'). floor($now->millisecond / 100);
+        $fileName = $brand."_".$formattedTime.".xlsx";
         $filePath = "order/".$fileName;
 
         $download = OrderExcelDownload::create([
             'file_name' => $fileName,
-            'file_path' => $filePath,
             'status' => 'processing',
             'requester' => Auth::user()->name
         ]);
+
+        $download_id = (new Hashids('flasystem-dev'))->encode($download->id);
+        $fileUrl = url('order/excel/file/download/') . "/{$download_id}";
+
+        OrderExcelDownload::where('id', $download->id) -> update(['file_url' => $fileUrl ]);
 
         // 백그라운드 큐 실행
         OrderExportJob::dispatch($order_idx, $fileName, $filePath, $download->id);

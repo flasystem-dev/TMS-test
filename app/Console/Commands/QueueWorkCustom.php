@@ -67,7 +67,7 @@ class QueueWorkCustom extends Command
         Artisan::call('queue:work', [
             '--queue' => $queueNames,
             '--tries' => 3,
-            '-timeout' => $this->timeout,
+            '--timeout' => $this->timeout,
             '--memory' => 1024,
         ]);
     }

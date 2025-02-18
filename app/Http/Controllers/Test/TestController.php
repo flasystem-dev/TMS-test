@@ -83,15 +83,15 @@ class TestController extends Controller
         $start = $year_month . "-01 00:00:00";
 //
 //        $endOfMonth = Carbon::parse($start)->day(15)->format('Y-m-d');
-        $endOfMonth = Carbon::parse($start)->endOfMonth()->format('Y-m-d');
-        $end = $endOfMonth. " 23:59:59";
+//        $endOfMonth = Carbon::parse($start)->endOfMonth()->format('Y-m-d');
+//        $end = $endOfMonth. " 23:59:59";
 //        $brand = "BTFC";
 
-//        $order_index = 3110964;
+//        $order_index = 3146274;
 
         OrderData::with('delivery:order_idx,goods_name,pr_idx,send_name', 'payments:order_idx,payment_item', 'carts', 'vendor')
-            ->whereBetween('create_ts',[$start, $end])
-//            ->where('order_idx', $order_index)
+//            ->whereBetween('create_ts',[$start, $end])
+            ->where('order_idx', $order_index)
             ->chunk(1000, function ($orders) {
                 DB::transaction(function () use ($orders) {
                     foreach ($orders as $order) {

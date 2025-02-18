@@ -9,9 +9,13 @@
             <div class="card card-body">
                 <div class="div-container">
                     @foreach($files as $file)
-                        <div class="item-container {{$file->status}}" onclick="download_excel('{{$file->id}}', '{{$file->file_name}}')">
+                        <div class="item-container {{$file->status}}" onclick="download_excel('{{$file->file_url}}')">
                             <img src="{{asset('assets/images/excel_icon.png')}}" height="50" width="50">
-                            <p class="file-name">{{$file->file_name}}</p>
+                            <p class="file-name mb-2">{{$file->file_name}}</p>
+                            <p class="time-data">📅 요청 <span class="fw-semibold text-info">{{$file->created_at}}</span></p>
+                            @if($file->status === "completed")
+                            <p class="time-data">✅ 완료 <span class="fw-semibold text-success">{{$file->completed_time}}</span></p>
+                            @endif
                             <p class="status {{$file->status}}">{{$file->status}}</p>
                             <p class="user-name">{{$file->requester}}</p>
                         </div>
@@ -23,24 +27,13 @@
 @endsection
 @section('script')
     <script>
-        function download_excel(id , fileName) {
-            fetch(`/order/excel/file/${id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('다운로드 실패');
-                    }
-                    return response.blob(); // 바이너리 데이터로 변환
-                })
-                .then(blob => {
-                    const link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = fileName + '.xlsx';
-                    link.click();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showAlert('error', '다운로드 실패');
-                });
+        function download_excel(url) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', '');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 @endsection

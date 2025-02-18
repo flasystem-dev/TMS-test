@@ -28,15 +28,11 @@ function excel_batch_download() {
         data: form,
         processData: false,  // FormData를 사용하면 반드시 false로 설정해야 함
         contentType: false,  // 파일 업로드 시에도 반드시 false로 설정
-        xhrFields: {
-            responseType: 'blob'  // 이진 데이터를 받아야 하므로 'blob'으로 설정
-        },
+        // xhrFields: {
+        //     responseType: 'blob'  // 이진 데이터를 받아야 하므로 'blob'으로 설정
+        // },
         success: function(data) {
-            const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'orderList_'+today_str+'.xlsx';
-            link.click();
+            alert(data.message);
         },
         error: function(error) {
             alert('다운로드 실패')
@@ -51,8 +47,8 @@ function validateDateRange() {
     var endDate = new Date(document.getElementById('excel_end_date').value);
 
     // 현재 end_date에서 3개월이 지났는지 확인
-    var maxEndDate = new Date(startDate);
-    maxEndDate.setMonth(maxEndDate.getMonth() + 1); // 시작 날짜로부터 3개월 후 날짜
+    // var maxEndDate = new Date(startDate);
+    // maxEndDate.setMonth(maxEndDate.getMonth() + 1); // 시작 날짜로부터 3개월 후 날짜
 
     // 시작날짜 종료날짜 확인
     if (endDate < startDate) {
@@ -61,11 +57,11 @@ function validateDateRange() {
     }
 
     // 최대 3개월 확인
-    if (endDate > maxEndDate) {
-        alert('최대 1개월까지 선택할 수 있습니다.');
-        // end_date 값을 3개월 후로 자동 설정
-        document.getElementById('excel_end_date').value = maxEndDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 설정
-    }
+    // if (endDate > maxEndDate) {
+    //     alert('최대 1개월까지 선택할 수 있습니다.');
+    //     // end_date 값을 3개월 후로 자동 설정
+    //     document.getElementById('excel_end_date').value = maxEndDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 설정
+    // }
 }
 
 function excel_date_select(date) {

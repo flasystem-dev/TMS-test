@@ -42,7 +42,7 @@ class OrderExportJob implements ShouldQueue
 
             OrderExcelDownload::where('id', $this->downloadId)->update([
                 'status' => 'completed',
-                'updated_at' => now()
+                'completed_time' => now()
             ]);
 
         }catch (\Exception $e) {

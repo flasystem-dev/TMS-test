@@ -18,17 +18,26 @@ use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+
 use App\Models\Order\OrderData;
+use App\Models\Order\OrderExcelDownload;
 
 class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkReading, ShouldAutoSize, WithColumnFormatting, WithDefaultStyles, WithStyles
 {
     protected array $order_idx;
     private int $rowNumber = 0;
     private int $orderCount = 0;
+    protected $downloadId;
+    protected $totalChunks;
+    protected int $currentChunk = 0;
 
-    public function __construct($order_idx)
+
+
+    public function __construct($order_idx, $downloadId)
     {
         $this->order_idx = $order_idx;
+        $this->downloadId = $downloadId;
+        
     }
 
     public function defaultStyles(Style $defaultStyle)

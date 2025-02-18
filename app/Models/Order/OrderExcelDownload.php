@@ -10,5 +10,5 @@ class OrderExcelDownload extends Model
     use HasFactory;
 
     protected $table = 'order_excel_download';
-    protected $fillable = ['file_name', 'file_path', 'status', 'requester', 'created_at', 'updated_at'];
+    protected $fillable = ['file_name', 'file_url', 'status', 'progress', 'requester', 'completed_time', 'created_at', 'updated_at'];
 }
