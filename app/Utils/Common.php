@@ -183,57 +183,6 @@ class Common {
             default => "",
         };
     }
-
-    // 주문 금액 확인 후 상태 변경
-    public static function check_OrderAmount_state($order_idx) {
-        $order = OrderData::find($order_idx);
-
-        if($order->payments->isNotEmpty()) {
-            $pay_amount = 0;
-            $misu_amount = 0;
-            $refund_amount = 0;
-
-            $payment_number = OrderPayment::where('order_idx', $order->order_idx)->min('payment_number');
-
-            $count = 0;
-            $payment_cnt = count($order->payments);
-            foreach ($order->payments as $payment) {
-                if($payment->payment_number === $payment_number){
-                    $order->payment_type_code = $payment->payment_type_code;
-                }
-
-                if($payment->payment_state_code === "PSUD") {
-                    $misu_amount += (int)$payment -> payment_amount;
-                }elseif ($payment->payment_state_code === "PSDN") {
-                    $pay_amount += (int)$payment -> payment_amount;
-                    $refund_amount += (int)$payment -> refund_amount;
-                }elseif ($payment->payment_state_code === "PSCC") {
-                    if(!empty($payment->payment_pg)) {
-                        $refund_amount += (int)$payment -> refund_amount;
-                    }
-                    $count++;
-                }
-            }
-
-            $order -> pay_amount = $pay_amount;
-            $order -> misu_amount = $misu_amount;
-            $order -> refund_amount = $refund_amount;
-
-            if($payment_cnt === $count){
-                $order -> payment_state_code = "PSCC";
-            }else if($order->total_amount - $order->discount_amount !== $order->pay_amount + $order->misu_amount) {
-                $order -> payment_state_code = "PSOC";
-            }else if($order->total_amount - $order->discount_amount === $order->pay_amount) {
-                $order -> payment_state_code = "PSDN";
-            }else {
-                $order -> payment_state_code = "PSUD";
-            }
-
-            self::auto_update_order_log($order);
-
-            $order -> save();
-        }
-    }
 }
 
 

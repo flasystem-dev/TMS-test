@@ -40,13 +40,15 @@ class OrderExportJob implements ShouldQueue
 
             Excel::store(new OrderExport($this->orderIdx), $this->filePath, 'excel');
 
-            ExcelDownload::where('id', $this->downloadId)->update([
+            OrderExcelDownload::where('id', $this->downloadId)->update([
                 'status' => 'completed',
                 'updated_at' => now()
             ]);
 
         }catch (\Exception $e) {
-            ExcelDownload::where('id', $this->downloadId)->update(['status' => 'failed','updated_at' => now()]);
+            \Log::error($e->getMessage());
+
+            OrderExcelDownload::where('id', $this->downloadId)->update(['status' => 'failed','updated_at' => now()]);
         }
     }
 }
