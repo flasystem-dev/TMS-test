@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Order\OrderData;
-use App\Exports\OrderExport;
+use App\Exports\OrderDataExport;
 use Carbon\Carbon;
 use Hashids\Hashids;
 
@@ -50,7 +50,7 @@ class OrderExcelController extends Controller
         $now = Carbon::now() -> format('y-m-d');
         $file_name = "order_".$now.".xls";
 
-        return Excel::download(new OrderExport($order_idx), $file_name,  \Maatwebsite\Excel\Excel::XLSX, [
+        return Excel::download(new OrderDataExport($order_idx), $file_name,  \Maatwebsite\Excel\Excel::XLSX, [
             'Content-Type' => 'application/octet-stream'
         ]);
     }
@@ -58,8 +58,6 @@ class OrderExcelController extends Controller
     public function download_batch_orderExcel(Request $request) {
         $search = $request -> all();
         $order_idx = OrderIndexService::order_bulk_excelDownload($search);
-
-        count($order_idx);
 
         $brand = BrandAbbr($search['excel_brand']);
         $now = Carbon::now();
@@ -80,6 +78,7 @@ class OrderExcelController extends Controller
 
         // 백그라운드 큐 실행
         OrderExportJob::dispatch($order_idx, $fileName, $filePath, $download->id);
+//        OrderExportJob::dispatch($order_idx, $fileName, $filePath, $download->id)->onQueue('test');
 
         return response()->json([
             'message' => '파일 생성이 시작되었습니다. 다운로드 내역에서 확인하세요.',

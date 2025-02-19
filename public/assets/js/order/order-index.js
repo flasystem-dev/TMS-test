@@ -263,7 +263,7 @@ function excel_download() {
             const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'orderList_'+today_str+'.xlsx';
+            link.download = 'order_'+today_str+'.xlsx';
             link.click();
         },
         error: function(error) {

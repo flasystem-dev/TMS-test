@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\OrderExport;
+use App\Exports\OrderDataBatchExport;
 
 use App\Models\Order\OrderExcelDownload;
 
@@ -38,10 +38,11 @@ class OrderExportJob implements ShouldQueue
     {
         try {
 
-            Excel::store(new OrderExport($this->orderIdx), $this->filePath, 'excel');
+            Excel::store(new OrderDataBatchExport($this->orderIdx, $this->downloadId), $this->filePath, 'excel');
 
             OrderExcelDownload::where('id', $this->downloadId)->update([
                 'status' => 'completed',
+                'progress' => 100,
                 'completed_time' => now()
             ]);
 

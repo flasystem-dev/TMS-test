@@ -18,26 +18,22 @@ use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use Maatwebsite\Excel\Concerns\RemembersRowNumber;
 
 use App\Models\Order\OrderData;
 use App\Models\Order\OrderExcelDownload;
 
-class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkReading, ShouldAutoSize, WithColumnFormatting, WithDefaultStyles, WithStyles
+class OrderDataExport implements FromQuery, WithHeadings, WithMapping, WithChunkReading, ShouldAutoSize, WithColumnFormatting, WithDefaultStyles, WithStyles
 {
     protected array $order_idx;
     private int $rowNumber = 0;
-    private int $orderCount = 0;
-    protected $downloadId;
-    protected $totalChunks;
-    protected int $currentChunk = 0;
+    private int $orderCount;
 
 
-
-    public function __construct($order_idx, $downloadId)
+    public function __construct($order_idx)
     {
         $this->order_idx = $order_idx;
-        $this->downloadId = $downloadId;
-        
+        $this->orderCount = count($order_idx);
     }
 
     public function defaultStyles(Style $defaultStyle)
@@ -62,6 +58,8 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkRead
     public function headings(): array
     {
         return [
+            [ $this->orderCount . " 건"],
+            [
             '번호',
             '주문번호',
             '주문일시',
@@ -102,16 +100,16 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkRead
             '화원사옵션',
             '경조사어',
             '보내는분',
+                ]
         ];
     }
 
     public function map($order): array
     {
+        $this->rowNumber++;
+
         $right = $order->delivery->delivery_ribbon_right ?? "";
         $left = !empty($order->delivery->delivery_ribbon_left) ? "(" . $order->delivery->delivery_ribbon_left . ")" : "";
-
-        $this->rowNumber++;
-        $this->orderCount = $this->rowNumber;
 
         return [
             // 번호
@@ -197,22 +195,10 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkRead
         ];
     }
 
-//    public function view(): View
-//    {
-//        $orders = OrderData::with('delivery', 'item', 'payments', 'vendor', 'pass')
-//            -> whereIn('order_idx', $this -> order_idx) -> get();
-//
-//        $data['orders'] = $orders;
-//
-//        return view('excel.select-orderData', $data);
-//    }
-
     public function styles(Worksheet $sheet)
     {
         $highestRow = $sheet->getHighestRow(); // 마지막 데이터가 있는 행 번호
         $highestColumn = $sheet->getHighestColumn(); // 마지막 데이터가 있는 열 문자 (A, B, C, ...)
-
-//        $sheet->setCellValue('A1', $this->rowNumber . " 건");
 
         $sheet->getStyle("A1:A1")->applyFromArray([
             'font' => [
@@ -224,7 +210,7 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkRead
             ]
         ]);
 
-        $sheet->getStyle("A1:{$highestColumn}1")->applyFromArray([
+        $sheet->getStyle("A2:{$highestColumn}2")->applyFromArray([
             // 첫 번째 행(A1:Z1)에 스타일 적용
             'font' => [
                 'bold' => true,
@@ -251,6 +237,6 @@ class OrderExport implements FromQuery, WithHeadings, WithMapping, WithChunkRead
 
     public function chunkSize(): int
     {
-        return 1000;
+        return 2000;
     }
 }

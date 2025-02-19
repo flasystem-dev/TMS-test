@@ -11,7 +11,7 @@
                     @foreach($files as $file)
                         <div class="item-container {{$file->status}}" onclick="download_excel('{{$file->file_url}}')">
                             <img src="{{asset('assets/images/excel_icon.png')}}" height="50" width="50">
-                            <p class="file-name mb-2">{{$file->file_name}}</p>
+                            <p class="file-name mb-2">{{$file->file_name}} @if($file->status==="processing") <span>({{$file->progress}} %)</span> @endif</p>
                             <p class="time-data">📅 요청 <span class="fw-semibold text-info">{{$file->created_at}}</span></p>
                             @if($file->status === "completed")
                             <p class="time-data">✅ 완료 <span class="fw-semibold text-success">{{$file->completed_time}}</span></p>
