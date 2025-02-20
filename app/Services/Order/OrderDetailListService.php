@@ -49,8 +49,8 @@ Class OrderDetailListService
         $query = OrderDataQueryBuilder::includeCancelOrder($query, $search);
 
         // 금액 검색
-        if(!empty($search['order_amount'])) {
-            $data = OrderDetailListQueryBuilder::searchAmount($query, $search['order_amount']);
+        if(!empty($search['total_amount'])) {
+            $query = OrderDetailListQueryBuilder::searchAmount($query, $search['total_amount']);
         }
         
         // 총 금액 계산

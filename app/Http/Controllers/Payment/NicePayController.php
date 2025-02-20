@@ -731,7 +731,6 @@ class NicePayController extends Controller
             $result[$key] = iconv('EUC-KR', 'UTF-8', $value);
         }
 
-
         try{
             $payment = OrderPayment::where('payment_pid', $result['MOID'])->first();
             $orders = OrderData::with('payments')->where('order_idx', $payment->order_idx) -> get();

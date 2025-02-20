@@ -2,6 +2,7 @@ p { margin-bottom: 3px; }
 
 .select_brand { border:1px solid #d1d1d1; }
 
+.brand_btns input:checked + label.select_brand_all { background-color: #858585 !important; color: #fff; border: 1px solid #858585}
 .brand_btns input:checked + label.select_brand_BTCP { background-color: #f33737 !important; color: #fff; border: 1px solid #f33737}
 .brand_btns input:checked + label.select_brand_BTCC { background-color: #ffb500 !important; color: #fff; border: 1px solid #ffb500}
 .brand_btns input:checked + label.select_brand_BTSP { background-color: #2d73c3 !important; color: #fff; border: 1px solid #2d73c3}

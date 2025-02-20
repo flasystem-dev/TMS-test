@@ -139,7 +139,7 @@
                                         <div class="menu4">
                                             <div class="input-group">
                                                 <span class="input-group-text">합계금액</span>
-                                                <input type="number" class="form-control" name="order_amount" value="{{request()->order_amount}}">
+                                                <input type="number" class="form-control" name="total_amount" value="{{request()->total_amount}}">
                                             </div>
                                         </div>
                                         <div class="menu5">

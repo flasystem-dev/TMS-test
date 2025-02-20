@@ -20,6 +20,8 @@
                             <div class="menu1">
                                 <div class="input-group brand_btns">
                                     <span class="input-group-text">브랜드</span>
+                                    <input type="radio" class="btn-check" name="brand" value="all" id="select_brand_all" autocomplete="off" {{request()->input('brand')==="all" ? "checked" : ""}}>
+                                    <label class="btn select_brand select_brand_all" for="select_brand_all">전체</label>
                                     @foreach($brands as $brand)
                                         <input type="radio" class="btn-check" name="brand" value="{{$brand->brand_type_code}}" id="select_brand_{{$brand->brand_type_code}}" autocomplete="off" {{request()->input('brand')===$brand->brand_type_code ? "checked" : ""}}>
                                         <label class="btn select_brand select_brand_{{$brand->brand_type_code}}" for="select_brand_{{$brand->brand_type_code}}">{{$brand->brand_ini}}</label>

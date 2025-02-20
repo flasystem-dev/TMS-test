@@ -43,25 +43,31 @@ function excel_batch_download() {
 
 // 최대 1개월 설정
 function validateDateRange() {
-    var startDate = new Date(document.getElementById('excel_start_date').value);
-    var endDate = new Date(document.getElementById('excel_end_date').value);
+    var startDateInput = document.getElementById('excel_start_date');
+    var endDateInput = document.getElementById('excel_end_date');
+
+    var startDate = new Date(startDateInput.value);
+    var endDate = new Date(endDateInput.value);
 
     // 현재 end_date에서 3개월이 지났는지 확인
-    // var maxEndDate = new Date(startDate);
-    // maxEndDate.setMonth(maxEndDate.getMonth() + 1); // 시작 날짜로부터 3개월 후 날짜
+    var maxEndDate = new Date(startDate);
+    maxEndDate.setMonth(maxEndDate.getMonth() + 3); // 시작 날짜로부터 3개월 후 날짜
+
+    // 마지막 날 확인
+    maxEndDate.setDate(0);
 
     // 시작날짜 종료날짜 확인
     if (endDate < startDate) {
         alert('종료 날짜는 시작 날짜보다 작을 수 없습니다.');
-        document.getElementById('excel_end_date').value = document.getElementById('excel_start_date').value; // end_date를 start_date로 설정
+        endDateInput.value = startDateInput.value; // end_date를 start_date로 설정
     }
 
     // 최대 3개월 확인
-    // if (endDate > maxEndDate) {
-    //     alert('최대 1개월까지 선택할 수 있습니다.');
-    //     // end_date 값을 3개월 후로 자동 설정
-    //     document.getElementById('excel_end_date').value = maxEndDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 설정
-    // }
+    if (endDate > maxEndDate) {
+        alert('최대 3개월까지 선택할 수 있습니다.');
+        // end_date 값을 3개월 후로 자동 설정
+        endDateInput.value = formatDateToInput(maxEndDate); // YYYY-MM-DD 형식으로 설정
+    }
 }
 
 function excel_date_select(date) {

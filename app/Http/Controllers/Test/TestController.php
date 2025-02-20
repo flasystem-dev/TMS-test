@@ -87,7 +87,7 @@ class TestController extends Controller
 //        $end = $endOfMonth. " 23:59:59";
 //        $brand = "BTFC";
 
-//        $order_index = 3146442;
+        $order_index = 3147004;
 
         OrderData::with('delivery:order_idx,goods_name,pr_idx,send_name', 'payments:order_idx,payment_item', 'carts', 'vendor')
 //            ->whereBetween('create_ts',[$start, $end])
@@ -527,7 +527,7 @@ class TestController extends Controller
         $data = [
             'order_number'  => "1234-1234",
             'order_time'  => Carbon::now()->format('Y-m-d H:i:s'),
-            'orderer_name' => "주문자 테스트",
+            'orderer_name' => "테스트",
             'orderer_phone' => "010-1111-1111",
             'receiver_name' => "받는분 테스트",
             'receiver_phone' => "010-2222-2222",
@@ -535,13 +535,14 @@ class TestController extends Controller
             'pay_amount' => 100000,
             'supply_amount' => 90000,
             'delivery_address'    => "테스트 주소 123 김해",
-            'delivery_date'    => "2024-12-24",
+            'delivery_date'    => "2025-03-28",
             'delivery_time'   => "13:30:00",
             'delivery_ribbon_right' => '경조사어',
             'delivery_ribbon_left' => '보내는분',
             'order_memo' => '주문 메모',
             'goods_name' => '상품명',
-            'goods_url' => 'test.jpg',
+            'goods_code' => 'hjch001',
+            'goods_url' => '',
             'goods_options' => [
                 [
                     'option_name' => '받침대',

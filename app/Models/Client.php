@@ -33,7 +33,10 @@ class Client extends Model
         $clients = Client::query();
 
         if($search) {
-            $clients->where('brand',$search['brand']);
+
+            if($search['brand']!=="all") {
+                $clients->where('brand', 'like', "%".$search['brand']."%");
+            }
 
             if(isset($search['search'])){
                 $search_column = [

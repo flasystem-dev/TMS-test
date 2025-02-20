@@ -15,6 +15,7 @@ function clientUpsert() {
             processData: false,
             success: function (data) {
                 if(data.status){
+                    opener.location.reload();
                     location.href = data.url;
                 }else {
                     alert("수정 실패");
@@ -49,6 +50,7 @@ function managerUpsert() {
             processData: false,
             success: function (data) {
                 if(data){
+                    opener.location.reload();
                     location.reload();
                 }else {
                     alert("저장 실패");

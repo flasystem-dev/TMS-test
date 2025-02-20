@@ -177,11 +177,12 @@ class OrderDetailListQueryBuilder
 
     public static function sumAmount($query)
     {
-        $query_for_sum = clone $query;
+        $query_for_sum = $query;
+
         $result_data = $query_for_sum
             ->selectRaw('SUM(COALESCE(order_data.total_amount, 0)) as sum_amount')
-            ->first();
-        return $result_data -> sum_amount ?? 0;
+            ->value('sum_amount');
+        return $result_data ?? 0;
     }
 
     public static function paginate($query)
