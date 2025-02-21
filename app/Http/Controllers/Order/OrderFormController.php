@@ -182,7 +182,21 @@ class OrderFormController extends Controller
         $search_word = $request -> search_word;
         $price_type = $request -> price_type;
 
-        $query = Product::with(['options', 'prices' => function ($query) use ($price_type) { $query -> where('price_type_id', $price_type); }])
+        $query = Product::with(['options', 'prices' => function ($query) use ($price_type) {
+                $query->where(function ($q) use ($price_type) {
+                    $q->where('price_type_id', $price_type)
+                        ->orWhere(function ($q) use ($price_type) {
+                            // 만약 $price_type 데이터가 없으면 price_type_id = 1 조회
+                            $q->where('price_type_id', 1)
+                                ->whereNotExists(function ($subQuery) use ($price_type) {
+                                    $subQuery->select(DB::raw(1))
+                                        ->from('product_prices as pp')
+                                        ->whereColumn('pp.product_id', 'product_prices.product_id')
+                                        ->where('pp.price_type_id', $price_type);
+                                });
+                        });
+                });
+            }])
             -> where('brand', $brand)
             -> where('is_view', 1);
 
