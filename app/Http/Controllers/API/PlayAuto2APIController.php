@@ -175,10 +175,13 @@ class PlayAuto2APIController extends Controller
 
             $arr = json_decode($response,true);
             $data_arr = $arr["results"];
-
             if(!empty($data_arr)) {
 
                 foreach ($data_arr as $result_data) {
+
+                    if($result_data['ord_status'] === '배송중') {
+                        continue;
+                    }
 
                     $check = false;
 
@@ -730,7 +733,6 @@ class PlayAuto2APIController extends Controller
             'status'            => ['신규주문', '취소요청', '반품요청', '교환요청', '주문재확인'],
             'bundle_yn'         => true
         ]);
-
         return $response;
     }
 

@@ -199,6 +199,8 @@ class OrderFormController extends Controller
 
         $data['products'] = $query -> get();
 
+//        dd($data['products']);
+
         return view('order.include.order-form.products-list', $data);
     }
 

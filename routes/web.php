@@ -167,6 +167,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::get('/PlayAuto2/Order/Auto', [App\Http\Controllers\API\PlayAuto2APIController::class, 'get_order']);
     Route::get('/PlayAuto2/Order/Auto2', [App\Http\Controllers\API\PlayAuto2APIController::class, 'send_data_TMS']);
     Route::get('/PlayAuto2/Order/Auto3', [App\Http\Controllers\API\PlayAuto2APIController::class, 'test_update']);
+    Route::get('/PlayAuto2/Order/Auto4', [App\Http\Controllers\API\PlayAuto2APIController::class, 'get_orderToTMS']);
 //Route::get('/PlayAuto2/Order/Auto', [App\Http\Controllers\API\PlayAuto2APIController::class, 'Synchronize_order']);
     Route::get('/PlayAuto2/Order/NR', [App\Http\Controllers\API\PlayAuto2APIController::class, 'setDeliveryState']);
     Route::get('order/playauto/delivery', [App\Http\Controllers\API\PlayAuto2APIController::class, 'resend_delivery']);
