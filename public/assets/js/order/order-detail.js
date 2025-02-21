@@ -188,7 +188,7 @@ $('#product-list').on('click', '.add-product-btn', function(e){
 
 // 사업자 옵션 리스트 가져오기
 $('#change_vendor_modal').on('show.bs.modal', function(e){
-    let brand = document.getElementById('brand_type_code').value;
+    let brand = document.getElementById('brand').value;
     let vendor_idx = document.getElementById('vendor_idx').value;
 
     $.ajax({
