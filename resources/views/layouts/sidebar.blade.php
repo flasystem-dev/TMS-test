@@ -36,7 +36,7 @@
                 <a href="javascript: void(0);" class="has-arrow"> <i class="uil-store"></i><span>주문관리</span></a>
                 <ul class="sub-menu" aria-expanded="true">
                     <li class="disable"><a href="{{url('order/ecommerce_orders')}}">전체주문관리</a></li>
-                    <li class="disable"><a href="javascript: void(0);"><strike>미수현황</strike></a></li>
+                    <li class="disable"><a href="{{ url('order/transaction/outstanding') }}"><strike>미수현황</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>클레임</strike></a></li>
                     <li class="disable"><a href="{{ url('shop/account')}}">오픈마켓 계정정보</a></li>
                     <li class="disable"><a href="{{ url('Board/Notification') }}">알림</a></li>

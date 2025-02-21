@@ -48,30 +48,38 @@ use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
-    public static function test() {
-//        $order = OrderData::find(3146050);
-//
-//        $item_id = OrderItem::max('id') + 1;
-//
-//        OrderItem::insert([
-//            'id' => $item_id,
-//            'order_id' => 3146050,
-//            'product_name' => "축하화환 3단(기본형)",
-//            'item_total_amount' => 84900,
-//            'product_price' => 64900
-//        ]);
-//
-//        OrderItemOption::insert([
-//            'order_item_id' => $item_id,
-//            'option_type_id' => 9,
-//            'option_type_name' => "지역추가금",
-//            'option_name' => "전북/충북/제주/강원",
-//            'option_price' => 20000,
-//            'balju_option_price' => 20000,
-//            'vendor_option_price' => 20000,
-//        ]);
-//
-//        dd($order);
+    public static function get_api(Request $request) {
+        $orders = $request->input('orders');
+
+        foreach ($orders as $order) {
+                $order_idx = OrderData::max('order_idx') + 1;
+            try {
+                $delivery = $order['delivery'];
+                $item = $order['item'];
+
+                $order['order_idx'] = $order_idx;
+                $delivery['order_idx'] = $order_idx;
+                $item['order_id'] = $order_idx;
+
+                $newOrder = new OrderData();
+                $newOrder->fill($order);
+                $newOrder->save();
+
+                $newDelivery = new OrderDelivery();
+                $newDelivery->fill($delivery);
+                $newDelivery->save();
+
+                $newItem = new OrderItem();
+                $newItem->fill($item);
+                $newItem->save();
+            }catch (\Exception $e) {
+                \Log::error("데이터 받기 실패");
+                \Log::error("order-idx : ". $order_idx);
+                \Log::error($e->getMessage());
+            }
+        }
+        
+        return response()->json(["완료"]);
     }
 
     public static function test2(Request $request)

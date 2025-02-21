@@ -96,6 +96,9 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::get('order/cancel/table', [App\Http\Controllers\Order\OrderDetailController::class, 'refund_table']);
     Route::post('order/vendor/balju', [App\Http\Controllers\Order\OrderDetailController::class, 'update_baljuAmount']);
 
+// 미수현황
+    Route::get('order/transaction/outstanding', [App\Http\Controllers\Order\OutstandingTransactionController::class, 'index']);
+
 // 증빙서류 관련
     Route::get('Document/document-orders', [App\Http\Controllers\Document\DocumentController::class, 'get_orders']);
     Route::get('Document/cancel/bank', [App\Http\Controllers\Document\DocumentController::class, 'bank_code']);

@@ -84,6 +84,8 @@ Route::get('/Shop/boardDel/{id}', [App\Http\Controllers\Board\boardController::c
 Route::post('ETC/Test', [App\Http\Controllers\Test\TestController::class, 'get_file']);
 Route::get('test/bmsv2', [App\Http\Controllers\Test\TestController::class, 'BMSv2_response_api']);
 Route::post('test/bmsv2/delivery', [App\Http\Controllers\Test\TestController::class, 'test_api_data']);
+Route::post('test/api', [App\Http\Controllers\Test\TestController::class, 'get_api']);
+
 
 // Document
 Route::get('Document/transaction/view', [App\Http\Controllers\Document\TransactionController::class, 'transaction_document']) -> name('transaction-view');

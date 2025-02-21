@@ -778,7 +778,8 @@ class PlayAuto2APIController extends Controller
             '취소완료' => 'PSCC',
             '반품완료' => 'PSRC',
             '교환완료' => 'PSEC',
-            '주문재확인'=> 'PSOC'
+            '주문재확인'=> 'PSOC',
+            '배송중' => 'PSDN'
         ];
 
         return $type_code[$result_data['ord_status']];
