@@ -14,7 +14,7 @@ use App\Exports\OrderDataBatchExport;
 
 use App\Models\Order\OrderExcelDownload;
 
-class OrderExportJob implements ShouldQueue
+class OrderExportJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -51,5 +51,10 @@ class OrderExportJob implements ShouldQueue
 
             OrderExcelDownload::where('id', $this->downloadId)->update(['status' => 'failed','updated_at' => now()]);
         }
+    }
+
+    public function uniqueId()
+    {
+        return 'order_export_job';
     }
 }
