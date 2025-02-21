@@ -23,6 +23,7 @@
     @csrf
     <input type="hidden" value="{{$order->order_idx}}" name="order_idx" id="order-idx">
     <input type="hidden" value="{{$order->brand_type_code}}" id="brand">
+    <input type="hidden" value="{{$order->mall_code}}" id="vendor_idx">
     <div class="top_fixed">
         <span class="brand_type {{$order->brand_type_code}}" >{{BrandAbbr($order->brand_type_code)}}</span>
         <!-- 벤더 메뉴 -->
