@@ -94,5 +94,5 @@
 
 @endsection
 @section('script')
-<script src="{{asset('assets/js/order/order-excel.js')}}v={{ time() }}"></script>
+<script src="{{asset('assets/js/order/order-excel.js')}}?v={{ time() }}"></script>
 @endsection
