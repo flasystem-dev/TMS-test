@@ -591,7 +591,7 @@
     </div> <!-- end row -->
 @endsection
 @section('script')
-    <script src="{{asset('assets/js/order/order-index.js')}}"></script>
+    <script src="{{asset('assets/js/order/order-index.js')}}?v=1.3"></script>
     <script>
         function order_detail(order_idx){
             var url = './order-detail/'+order_idx;
