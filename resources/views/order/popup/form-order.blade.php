@@ -614,7 +614,7 @@
 <div id="payment_area"></div>
 
 <script> $('.datepicker').datepicker({ autoclose: true }); </script>
-<script src="/assets/js/order/form-order.js"></script>
+<script src="/assets/js/order/form-order.js?v={{ time() }}"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 @endsection
 

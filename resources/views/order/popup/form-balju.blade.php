@@ -273,5 +273,5 @@
 </div>
 @endsection
 @section('script')
-    <script src="{{asset('assets/js/order/form-balju.js')}}"></script>
+    <script src="{{asset('assets/js/order/form-balju.js')}}?v={{ time() }}"></script>
 @endsection

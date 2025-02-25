@@ -503,8 +503,8 @@
 </div>
         @endsection
         @section('script')
-            <script src="{{asset('assets/js/order/order-index.js')}}"></script>
-            <script src="{{asset('assets/js/order/order-list-detail.js')}}"></script>
+            <script src="{{asset('assets/js/order/order-index.js')}}?v={{ time() }}"></script>
+            <script src="{{asset('assets/js/order/order-list-detail.js')}}?v={{ time() }}"></script>
             <script>
                 function order_detail(order_idx){
                     var url = './order-detail/'+order_idx;

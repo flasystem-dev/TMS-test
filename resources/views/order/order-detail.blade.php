@@ -624,7 +624,7 @@
     <script src="{{ URL::asset('/assets/libs/parsleyjs/parsleyjs.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/pages/form-validation.init.js') }}"></script>
     <script src="{{ URL::asset('assets/js/pages/bootstrap-toasts.init.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/order/order-detail.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/order/order-detail.js') }}?v={{ time() }}"></script>
 
     @if($order->total_amount !== $order->pay_amount+$order->misu_amount)
     <script>
