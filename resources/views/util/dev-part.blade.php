@@ -46,7 +46,8 @@
             <div class="row">
                 <div class="col-4">
                     <div class="input-group mb-3">
-                        <button type="button" class="btn btn-primary" onclick="user_test()">Test</button>
+                        <input type="number" class="form-control" name="order_id">
+                        <button type="button" class="btn btn-primary" onclick="upsert_orderItem()">주문서 상품 새버전 갱신</button>
                     </div>
                 </div>
             </div>
@@ -55,7 +56,7 @@
 </div>
 @endsection
 @section('script')
-    <script src="{{asset('assets/js/dev/dev-part.js')}}"></script>
+    <script src="{{asset('assets/js/dev/dev-part.js')}}?v={{ time() }}"></script>
     <script>
         function user_test() {
             $.ajax({

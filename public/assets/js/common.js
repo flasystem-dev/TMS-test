@@ -24,42 +24,57 @@ function brand_session(){
     });
 }
 
-function auto_hyphen(e)
-{
+function auto_hyphen(e) {
     let ele = e.target;
-    var val = $(ele).val().replace(/[^0-9]/g, '');
+    let val = ele.value.replace(/[^0-9]/g, ''); // 숫자만 남김
 
-    if(val.length > 3 && val.length < 6){
-        var tmp = val.substring(0,2)
-        if(tmp == "02"){
-            $(ele).val(val.substring(0,2) + "-" + val.substring(2));
+    let result = '';
+
+    if (val.startsWith('02')) {
+        // 서울 지역번호 (02)
+        if (val.length <= 2) {
+            result = val;
+        } else if (val.length <= 6) {
+            result = val.substring(0, 2) + '-' + val.substring(2);
         } else {
-            $(ele).val(val.substring(0,3) + "-" + val.substring(3));
+            result = val.substring(0, 2) + '-' + val.substring(2, 6) + '-' + val.substring(6);
         }
-    }else if (val.length > 6){
-        var tmp = val.substring(0,2)
-        var tmp2 = val.substring(0,4)
-        if(tmp == "02"){
-            if(val.length == "10"){
-                $(ele).val(val.substring(0,2) + "-" + val.substring(2, 6) + "-" + val.substring(6));
-            } else {
-                $(ele).val(val.substring(0,2) + "-" + val.substring(2, 5) + "-" + val.substring(5));
-            }
-        } else if(tmp2 == "0505"){
-            if(val.length == "12"){
-                $(ele).val(val.substring(0,4) + "-" + val.substring(4, 8) + "-" + val.substring(8));
-            } else {
-                $(ele).val(val.substring(0,4) + "-" + val.substring(4, 7) + "-" + val.substring(7));
-            }
+    } else if (val.startsWith('0505')) {
+        // 전국 대표번호 (0505)
+        if (val.length <= 4) {
+            result = val;
+        } else if (val.length <= 8) {
+            result = val.substring(0, 4) + '-' + val.substring(4);
         } else {
-            if(val.length == "11"){
-                $(ele).val(val.substring(0,3) + "-" + val.substring(3, 7) + "-" + val.substring(7));
-            } else {
-                $(ele).val(val.substring(0,3) + "-" + val.substring(3, 6) + "-" + val.substring(6));
-            }
+            result = val.substring(0, 4) + '-' + val.substring(4, 8) + '-' + val.substring(8);
         }
+    } else if (val.startsWith('010')) {
+        // 휴대폰 번호 (010)
+        if (val.length <= 3) {
+            result = val;
+        } else if (val.length <= 7) {
+            result = val.substring(0, 3) + '-' + val.substring(3);
+        } else {
+            result = val.substring(0, 3) + '-' + val.substring(3, 7) + '-' + val.substring(7);
+        }
+    } else if (val.length >= 9) {
+        // 일반 지역번호 (031, 051 등)
+        if (val.length <= 3) {
+            result = val;
+        } else if (val.length <= 6) {
+            result = val.substring(0, 3) + '-' + val.substring(3);
+        } else {
+            result = val.substring(0, 3) + '-' + val.substring(3, 6) + '-' + val.substring(6);
+        }
+    } else {
+        result = val;
     }
+
+    ele.value = result;
 }
+
+
+
 
 function open_win(url, name, popupWidth, popupHeight, Left, Top) {
     // name   : 팝업윈도우_이름

@@ -149,7 +149,7 @@ class DevController extends Controller
 
     public function upsert_orderDataItem(Request $request)
     {
-        $order_index = 3147004;
+        $order_index = $request->order_idx;
 
         OrderData::with('delivery:order_idx,goods_name,pr_idx,send_name', 'payments:order_idx,payment_item', 'carts', 'vendor')
             ->where('order_idx', $order_index)
@@ -293,6 +293,7 @@ class DevController extends Controller
                     }
                 });
             });
+        return response() -> json(true);
     }
 
 #######################################################################################################################

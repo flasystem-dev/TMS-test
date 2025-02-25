@@ -19,7 +19,7 @@
 <!-- Common Css-->
 <link href="{{ URL::asset('/assets/css/common.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
 <!-- Common JS-->
-<script src="{{ URL::asset('/assets/js/common.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/common.js') }}?v={{ filemtime(public_path('assets/js/common.js')) }}"></script>
 <!-- select2 -->
 <link href="{{ URL::asset('/assets/libs/select2/select2.min.css') }}" rel="stylesheet">
 <script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>

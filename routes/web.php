@@ -96,9 +96,6 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::get('order/cancel/table', [App\Http\Controllers\Order\OrderDetailController::class, 'refund_table']);
     Route::post('order/vendor/balju', [App\Http\Controllers\Order\OrderDetailController::class, 'update_baljuAmount']);
 
-// 미수현황
-    Route::get('order/transaction/outstanding', [App\Http\Controllers\Order\OutstandingTransactionController::class, 'index']);
-
 // 증빙서류 관련
     Route::get('Document/document-orders', [App\Http\Controllers\Document\DocumentController::class, 'get_orders']);
     Route::get('Document/cancel/bank', [App\Http\Controllers\Document\DocumentController::class, 'bank_code']);
@@ -121,6 +118,8 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('document/client/user-form', [App\Http\Controllers\Document\ClientController::class, 'userRegister']);
     Route::patch('document/client/user/manager', [App\Http\Controllers\Document\ClientController::class, 'user_manager']);
 
+// 미수금 관리
+    Route::get('outstanding/orders', [App\Http\Controllers\Outstanding\OutstandingManagementController::class, 'orders']);
 
 // 토스페이먼츠
     Route::get('Tosspayment/Widget/{od_id}', [App\Http\Controllers\Payment\TosspaymentsController::class, 'get_widget']);
@@ -293,6 +292,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('dev/user', [App\Http\Controllers\Dev\DevController::class, 'user']);
     Route::post('dev/vendor', [App\Http\Controllers\Dev\DevController::class, 'vendor']);
     Route::get('dev/statistics/url', [App\Http\Controllers\Dev\DevController::class, 'statistics_url']);
+    Route::get('dev/orderItem', [App\Http\Controllers\Dev\DevController::class, 'upsert_orderDataItem']);
 });
 
 Route::view('/error/403', 'pages-403')->name('403');

@@ -59,3 +59,19 @@ function statistics_url() {
         console.log(e)
     })
 }
+
+function upsert_orderItem() {
+    $.ajax({
+        url : main_url + "/dev/orderItem",
+        method = "POST",
+        data : { order_idx : document.querySelector('input[name="order_id"]').value },
+        success: function(data) {
+            if(data) {
+                alert("업데이트 완료");
+            }
+        },
+        error: function(e) {
+            alert("업데이트 실패!")
+        }
+    })
+}
