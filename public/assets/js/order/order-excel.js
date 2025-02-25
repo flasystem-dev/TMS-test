@@ -33,6 +33,7 @@ function excel_batch_download() {
         // },
         success: function(data) {
             alert(data.message);
+            window.close();
         },
         error: function(error) {
             alert('다운로드 실패')
