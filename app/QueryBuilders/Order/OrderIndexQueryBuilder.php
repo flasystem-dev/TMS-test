@@ -36,6 +36,7 @@ class OrderIndexQueryBuilder
     public static function orderIndexJoinTable($query, $subQuery)
     {
         $query ->fromSub($subQuery, 'order_data')
+//            ->join(DB::raw('order_delivery STRAIGHT_JOIN order_data ON order_data.order_idx = order_delivery.order_idx'), 'order_data.order_idx', '=', 'order_delivery.order_idx')
             ->join('order_delivery', 'order_data.order_idx', '=', 'order_delivery.order_idx')
             ->leftJoinSub(
                 DB::table('order_payment')

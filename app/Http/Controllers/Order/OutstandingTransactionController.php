@@ -35,7 +35,7 @@ class OutstandingTransactionController extends Controller
 
         $data['brands'] = DB::table('code_of_company_info')->select('brand_type_code', "brand_ini")->where('is_used', 1) -> get();
 
-        return view('order.order-list-detail', $data);
+        return view('order.transaction.outstanding-transaction', $data);
     }
 
 }

@@ -70,3 +70,28 @@ if (!function_exists('optionTypeName')) {
         return optional($optionType->get($id))->name;
     }
 }
+
+// 전화번호 형식 변환 함수 (한국식 자동 변환)
+if (!function_exists('formatPhoneNumber')) {
+    function formatPhoneNumber($phone)
+    {
+        $phone = preg_replace('/\D/', '', $phone); // 숫자만 남김
+
+        // 02 지역번호 또는 3자리 지역번호 (서울: 02-123-4567, 지방: 031-123-4567)
+        if (preg_match('/^(02)(\d{3,4})(\d{4})$/', $phone, $matches)) {
+            return $matches[1] . '-' . $matches[2] . '-' . $matches[3];
+        }
+
+        // 일반 핸드폰 번호 (010-1234-5678)
+        if (preg_match('/^(01[016789])(\d{3,4})(\d{4})$/', $phone, $matches)) {
+            return $matches[1] . '-' . $matches[2] . '-' . $matches[3];
+        }
+
+        // 일반 지역번호 (031-123-4567, 042-123-4567)
+        if (preg_match('/^(\d{3})(\d{3,4})(\d{4})$/', $phone, $matches)) {
+            return $matches[1] . '-' . $matches[2] . '-' . $matches[3];
+        }
+
+        return $phone; // 형식에 맞지 않으면 원본 반환
+    }
+}

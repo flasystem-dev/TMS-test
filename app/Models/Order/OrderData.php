@@ -83,6 +83,27 @@ class OrderData extends Model
 ########################################################################################################################
 ################################################  편의 기능 함수  ########################################################
 
+    public function setOrdererPhoneAttribute($value)
+    {
+        $this->attributes['orderer_phone'] = preg_replace('/\D/', '', $value);
+    }
+
+    public function setOrdererTelAttribute($value)
+    {
+        $this->attributes['orderer_tel'] = preg_replace('/\D/', '', $value);
+    }
+
+    // 조회 시 하이픈이 포함된 한국 전화번호 형식으로 변환
+    public function getOrdererPhoneAttribute($value)
+    {
+        return formatPhoneNumber($value);
+    }
+    public function getOrdererTelAttribute($value)
+    {
+        return formatPhoneNumber($value);
+    }
+
+
     // 채널명
     public function channel() {
         $commonCodes = Cache::get('common_codes', collect());

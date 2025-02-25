@@ -14,7 +14,7 @@
         </script>
     @endif
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="card card-body">
                 <div class="row order_top_data_container">
                     <div class="text-center order_top_data2">
@@ -453,9 +453,9 @@
                                                           onclick="clipBoardCopy(event)">
                                             {{$order->receiver_name}}</p>
                                         @if(empty($order->receiver_phone))
-                                            {{$order->receiver_tel}}
+                                            {{formatPhoneNumber($order->receiver_tel)}}
                                         @else
-                                            {{$order->receiver_phone}}
+                                            {{formatPhoneNumber($order->receiver_phone)}}
                                         @endif
                                     </td>
                                     <!-- 주문상품/결제금액 -->

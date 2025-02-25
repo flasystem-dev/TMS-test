@@ -38,7 +38,7 @@
         <div class="input-group" id="refund_area">
             <input type="number" class="form-control" name="refund_amount" id="refund_amount" value="{{ $payment->payment_amount }}" @if(!($order->order_quantity > 1 && $payment->payment_number === 1)) readonly @endif>
             <input type="checkbox" class="btn-check" name="partial_cancel" value="1" id="partial_cancel" autocomplete="off" @if($order->order_quantity > 1 && $payment->payment_number === 1) checked @endif>
-            @if(!($order->order_quantity > 1 && $payment->payment_number === 1))
+            @if(!($order->order_quantity > 1 && $payment->payment_number === 1) && ($order->brand_type_code === "BTFC" || $order->brand_type_code === "BTCS"))
             <label class="btn btn-outline-warning" for="partial_cancel">부분 환불</label>
             @endif
         </div>

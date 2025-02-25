@@ -35,6 +35,9 @@ class OrderIndexService
             $order_columns = Schema::getColumnListing((new OrderData)->getTable());
             $delivery_columns = Schema::getColumnListing((new OrderDelivery)->getTable());
 
+            // 나머지 검색
+            $query = OrderIndexQueryBuilder::searchColumn($query, $search, $order_columns, $delivery_columns);
+
             // 1차 검색어
             if(!empty($search['word1']))
             {
@@ -46,10 +49,7 @@ class OrderIndexService
             {
                 $query = OrderIndexQueryBuilder::searchWord($query, $search['sw_2'], $search['word2'], $order_columns, $delivery_columns);
             }
-            
-            // 나머지 검색
-            $query = OrderIndexQueryBuilder::searchColumn($query, $search, $order_columns, $delivery_columns);
-            
+
             // 취소주문 포함/미포함
             $query = OrderDataQueryBuilder::includeCancelOrder($query, $search);
         } else {

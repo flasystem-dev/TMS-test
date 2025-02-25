@@ -28,4 +28,30 @@ class OrderDelivery extends Model
     public function product() {
         return $this -> hasOne(TMS_Product::class, 'idx', 'pr_idx');
     }
+
+
+    public function setReceiverPhoneAttribute($value)
+    {
+        $this->attributes['receiver_phone'] = preg_replace('/\D/', '', $value);
+    }
+
+    public function setReceiverTelAttribute($value)
+    {
+        $this->attributes['receiver_tel'] = preg_replace('/\D/', '', $value);
+    }
+
+    // 조회 시 하이픈이 포함된 한국 전화번호 형식으로 변환
+    public function getReceiverPhoneAttribute($value)
+    {
+        return formatPhoneNumber($value);
+    }
+    public function getReceiverTelAttribute($value)
+    {
+        return formatPhoneNumber($value);
+    }
+
+########################################################################################################################
+########################################################################################################################
+
+
 }

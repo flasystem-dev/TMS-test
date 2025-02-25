@@ -437,7 +437,7 @@
                                             </div>
                                         </td>
                                         <!-- 담당자 -->
-                                        <td class="center" id="send_name{{$order->order_idx}}">{{$order->send_name}}</td>
+                                        <td class="center" id="send_name{{$order->order_idx}}">{{$order->handler}}</td>
                                         <!-- 전송 -->
                                         <td class="center" id="send_area{{$order->order_idx}}">
                                             @if($order -> brand_type_code === 'BTCS' || $order -> brand_type_code === 'BTFC')
