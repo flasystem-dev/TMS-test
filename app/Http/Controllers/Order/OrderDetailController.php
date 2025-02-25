@@ -26,6 +26,8 @@ use App\Models\Order\OrderDataDeleted;
 
 use App\Models\Vendor;
 
+use App\Http\Controllers\Dev\DevController;
+
 class OrderDetailController extends Controller
 {
 
@@ -36,7 +38,7 @@ class OrderDetailController extends Controller
     public function order_detail($order_idx){
         $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
         OrderDetailService::isNotNew($order);
-        
+
         $order -> channel = $order->channel();
 
 
@@ -47,6 +49,14 @@ class OrderDetailController extends Controller
         }
 
         $data['order'] = $order;
+
+        if(!$order -> item) {
+            DevController::upsert_orderDataItem_auto($order_idx);
+            $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
+            if($order -> item){
+                return redirect("order/order-detail/{$order_idx}");
+            }
+        }
         return view('order.order-detail', $data);
     }
 

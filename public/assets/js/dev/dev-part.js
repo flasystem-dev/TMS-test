@@ -63,7 +63,7 @@ function statistics_url() {
 function upsert_orderItem() {
     $.ajax({
         url : main_url + "/dev/orderItem",
-        method = "POST",
+        method : "POST",
         data : { order_idx : document.querySelector('input[name="order_id"]').value },
         success: function(data) {
             if(data) {
@@ -73,5 +73,5 @@ function upsert_orderItem() {
         error: function(e) {
             alert("업데이트 실패!")
         }
-    })
+    });
 }

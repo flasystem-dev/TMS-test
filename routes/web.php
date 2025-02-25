@@ -292,7 +292,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('dev/user', [App\Http\Controllers\Dev\DevController::class, 'user']);
     Route::post('dev/vendor', [App\Http\Controllers\Dev\DevController::class, 'vendor']);
     Route::get('dev/statistics/url', [App\Http\Controllers\Dev\DevController::class, 'statistics_url']);
-    Route::get('dev/orderItem', [App\Http\Controllers\Dev\DevController::class, 'upsert_orderDataItem']);
+    Route::post('dev/orderItem', [App\Http\Controllers\Dev\DevController::class, 'upsert_orderDataItem']);
 });
 
 Route::view('/error/403', 'pages-403')->name('403');
