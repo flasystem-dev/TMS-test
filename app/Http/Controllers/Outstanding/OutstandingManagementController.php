@@ -23,7 +23,7 @@ class OutstandingManagementController extends Controller
 
     ################################################# 미수 현황 리스트 ###############################################
     public function orders(Request $request){
-        $search = $request -> except('page');
+        $search = $request -> except('page', 'standard');
 
         $data['orders'] = OutstandingService::getOrders($search);
 

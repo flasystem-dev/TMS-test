@@ -11,6 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <form method="get">
                     <div class="search_area_menu1 mb-3">
                         <div class="menu1">
                             <div class="input-group standard-label-container">
@@ -35,7 +36,6 @@
                     </div>
 
                     <div class="search_area_menu2 mb-3">
-
                         <div class="menu1">
                             <div class="input-group">
                                 <select class="form-select" name="search1">
@@ -61,9 +61,12 @@
                     <div class="search_area_menu3">
                         <div class="menu1">
                             <div class="input-group">
-                                <span class="input-group-text">주문일</span>
-                                <input type="date" class="form-control" id="start_date" name="start_date" value="{{request()->start_date ?? now()->subYear()->format('Y-m-d') }}" data-date-format="yyyy-mm-dd" data-date-container='#datepicker1' data-provide="datepicker">
-                                <input type="date" class="form-control" id="end_date" name='end_date' value="{{request()->end_date ?? $commonDate['today']}}" data-date-format="yyyy-mm-dd" data-date-container='#datepicker1' data-provide="datepicker">
+                                <select class="form-select" name="date_type">
+                                    <option value="order_time">주문일</option>
+                                    <option value="create_ts">수집일</option>
+                                </select>
+                                <input type="date" class="form-control datepicker" id="start_date" name="start_date" value="{{request()->start_date ?? now()->subMonths(3)->format('Y-m-d') }}">
+                                <input type="date" class="form-control datepicker" id="end_date" name='end_date' value="{{request()->end_date ?? $commonDate['today']}}">
                             </div>
                         </div>
                         <div class="menu2">
@@ -86,6 +89,7 @@
                             <button style="border-radius:3px;" class="btn btn-secondary waves-effect waves-light">검색하기</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -291,7 +295,7 @@
     </div>
 @endsection
 @section('script')
-{{--    <script src="{{asset('assets/js/outstanding/orders.js')}}"></script>--}}
+    <script src="{{asset('assets/js/outstanding/orders.js')}}?v={{ time() }}"></script>
     <script>
         {{--function order_detail(order_idx){--}}
         {{--    var url = './order-detail/'+order_idx;--}}

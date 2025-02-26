@@ -14,6 +14,7 @@
 
 .search_area_menu3 { display: flex; gap: 20px; }
 .search_area_menu3 .menu1 { flex-basis: 25%; }
+.search_area_menu3 .menu1 select { flex: 0 0 35%; }
 .search_area_menu3 .menu2 { flex-basis: 50%; }
 .search_area_menu3 .menu3 { flex-basis: 15%; }
 

@@ -14,6 +14,14 @@ class OutstandingService
 {
     public static function getOrders($search)
     {
-        $query = Orderdata::query();
+        if(empty($search)){
+            return null;
+        }
+
+        $query = Orderdata::query()
+            -> where('brand_type_code', $search['brand'])
+            -> whereBetween($search['date_type'], [$search['start_date'], $search['end_date']." 23:59:59"]);
+
+        return $query -> paginate(15);
     }
 }

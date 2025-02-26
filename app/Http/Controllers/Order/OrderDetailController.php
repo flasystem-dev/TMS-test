@@ -54,6 +54,11 @@ class OrderDetailController extends Controller
             DevController::upsert_orderDataItem_auto($order_idx);
             $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
             if($order -> item){
+                DB::table('test_log2')->insert([
+                    'test1' => '과거 주문 자동 변환',
+                    'test2' => $order_idx
+                ]);
+
                 return redirect("order/order-detail/{$order_idx}");
             }
         }
