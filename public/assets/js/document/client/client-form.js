@@ -245,3 +245,14 @@ $('#manager_id').on('change', function(){
         })
     }
 });
+
+// 계약서 파일 등록
+const contract_text = document.getElementById('contract_fileName');
+const contract_file = document.getElementById('contract_file');
+contract_text.addEventListener('click', function(){
+    contract_file.click();
+});
+
+contract_file.addEventListener('change', function(){
+    contract_text.value = this.files[0].name;
+});

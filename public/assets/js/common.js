@@ -63,8 +63,10 @@ function auto_hyphen(e) {
             result = val;
         } else if (val.length <= 6) {
             result = val.substring(0, 3) + '-' + val.substring(3);
-        } else {
+        } else if (val.length <= 10) {
             result = val.substring(0, 3) + '-' + val.substring(3, 6) + '-' + val.substring(6);
+        } else {
+            result = val.substring(0, 3) + '-' + val.substring(3, 7) + '-' + val.substring(7);
         }
     } else {
         result = val;
@@ -72,9 +74,6 @@ function auto_hyphen(e) {
 
     ele.value = result;
 }
-
-
-
 
 function open_win(url, name, popupWidth, popupHeight, Left, Top) {
     // name   : 팝업윈도우_이름

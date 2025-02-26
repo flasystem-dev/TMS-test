@@ -63,6 +63,22 @@ class ClientController extends Controller
             $id = Client::max('id') + 1;
             $input['id'] = $id;
         }
+
+        // 계약서
+        if($request->hasFile('contract_file')){
+            $file = $request->file('contract_file');
+            $path_name = 'contract/';
+            $fileName = 'contract_' . time() . '.' . $file -> extension();
+            $path = $path_name . $fileName;
+
+            $result = $request -> contract_file -> storeAs('clients', $path, 'tms');
+
+            if($result) {
+                $contract_url = asset("assets/images/TMS/".$path);
+                $client['contract'] = $contract_url;
+            }
+        }
+
         $client -> fill($input);
         write_table_log($client);
         $client -> save();

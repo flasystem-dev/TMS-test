@@ -6,6 +6,7 @@
 @include('Document.modal.client-form-modal')
 @php
     use Illuminate\Support\Str;
+    use Carbon\Carbon;
 @endphp
 
 @if(session('update'))
@@ -72,7 +73,7 @@
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text">등록일</span>
-                            <input type="date" class="form-control datepicker" name="created_at" value="{{ isset($client) ? \Carbon\Carbon::parse($client->created_at)->format('Y-m-d') : date('Y-m-d') }}">
+                            <input type="date" class="form-control datepicker" name="created_at" value="{{ isset($client) ? Carbon::parse($client->created_at)->format('Y-m-d') : date('Y-m-d') }}">
                         </div>
                     </div>
 
@@ -119,21 +120,26 @@
                     <div class="form_row">
                         <div class="mb-3 input-group input_select">
                             <span class="input-group-text">보증종류</span>
-                            <input type="radio" id="assurance_ARNR" name="assurance" onchange="change_assurance('ARNR');" value="ARNR" ><label for="assurance_ARNR" class="form-control">없음</label>
-                            <input type="radio" id="assurance_ARPS" name="assurance" onchange="change_assurance('ARPS');" value="ARPS" ><label for="assurance_ARPS"  class="form-control">패스</label>
-                            <input type="radio" id="assurance_ARIR" name="assurance" onchange="change_assurance('ARIR');" value="ARIR" ><label for="assurance_ARIR" class="form-control">보증보험</label>
-                            <input type="radio" id="assurance_ARDS" name="assurance" onchange="change_assurance('ARDS');" value="ARDS" ><label for="assurance_ARDS"  class="form-control">예치금</label>
+                            <input type="radio" id="assurance_ARNR" name="assurance" value="none"      {{$client->assurance==="none"     ? "checked":"" }} ><label for="assurance_ARNR" class="form-control">없음</label>
+                            <input type="radio" id="assurance_ARPS" name="assurance" value="pass"      {{$client->assurance==="pass"     ? "checked":"" }} ><label for="assurance_ARPS" class="form-control">패스</label>
+                            <input type="radio" id="assurance_ARIR" name="assurance" value="insurance" {{$client->assurance==="insurance"? "checked":"" }} ><label for="assurance_ARIR" class="form-control">보증보험</label>
+                            <input type="radio" id="assurance_ARDS" name="assurance" value="contract"  {{$client->assurance==="contract" ? "checked":"" }} ><label for="assurance_ARDS" class="form-control">계약서</label>
+                        </div>
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">계약서</span>
+                            <input type="text" class="form-control" id="contract_fileName" placeholder="계약서 파일을 등록해 주세요." value="{{ $client->contract_fileName }}" readonly>
+                            <input type="file" class="form-control d-none" name="contract_file" id="contract_file">
                         </div>
                     </div>
 
                     <div class="form_row">
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증금액</span>
-                            <input type="text" class="form-control" name="business_type" value="{{ optional($client) -> business_type }}">
+                            <input type="number" class="form-control" name="assurance_amount" value="{{ $client->assurance_amount }}">
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증종료일</span>
-                            <input type="text" class="form-control" name="business_kind" value="{{ optional($client) -> business_kind }}">
+                            <input type="date" class="form-control datepicker" name="assurance_ex_date" value="{{ $client->assurance_ex_date }}">
                         </div>
                     </div>
 
@@ -255,5 +261,5 @@
 @endSection
 @section('script')
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/js/document/client/client-form.js') }}"></script>
+    <script src="{{ URL::asset('/assets/js/document/client/client-form.js') }}?v={{time()}}"></script>
 @endsection
