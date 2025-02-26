@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
+use App\Services\Order\PaymentService;
+
 use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
@@ -45,7 +47,7 @@ class TosspaymentsController extends Controller
     public static function webhook(Request $request) {
         $data = $request -> getContent();
         $response = json_decode($data, true);
-        OrderData::update_PTVA($response);
+        PaymentService::update_PTVA($response);
     }
 
     // 취소 요청

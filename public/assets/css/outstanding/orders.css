@@ -45,6 +45,9 @@
 
 .gs_name, .deli_date, .addr, .ribbon_left, .state_p { margin: 0 auto;}
 
+.ribbon_left { width: 250px; }
+.product-price { color: #6671ff }
+
 .payments_area { display: flow-root; align-items: center; }
 .span_PT { display: inline-block; padding: 3px; }
 .payments_area .deposit_name_text { font-size: 12px; display: -webkit-inline-box; width: 85%; text-align: left}

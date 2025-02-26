@@ -117,6 +117,27 @@
                     </div>
 
                     <div class="form_row">
+                        <div class="mb-3 input-group input_select">
+                            <span class="input-group-text">보증종류</span>
+                            <input type="radio" id="assurance_ARNR" name="assurance" onchange="change_assurance('ARNR');" value="ARNR" ><label for="assurance_ARNR" class="form-control">없음</label>
+                            <input type="radio" id="assurance_ARPS" name="assurance" onchange="change_assurance('ARPS');" value="ARPS" ><label for="assurance_ARPS"  class="form-control">패스</label>
+                            <input type="radio" id="assurance_ARIR" name="assurance" onchange="change_assurance('ARIR');" value="ARIR" ><label for="assurance_ARIR" class="form-control">보증보험</label>
+                            <input type="radio" id="assurance_ARDS" name="assurance" onchange="change_assurance('ARDS');" value="ARDS" ><label for="assurance_ARDS"  class="form-control">예치금</label>
+                        </div>
+                    </div>
+
+                    <div class="form_row">
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">보증금액</span>
+                            <input type="text" class="form-control" name="business_type" value="{{ optional($client) -> business_type }}">
+                        </div>
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">보증종료일</span>
+                            <input type="text" class="form-control" name="business_kind" value="{{ optional($client) -> business_kind }}">
+                        </div>
+                    </div>
+
+                    <div class="form_row">
                         <div class="mb-3 input-group">
                             <span class="input-group-text">메모</span>
                             <textarea class="form-control" name="memo">{{ optional($client)->memo }}</textarea>

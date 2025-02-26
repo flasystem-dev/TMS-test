@@ -18,10 +18,10 @@ class OutstandingService
             return null;
         }
 
-        $query = Orderdata::with([
-            'delivery' => function($query) {
+        $query = Orderdata::with(['delivery', 'payments', 'vendor'])
+            -> whereHas('delivery', function($query) {
                 $query->where('is_balju', 1);
-            }, 'payments', 'vendor'])
+            })
             -> where('brand_type_code', $search['brand'])
             -> where('misu_amount', '>', 0)
             -> where('is_view', 1)

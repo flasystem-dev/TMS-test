@@ -58,6 +58,7 @@ class OrderDetailService
         $content = "<p class='column_container'>";
         $content .= "<span class='product_log_text'>";
         $content .= $item->product_name;
+        $content .= "<br> 상품금액 : ". $item->product_price;
         if($item->options->isNotEmpty()) {
             foreach($item->options as $option) {
                 $content .= "<br> " . $option->option_name . " (+" . number_format($option->option_price) . ")";
@@ -70,6 +71,7 @@ class OrderDetailService
         // 변경 될 상품
         $content .= "<span class='product_log_text'>";
         $content .= $orderProduct->product_name;
+        $content .= "<br> 상품금액 : ". $orderProduct->product_price;
         if(!empty($orderProduct->options)) {
             foreach($orderProduct->options as $option) {
                 $content .= "<br> " . $option['option_name'] . " (+" . number_format($option['option_price']) . ")";

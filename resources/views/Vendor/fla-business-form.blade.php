@@ -142,7 +142,7 @@
                         </div>
                         <div class="mb-3 input-group" id="assurance_value">
                             <span class="input-group-text">보증금액</span>
-                            <input type="text" class="form-control" name="assurance_amount" placeholder="단위(만)" value="@isset($vendor_info['assurance_amount']){{$vendor_info['assurance_amount']}}@endisset" autocomplete="off" aria-label="assurance_amount">
+                            <input type="number" class="form-control" name="assurance_amount" value="@isset($vendor_info['assurance_amount']){{$vendor_info['assurance_amount']}}@endisset" autocomplete="off" aria-label="assurance_amount">
                         </div>
                         <div class="mb-3 input-group" id="assurance_ex_date">
                             <span class="input-group-text">보증종료일</span>

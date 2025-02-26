@@ -112,15 +112,15 @@
                                     </th>
                                     <th style="width: 3%">번호</th>
                                     <th style="width: 3%">브랜드<br>채널</th>
-                                    <th style="width: 5%">주문일<br>배송일</th>
+                                    <th style="width: 7%">주문일<br>배송일</th>
                                     <th style="width: 5%">주문자(거래처)</th>
-                                    <th style="width: 12%">받는분<br>보내는분</th>
+                                    <th style="width: 10%">받는분<br>보내는분</th>
                                     <th style="width: 7%">주문상품<br>합계금액</th>
-                                    <th style="width: 7%">미수금액</th>
+                                    <th style="width: 5%">미수금액</th>
                                     <th style="width: 5%">결제수단</th>
-                                    <th style="width: 4%">거래명세서<br>증빙서류</th>
-                                    <th style="width: 3%">입금예정일</th>
-                                    <th style="width: 3%">결제메모</th>
+                                    <th style="width: 10%">거래명세서<br>증빙서류</th>
+                                    <th style="width: 5%">입금예정일</th>
+                                    <th style="width: 10%">결제메모</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -155,22 +155,22 @@
                                             </td>
                                             <!-- 주문자/연락처 -->
                                             <td>
-                                                <p class="gs_name"
+                                                <p class="gs_name cursor_p"
                                                    data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->orderer_name}}"
                                                    onclick="clipBoardCopy(event)">
                                                     {{$order->orderer_name}}</p>
                                                 <span>{{$order->orderer_phone}}</span>
                                             </td>
-                                            <!-- 받는분/연락처 -->
+                                            <!-- 받는분/보내는분 -->
                                             <td>
                                                 <p class="gs_name"
                                                                   data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->receiver_name ?? ""}}"
                                                                   onclick="clipBoardCopy(event)">
                                                     {{$order->delivery->receiver_name ?? ""}}</p>
-                                                <p class="ribbon_left cursor_p" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->delivery_ribbon_left}}" onclick="clipBoardCopy(event)">{{$order->delivery->delivery_ribbon_left}}</p>
+                                                <p class="ribbon_left cursor_p" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->delivery_ribbon_left ?? ""}}" onclick="clipBoardCopy(event)">{{$order->delivery->delivery_ribbon_left ?? ""}}</p>
                                             </td>
                                             <!-- 주문상품/결제금액 -->
-                                            <td><p class="gs_name">{{$order->delivery->goods_name}}</p><p class="amount">{{number_format($order->total_amount)}}원</p></td>
+                                            <td><p class="gs_name">{{$order->delivery->goods_name ?? ""}}</p><p class="amount product-price">{{number_format($order->total_amount)}}원</p></td>
                                             <!-- 미수금액 -->
                                             <td>
                                                 <p class="amount">{{number_format($order->misu_amount)}}원</p>

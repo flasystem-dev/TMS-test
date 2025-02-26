@@ -123,6 +123,7 @@ class OrderApiController extends Controller
             'od_id' => $order['od_id'],
             'order_idx' => $order_idx,
             'mall_code' => $order['mall_code'],
+            'group_code' => 'openMarket',
             'brand_type_code' => $order['brand_type_code'],
             'order_number' => $order['order_number'],
             'order_time' => $order['order_time'],
@@ -134,23 +135,23 @@ class OrderApiController extends Controller
             'order_quantity' => $order['order_quantity'],
             'payment_type_code' => $order['payment_type_code'],
             'payment_state_code' => $order['payment_state_code'],
-            'payment_date' => $order['payment_date'] == '0000-00-00 00:00:00' ? NULL : $order['payment_date'],
+            'payment_time' => $order['payment_date'] == '0000-00-00 00:00:00' ? NULL : $order['payment_date'],
             'total_amount' => $order['total_amount'] / $order['order_quantity'],
             'pay_amount' => $order['pay_amount'] / $order['order_quantity'],
             'supply_amount' => $order['supply_amount'] / $order['order_quantity'],
-            'admin_regist' => $order['admin_regist'],
+            'handler' => $order['admin_regist'],
             'create_ts' => NOW(),
             'options_string' => $order['options_string']?? '',
             'options_parse_yn' => $order['options_parse_yn']?? '',
             'options_string_display' => $order['options_string_display']?? '',
             'options_type' => $order['options_type'],
-            'open_market_goods_url' => $order['open_market_goods_url']?? '',
+            'goods_url' => $order['open_market_goods_url']?? '',
             'new_order_yn' => 'Y'
         ]);
 
         OrderPayment::insert([
             'order_idx' => $order_idx,
-            'order_number' => $order['order_number'],
+            'payment_pid' => $order['order_number'],
             'payment_pg' => 'toss',
             'payment_type_code' => $order['payment_type_code'],
             'payment_state_code' => $order['payment_state_code'],
@@ -253,21 +254,21 @@ class OrderApiController extends Controller
         $before_order -> order_quantity            = $order['order_quantity'];
         $before_order -> payment_type_code         = $order['payment_type_code'];
         $before_order -> payment_state_code        = $order['payment_state_code'];
-        $before_order -> payment_date              = $order['payment_date'];
+        $before_order -> payment_time              = $order['payment_date'];
         $before_order -> total_amount              = $order['total_amount'];
         $before_order -> pay_amount                = $order['pay_amount'];
         $before_order -> supply_amount             = $order['supply_amount'];
-        $before_order -> admin_regist              = $order['admin_regist'];
+        $before_order -> handler                   = $order['admin_regist'];
         $before_order -> create_ts                 = NOW();
         $before_order -> update_ts                 = NOW();
         $before_order -> options_string            = $order['options_string']?? '';
         $before_order -> options_parse_yn          = $order['options_parse_yn']?? '';
         $before_order -> options_type              = $order['options_type'];
-        $before_order -> open_market_goods_url     = $order['open_market_goods_url']?? '';
-        $before_order -> new_order_yn              = 'Y';
+        $before_order -> goods_url                 = $order['open_market_goods_url']?? '';
+        $before_order -> is_new                    = 1;
         $before_order -> save();
 
-        $payment_tbl -> order_number               = $order['order_number'];
+        $payment_tbl -> payment_pid                = $order['order_number'];
         $payment_tbl -> payment_pg                 = $order['payment_pg'];
         $payment_tbl -> payment_type_code          = $order['payment_type_code'];
         $payment_tbl -> payment_state_code         = $order['payment_state_code'];
