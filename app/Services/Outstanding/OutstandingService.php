@@ -18,10 +18,15 @@ class OutstandingService
             return null;
         }
 
-        $query = Orderdata::query()
+        $query = Orderdata::with([
+            'delivery' => function($query) {
+                $query->where('is_balju', 1);
+            }, 'payments', 'vendor'])
             -> where('brand_type_code', $search['brand'])
+            -> where('misu_amount', '>', 0)
+            -> where('is_view', 1)
             -> whereBetween($search['date_type'], [$search['start_date'], $search['end_date']." 23:59:59"]);
 
-        return $query -> paginate(15);
+        return $query -> paginate(15) ->withQueryString();
     }
 }

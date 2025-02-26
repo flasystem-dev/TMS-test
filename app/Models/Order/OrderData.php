@@ -103,6 +103,20 @@ class OrderData extends Model
         return formatPhoneNumber($value);
     }
 
+    public function getChannelNameAttribute()
+    {
+        switch ($this->group_code) {
+            case 'openMarket':
+                return CommonCodeName($this->mall_code);
+            case 'vendor':
+                return $this -> vendor -> rep_name ?? "없음";
+            case 'pass':
+                return $this -> pass -> name ?? "없음";
+            default:
+                return CommonCodeName($this->mall_code) ?? "";
+        }
+    }
+
 
     // 채널명
     public function channel() {

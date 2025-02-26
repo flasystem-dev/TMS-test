@@ -11,7 +11,7 @@
     <link href="{{ URL::asset('/assets/libs/summernote/summernote-lite.min.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ URL::asset('/assets/libs/summernote/summernote-lite.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/libs/summernote/lang/summernote-ko-KR2.js') }}"></script>
-    <form id="popup_form" name="banner_form" action="{{ url('/Shop/popupSave') }}" method="post" enctype="multipart/form-data">
+    <form id="popup_form" name="banner_form" action="{{ url('/shop/popupSave') }}" method="post" enctype="multipart/form-data">
     <header id="page-topbar">
         <div class="navbar-header">
             <div class="d-flex text-xl-center">

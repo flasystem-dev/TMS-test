@@ -33,6 +33,13 @@
 .brand_btns input:checked + label.select_brand_BTCS { background-color: #73bf43 !important; color: #fff; border: 1px solid #73bf43}
 .brand_btns input:checked + label.select_brand_BTFC { background-color: #34c28e !important; color: #fff; border: 1px solid #34c28e}
 
+.table tr td, .table tr th {
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
 .input-in-text { width: 20px; justify-content: center; padding: 0; }
 .cancel_check_container { float: right; }
 
@@ -62,5 +69,3 @@
 .table tr th, .table tr td { padding: 0px 4px; }
 
 .mb-1 {margin-bottom: 3px; text-align: left; }
-
-.center { text-align: center; }

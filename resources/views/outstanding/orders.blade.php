@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="get">
+                    <form method="get" id="search-form">
                     <div class="search_area_menu1 mb-3">
                         <div class="menu1">
                             <div class="input-group standard-label-container">
@@ -110,14 +110,14 @@
                                             <input type="checkbox" name="checkAll">
                                         </label>
                                     </th>
-                                    <th style="width: 4%">번호</th>
-                                    <th style="width: 5%">브랜드<br>채널</th>
-                                    <th style="width: 8%">수집일<br>배송일</th>
+                                    <th style="width: 3%">번호</th>
+                                    <th style="width: 3%">브랜드<br>채널</th>
+                                    <th style="width: 5%">주문일<br>배송일</th>
                                     <th style="width: 5%">주문자(거래처)</th>
-                                    <th style="width: 5%">받는분<br>보내는분</th>
+                                    <th style="width: 12%">받는분<br>보내는분</th>
                                     <th style="width: 7%">주문상품<br>합계금액</th>
-                                    <th style="width: 11%">미수금액</th>
-                                    <th style="width: 30%">결제수단</th>
+                                    <th style="width: 7%">미수금액</th>
+                                    <th style="width: 5%">결제수단</th>
                                     <th style="width: 4%">거래명세서<br>증빙서류</th>
                                     <th style="width: 3%">입금예정일</th>
                                     <th style="width: 3%">결제메모</th>
@@ -137,17 +137,16 @@
                                                 {{$order->order_idx}}
                                             </td>
                                             <!-- 브랜드 / 채널 -->
-                                            <td class="center">
+                                            <td>
                                                 <p class="brand_type {{$order->brand_type_code}}">{{ BrandAbbr($order->brand_type_code)}}</p>
-                                                <!-- 벤더 도메인 연결 -->
-                                                <p class="brand_type {{$order->mall_code}}" style="margin-top: 3px">{{$order->channel_name()}}</p>
+                                                <p class="brand_type {{$order->mall_code}}" style="margin-top: 3px">{{$order->channel_name}}</p>
                                             </td>
-                                            <!-- 수집일/배송일 -->
-                                            <td class="center">
+                                            <!-- 주문일/배송일 -->
+                                            <td>
                                                 <div style="position: relative" class="date_container simptip-position-bottom simptip-fade" tooltip="{{$order->admin_memo}}" flow="down">
-                                                    <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">{{$order->create_ts}}
+                                                    <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">{{Carbon::parse($order->order_time)->format('Y-m-d')}}
                                                     <br>
-                                                    <span class="deli_date span_date">{{$order->delivery_date}} {{$order->delivery_time}}</span>
+                                                    <span class="deli_date span_date">{{$order->delivery->delivery_date ?? ""}}</span>
                                                         @if(!empty($order->admin_memo))
                                                         <i class="mdi mdi-note-text-outline memo_check"></i>
                                                        @endif
@@ -155,7 +154,7 @@
                                                 </div>
                                             </td>
                                             <!-- 주문자/연락처 -->
-                                            <td class="center">
+                                            <td>
                                                 <p class="gs_name"
                                                    data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->orderer_name}}"
                                                    onclick="clipBoardCopy(event)">
@@ -163,113 +162,34 @@
                                                 <span>{{$order->orderer_phone}}</span>
                                             </td>
                                             <!-- 받는분/연락처 -->
-                                            <td class="center"><p class="gs_name"
-                                                                  data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->receiver_name}}"
+                                            <td>
+                                                <p class="gs_name"
+                                                                  data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->receiver_name ?? ""}}"
                                                                   onclick="clipBoardCopy(event)">
-                                                    {{$order->receiver_name}}</p>
-                                                @if(empty($order->receiver_phone))
-                                                    {{$order->receiver_tel}}
-                                                @else
-                                                    {{$order->receiver_phone}}
-                                                @endif
+                                                    {{$order->delivery->receiver_name ?? ""}}</p>
+                                                <p class="ribbon_left cursor_p" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->delivery_ribbon_left}}" onclick="clipBoardCopy(event)">{{$order->delivery->delivery_ribbon_left}}</p>
                                             </td>
                                             <!-- 주문상품/결제금액 -->
-                                            <td class="center"><a href='javascript:void(0);' onclick="market_open('{{ App\Utils\Common::get_item_url($order->mall_code, $order->brand_type_code) ?? ''}}{{$order->open_market_goods_url}}');"><p class="gs_name">{{$order->goods_name}}</p></a><p class="amount">{{number_format((int)$order->total_amount - (int)$order->discount_amount)}}원</p></td>
-                                            <!-- 배송지/보내는분 -->
-                                            <td class="center">
-                                                <p class="addr cursor_p"
-                                                   data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery_address}}"
-                                                   onclick="clipBoardCopy(event)"
-                                                >
-                                                    {{$order->delivery_address}}
-                                                </p>
-                                                <p class="ribbon_left cursor_p" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery_ribbon_left}}" onclick="clipBoardCopy(event)">{{$order->delivery_ribbon_left}}</p>
+                                            <td><p class="gs_name">{{$order->delivery->goods_name}}</p><p class="amount">{{number_format($order->total_amount)}}원</p></td>
+                                            <!-- 미수금액 -->
+                                            <td>
+                                                <p class="amount">{{number_format($order->misu_amount)}}원</p>
                                             </td>
                                             <!-- 결제수단 -->
-                                            <td class="center">
-                                                @if($order->payments->isEmpty())
-                                                    <p class="state_p {{$order->payment_type_code}} cursor_p" style="margin: 0 auto;">{{ CommonCodeName($order->payment_type_code) }}</p>
-                                                @else
-                                                    @foreach($order->payments as $payment)
-                                                        <div class="payments_area mb-1">
-                                                            <span class="state_p {{$payment->payment_type_code}} span_PT" style="margin: 0 auto;">{{ CommonCodeName($payment->payment_type_code) }}</span>
-                                                            @if(!empty($payment->deposit_name))
-                                                                <span class="deposit_name_text ms-1"
-                                                                      data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$payment->deposit_name}}"
-                                                                      onclick="clipBoardCopy(event)">{{ $payment->deposit_name }}</span>
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
+                                            <td>
+                                                <p class="state_p {{$order->payment_type_code}}" style="margin: 0 auto;">{{ CommonCodeName($order->payment_type_code) }}</p>
+                                            </td>
+                                            <!-- 거래명세서 / 증빙서류 -->
+                                            <td>
 
-                                                @endif
                                             </td>
-                                            <!-- 결제상태/배송상태 -->
-                                            <td class="center">
-                                                <!-- 결제 상태 취소 요청 -->
-                                                @if($order->payment_state_code === 'PSCR' || $order->payment_state_code === 'PSER' || $order->payment_state_code === 'PSRR')
-                                                    <div class="btn-group">
-                                                        <p class="state_p {{$order->payment_state_code}} dropdown-toggle dropdown-toggle-split cursor_p" data-bs-toggle="dropdown" aria-expanded="false">{{CommonCodeName($order->payment_state_code)}}</p>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="javascript:cancel_progress('{{$order->order_idx}}', '{{Str::ucfirst(Auth::user()->name)}}')">취소 처리 중</a></li>
-                                                            <li><a class="dropdown-item" href="#" id="cancel_refuse_btn" data-bs-toggle="modal" data-bs-target="#cancel_refuse" data-number="{{ $order-> order_number}}">주문진행</a></li>
-                                                            <li><a class="dropdown-item" href="#" id="cancel_complete_btn" data-bs-toggle="modal" data-bs-target="#cancel_complete" data-state="{{ $order -> payment_state_code }}" data-number="{{ $order-> order_number}}">취소완료</a></li>
-                                                        </ul>
-                                                    </div>
-                                                @else
-                                                    <p class="state_p {{$order->payment_state_code}}">{{CommonCodeName($order->payment_state_code)}}</p>
-                                                @endif
+                                            <!-- 입금예정일 -->
+                                            <td>
 
-                                                <div class="btn-group">
-                                                    <p class="state_p mt-1 {{$order->delivery_state_code}} dropdown-toggle dropdown-toggle-split cursor_p" data-bs-toggle="dropdown" aria-expanded="false">{{CommonCodeName($order->delivery_state_code)}}</p>
-                                                    @if($order->payment_state_code === "PSCC" || $order->payment_state_code === "PSUD")
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" data-index="{{$order->order_idx}}" href="" onclick="change_deli_state(event,'DLCC', '{{Auth::user()->name}}')">배송취소 상태변경</a></li>
-                                                        </ul>
-                                                    @endif
-                                                </div>
                                             </td>
-                                            <!-- 담당자 -->
-                                            <td class="center" id="send_name{{$order->order_idx}}">{{$order->send_name}}</td>
-                                            <!-- 전송 -->
-                                            <td class="center" id="send_area{{$order->order_idx}}">
-                                                @if($order -> brand_type_code === 'BTCS' || $order -> brand_type_code === 'BTFC')
-                                                    @if($order->is_balju === 1)
-                                                        <span>완료</span>
-                                                    @elseif($order->is_credit() && $order->delivery_state_code!=="DLDN" )
-                                                        <button class="btn btn-primary btn-soft-primary btn-sm" onclick="send_intranet('{{ $order->order_idx }}');">발주</button>
-                                                    @elseif($order->payment_state_code === 'PSDN' && $order->delivery_state_code!=="DLDN")
-                                                        <button class="btn btn-primary btn-soft-primary btn-sm" onclick="send_intranet('{{ $order->order_idx }}');">발주</button>
-                                                    @else
-                                                        <div></div>
-                                                    @endif
-                                                @else
-                                                    @if($order->is_balju === 1)
-                                                        <span>완료</span>
-                                                    @elseif(!($order->payment_state_code === 'PSDN' || $order->payment_type_code === 'PTDP'))
-                                                        <div></div>
-                                                    @else
-                                                        <button id="send_btn{{$order->order_idx}}" class="btn btn-primary btn-soft-primary btn-sm" onclick="nr_send(event,'{{ $order->order_idx }}');">전송</button>
-                                                    @endif
-                                                @endif
-                                            </td>
-                                            <!-- 배송사진 -->
-                                            <td class="center" style="max-width: 110px;">
-                                                @if(!empty($order->delivery_insuName))
-                                                    <i class="uil-user etc_icon icon_insu" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="hover"
-                                                       data-bs-placement="left" data-bs-content="{{$order->delivery_insuName}}"></i>
-                                                @endif
-                                                @if(!empty($order->delivery_photo))
-                                                    <i class="uil-truck etc_icon icon_photo" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="hover"
-                                                       data-bs-placement="left" data-bs-content="<img src='{{ $order->delivery_photo }}' alt='배송 사진' width='150px' height='200px'>" onclick="photo_popup('{{ $order->delivery_photo }}');"></i>
-                                                @endif
-                                                @if(!empty($order->delivery_photo2))
-                                                    <i class="uil-truck etc_icon icon_photo" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="hover"
-                                                       data-bs-placement="left" data-bs-content="<img src='{{ $order->delivery_photo2 }}' alt='배송 사진' width='150px' height='200px'>" onclick="photo_popup('{{ $order->delivery_photo2 }}');"></i>
-                                                @endif
-                                                @if(!empty($order->delivery_photo3))
-                                                    <i class="uil-truck etc_icon icon_photo" data-bs-toggle="popover" data-bs-html="true" data-bs-trigger="hover"
-                                                       data-bs-placement="left" data-bs-content="<img src='{{ $order->delivery_photo3 }}' alt='배송 사진' width='150px' height='200px'>" onclick="photo_popup('{{ $order->delivery_photo3 }}');"></i>
-                                                @endif
+                                            <!-- 결제 메모 -->
+                                            <td>
+
                                             </td>
                                         </tr>
                                     @endforeach
