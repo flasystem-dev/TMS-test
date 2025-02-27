@@ -83,7 +83,7 @@
                                     <th>상품명</th>
                                     <th style="width: 12%">기본가</th>
                                     <th style="width: 6%">사용</th>
-                                    <th style="width: 5%">숨김</th>
+                                    <th style="width: 5%">보이기</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,12 +112,12 @@
                                         <p>{{ number_format(optional($product -> prices[0]) -> product_price ?? 0) }}</p>
                                     </td>
                                     <!-- 사용 -->
-                                    <td class="fs-3 p-0">
+                                    <td class="fs-3 p-0" data-order="{{ $product -> is_used ? 1: 0 }}">
                                         <input class="checkbox_toggle product-change-state" type="checkbox" value="1" id="product_is_used{{$loop->index}}" data-column="is_used" data-index="{{$product->id}}" {{ $product->is_used ? "checked" : "" }}>
                                         <label class="checkbox_toggle_label" for="product_is_used{{$loop->index}}"></label>
                                     </td>
                                     <!-- 삭제 -->
-                                    <td class="p-0">
+                                    <td class="p-0" data-order="{{ $product -> is_view ? 1: 0 }}">
                                         <input class="checkbox_toggle product-change-state" type="checkbox" value="1" id="product_is_view{{$loop->index}}" data-column="is_view" data-index="{{$product->id}}" {{ $product->is_view ? "checked" : "" }}>
                                         <label class="checkbox_toggle_label" for="product_is_view{{$loop->index}}"></label>
                                     </td>

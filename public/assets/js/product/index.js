@@ -2,12 +2,24 @@ var number = 1;
 
 $('#product_table').DataTable({
     paging: true,
-    columnDefs: [
-        { orderable: false, targets: [0, 1, 2 ] } // 정렬을 비활성화할 열의 인덱스
-    ],
     lengthMenu: [[20, 50 , 100, -1], [20, 50 , 100, "전체"]],
     pageLength: 20, // 기본 페이지 길이 설정,
-
+    columnDefs: [
+        { orderable: false, targets: [0, 1, 2 ] }, // 정렬을 비활성화할 열의 인덱스
+        {
+            targets: [5, 6], // 체크박스가 있는 열의 인덱스
+            orderable: true, // 정렬 가능하도록 설정
+            render: function (data, type, row, meta) {
+                if (type === 'sort') {
+                    // 정렬 시 data-order 값을 반환
+                    var cellNode = meta.settings.aoData[meta.row].anCells[meta.col];
+                    return $(cellNode).attr("data-order") || 0;
+                }
+                return data; // 테이블에 표시될 때는 원래 데이터 유지
+            }
+        },
+    ],
+    order: [[5, 'desc']],
 });
 
 // 상품 추가 팝업
@@ -69,7 +81,7 @@ function remove_product(id) {
 }
 
 // 상태 변경
-$('.product-change-state').on('change', function(){
+$(document).on('change', '.product-change-state', function(){
     let id = $(this).data('index')
     let column = $(this).data('column');
     
