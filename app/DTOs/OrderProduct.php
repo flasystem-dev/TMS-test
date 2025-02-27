@@ -48,6 +48,7 @@ class OrderProduct
         if(isset($input['option_type_id'])) {
             $option = [];
             foreach ($input['option_type_id'] as $key => $value) {
+                $option['option_id'] = $input['option_id'][$key] ?? 0 ;
                 $option['option_type_id'] = $value ?? 8;
                 $option['option_type_name'] = $input['option_type_name'][$key] ?? "기타옵션";
                 $option['option_price_id'] = $input['option_price_id'][$key] ?? 0;

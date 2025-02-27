@@ -36,6 +36,17 @@ class OrderDetailController extends Controller
 
     ############################################## 주문 상세 뷰 ##########################################################
     public function order_detail($order_idx){
+
+        if(DB::table('order_items')->where('order_id', $order_idx)->doesntExist()) {
+            DevController::upsert_orderDataItem_auto($order_idx);
+            if(DB::table('order_items')->where('order_id', $order_idx)->exists()){
+                DB::table('test_log2')->insert([
+                    'test1' => '과거 주문 자동 변환',
+                    'test2' => $order_idx
+                ]);
+            }
+        }
+        
         $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
         OrderDetailService::isNotNew($order);
 
@@ -49,19 +60,6 @@ class OrderDetailController extends Controller
         }
 
         $data['order'] = $order;
-
-        if(!$order -> item) {
-            DevController::upsert_orderDataItem_auto($order_idx);
-            $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
-            if($order -> item){
-                DB::table('test_log2')->insert([
-                    'test1' => '과거 주문 자동 변환',
-                    'test2' => $order_idx
-                ]);
-
-                return redirect("order/order-detail/{$order_idx}");
-            }
-        }
         return view('order.order-detail', $data);
     }
 

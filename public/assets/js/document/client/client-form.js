@@ -256,3 +256,7 @@ contract_text.addEventListener('click', function(){
 contract_file.addEventListener('change', function(){
     contract_text.value = this.files[0].name;
 });
+
+function popup_contract(url) {
+    open_win(url, "계약서", 600, 700, 1000, 50);
+}

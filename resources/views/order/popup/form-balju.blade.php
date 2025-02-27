@@ -80,6 +80,7 @@
                         <div id="options-container">
                             <template id="option-template">
                                 <div class="product-table-row">
+                                    <input type="hidden" name="option_id[]" value="0">
                                     <input type="hidden" name="option_type_id[]" value="10">
                                     <input type="hidden" name="option_type_name[]" value="기타">
                                     <input type="hidden" name="option_price_id[]" value="0">
@@ -94,6 +95,7 @@
                         @if($order->item->options->isNotEmpty())
                             @foreach($order->item->options as $option)
                                 <div class="product-table-row">
+                                    <input type="hidden" name="option_id[]" value="{{$option->id}}">
                                     <input type="hidden" name="option_type_id[]" value="{{$option->option_type_id}}">
                                     <input type="hidden" name="option_type_name[]" value="{{$option->option_type_name}}">
                                     <input type="hidden" name="option_price_id[]" value="{{$option->option_price_id}}">

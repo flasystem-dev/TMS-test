@@ -118,7 +118,9 @@
                                        <p class="gs_name_v">{{$order->item->product_name}}<span class="option_text"> ({{number_format($order->item->product_price)}})</span></p>
                                        @if($order->item && $order->item->options->isNotEmpty())
                                            @foreach($order->item->options as $option)
+                                               @if($option->is_view)
                                                <p class="gs_name_v option_text">{{$option->option_name . " (+".number_format($option->option_price).")"}}</p>
+                                               @endif
                                            @endforeach
                                        @endif
                                    </a>

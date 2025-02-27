@@ -138,7 +138,7 @@
                     <div class="form_row">
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증금액</span>
-                            <input type="number" class="form-control" name="assurance_amount" value="{{ optional($client)->assurance_amount }}">
+                            <input type="number" class="form-control text-end" name="assurance_amount" value="{{ optional($client)->assurance_amount }}">
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증종료일</span>
