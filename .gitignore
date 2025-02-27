@@ -1,6 +1,8 @@
 /node_modules
 app/Console/Kernel.php
-/storage/logs
+/storage/excel
+/storage/tms
 /.env
 .log
 public/assets/images
+public/tms

@@ -120,28 +120,48 @@
                     <div class="form_row">
                         <div class="mb-3 input-group input_select">
                             <span class="input-group-text">보증종류</span>
-                            <input type="radio" id="assurance_ARNR" name="assurance" value="none"      {{$client->assurance==="none"     ? "checked":"" }} ><label for="assurance_ARNR" class="form-control">없음</label>
-                            <input type="radio" id="assurance_ARPS" name="assurance" value="pass"      {{$client->assurance==="pass"     ? "checked":"" }} ><label for="assurance_ARPS" class="form-control">패스</label>
-                            <input type="radio" id="assurance_ARIR" name="assurance" value="insurance" {{$client->assurance==="insurance"? "checked":"" }} ><label for="assurance_ARIR" class="form-control">보증보험</label>
-                            <input type="radio" id="assurance_ARDS" name="assurance" value="contract"  {{$client->assurance==="contract" ? "checked":"" }} ><label for="assurance_ARDS" class="form-control">계약서</label>
+                            <input type="radio" id="assurance_ARNR" name="assurance" value="none"      {{optional($client)->assurance==="none"     ? "checked":"" }} ><label for="assurance_ARNR" class="form-control">없음</label>
+                            <input type="radio" id="assurance_ARPS" name="assurance" value="pass"      {{optional($client)->assurance==="pass"     ? "checked":"" }} ><label for="assurance_ARPS" class="form-control">패스</label>
+                            <input type="radio" id="assurance_ARIR" name="assurance" value="insurance" {{optional($client)->assurance==="insurance"? "checked":"" }} ><label for="assurance_ARIR" class="form-control">보증보험</label>
+                            <input type="radio" id="assurance_ARDS" name="assurance" value="contract"  {{optional($client)->assurance==="contract" ? "checked":"" }} ><label for="assurance_ARDS" class="form-control">계약서</label>
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text">계약서</span>
-                            <input type="text" class="form-control" id="contract_fileName" placeholder="계약서 파일을 등록해 주세요." value="{{ $client->contract_fileName }}" readonly>
+                            <input type="text" class="form-control" id="contract_fileName" placeholder="계약서 파일을 등록해 주세요." value="{{ optional($client)->contract_file_name }}" readonly>
                             <input type="file" class="form-control d-none" name="contract_file" id="contract_file">
+                            @if(!empty(optional($client)->contract))
+                            <button type="button" class="btn btn-secondary" onclick="popup_contract('{{optional($client)->contract}}');">확인</button>
+                            @endif
                         </div>
                     </div>
 
                     <div class="form_row">
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증금액</span>
-                            <input type="number" class="form-control" name="assurance_amount" value="{{ $client->assurance_amount }}">
+                            <input type="number" class="form-control" name="assurance_amount" value="{{ optional($client)->assurance_amount }}">
                         </div>
                         <div class="mb-3 input-group">
                             <span class="input-group-text">보증종료일</span>
-                            <input type="date" class="form-control datepicker" name="assurance_ex_date" value="{{ $client->assurance_ex_date }}">
+                            <input type="date" class="form-control datepicker" name="assurance_ex_date" value="{{ optional($client)->assurance_ex_date }}">
                         </div>
                     </div>
+
+                    <div class="form_row">
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">청구기간</span>
+                            <span class="input-group-text charge-ex-date">매월</span>
+                            <select class="form-select" name="charge_ex_date">
+                                @for($i=1; $i<=31; $i++)
+                                <option value="{{$i}}" {{optional($client)->charge_ex_date===$i ? "selected":""}}>{{$i}}일</option>
+                                @endfor
+                            </select>
+                            <span class="input-group-text charge-ex-date">마감</span>
+                        </div>
+                        <div class="mb-3 input-group">
+
+                        </div>
+                    </div>
+
 
                     <div class="form_row">
                         <div class="mb-3 input-group">

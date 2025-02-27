@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -67,14 +68,14 @@ class ClientController extends Controller
         // 계약서
         if($request->hasFile('contract_file')){
             $file = $request->file('contract_file');
-            $path_name = 'contract/';
+            $path_name = 'clients/contract/';
             $fileName = 'contract_' . time() . '.' . $file -> extension();
             $path = $path_name . $fileName;
 
-            $result = $request -> contract_file -> storeAs('clients', $path, 'tms');
+            $result = $request -> contract_file -> storeAs('tms', $path);
 
             if($result) {
-                $contract_url = asset("assets/images/TMS/".$path);
+                $contract_url = asset('tms/'.$path);
                 $client['contract'] = $contract_url;
             }
         }
