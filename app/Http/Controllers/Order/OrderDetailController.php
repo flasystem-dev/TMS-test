@@ -46,7 +46,7 @@ class OrderDetailController extends Controller
                 ]);
             }
         }
-        
+
         $order = OrderData::with('delivery', 'payments', 'item', 'vendor', 'pass') -> where('order_idx', $order_idx) -> first();
         OrderDetailService::isNotNew($order);
 

@@ -78,25 +78,8 @@ class IntranetService
         $data['rw_item_name'] = "";
         $data['rw_item_price'] = "";
 
-        $balju_options_amount = 0;
-        $vendor_options_amount = 0;
-
         if(!empty($orderProduct -> options)){
             foreach($orderProduct -> options as $key => $option){
-
-                if($option['option_id']=== "0") {
-                    $model_option = new OrderItemOption();
-                    $model_option -> order_item_id = $order->item->id;
-                    $model_option -> option_type_id = 10;
-                    $model_option -> option_type_name = "기타";
-                    $model_option -> option_price_id = 0;
-                    $model_option -> option_name = $option['option_name'];
-                    $model_option -> option_price = 0;
-                    $model_option -> is_view = 0;
-
-                }else {
-                    $model_option = OrderItemOption::find($option['option_id']);
-                }
 
                 if($key!==count($orderProduct -> options)-1) {
                     $data['rw_item_name'] .= $option['option_name'].",";
@@ -106,21 +89,10 @@ class IntranetService
                     $data['rw_item_price'] .= $option['balju_option_price'];
                 }
 
-                $model_option -> balju_option_price = (int)$option['balju_option_price'];
-                $model_option -> vendor_option_price = (int)$option['vendor_option_price'];
-
-                $balju_options_amount += (int)$option['balju_option_price'];
-                $vendor_options_amount += (int)$option['vendor_option_price'];
-
-                $model_option -> save();
             }
         }
-        $order -> item -> balju_options_amount = $balju_options_amount;
-        $order -> item -> vendor_options_amount = $vendor_options_amount;
-        $order -> item -> save();
 
         $order -> delivery -> send_id = $send_id;
-        $order -> delivery -> save();
 
         return $data;
     }
@@ -152,32 +124,40 @@ class IntranetService
         $order -> delivery -> delivery_state_code = "DLSP";
         $order -> delivery -> is_balju = 1;
 
+        $balju_options_amount = 0;
+        $vendor_options_amount = 0;
+
         if(!empty($orderProduct->options)) {
             foreach($orderProduct -> options as $option){
-                $is_view = 1;
-                if($option['option_type_id'] === 10) {
-                    $is_view = 0;
+                if($option['option_id']=== "0") {
+                    $model_option = new OrderItemOption();
+                    $model_option -> order_item_id = $order->item->id;
+                    $model_option -> option_type_id = 10;
+                    $model_option -> option_type_name = "기타";
+                    $model_option -> option_price_id = 0;
+                    $model_option -> option_name = $option['option_name'];
+                    $model_option -> option_price = 0;
+                    $model_option -> is_view = 0;
+
+                }else {
+                    $model_option = OrderItemOption::find($option['option_id']);
                 }
 
-                OrderItemOption::updateOrCreate(
-                    [
-                        'order_item_id' => $order->item->id,
-                        'option_type_id' => $option['option_type_id'],
-                        'option_name' => $option['option_name']
-                    ],
-                    [
-                        'option_type_name' => $option['option_type_name'],
-                        'option_price_id' => $option['option_price_id'],
-                        'option_price' => $option['option_price'],
-                        'balju_option_price' => $option['balju_option_price'],
-                        'vendor_option_price' => $option['vendor_option_price'],
-                        'is_view' => $is_view,
-                    ]
-                );
+                $model_option -> balju_option_price = (int)$option['balju_option_price'];
+                $model_option -> vendor_option_price = (int)$option['vendor_option_price'];
+
+                $balju_options_amount += (int)$option['balju_option_price'];
+                $vendor_options_amount += (int)$option['vendor_option_price'];
+
+                $model_option -> save();
+
             }
         }
+        $order -> item -> balju_options_amount = $balju_options_amount;
+        $order -> item -> vendor_options_amount = $vendor_options_amount;
 
         $order -> save();
+        $order -> item -> save();
         $order -> delivery -> save();
 
         DB::table('order_log') -> insert([
