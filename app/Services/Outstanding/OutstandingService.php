@@ -20,16 +20,27 @@ class OutstandingService
         }
 
         $query = Orderdata::with(['delivery', 'payments', 'vendor'])
-            -> whereHas('delivery', function($query) use($search) {
+            -> whereHas('delivery', function($query) {
                 $query->where('is_balju', 1);
                 $query->whereNot('delivery_state_code', 'DLCC');
-                $query->whereBetween('delivery_date', [$search['start_date'], $search['end_date']]);
             })
             -> whereIn('payment_state_code', ['PSUD', 'PSOC'])
             -> where('brand_type_code', $search['brand'])
             -> where('misu_amount', '>', 0)
             -> where('is_view', 1);
-//            -> whereBetween($search['date_type'], [$search['start_date'], $search['end_date']." 23:59:59"]);
+
+        switch ($search['date_type']) {
+            case 'delivery_date' :
+                $query -> whereHas('delivery', function($query) use($search) {
+                    $query->whereBetween('delivery_date', [$search['start_date'], $search['end_date']]);
+                });
+                break;
+            case 'order_time' :
+            case 'create_ts' :
+                $query-> whereBetween($search['date_type'], [$search['start_date'], $search['end_date']." 23:59:59"]);
+                break;
+
+        }
 
         if(!empty($search['search_word1'])){
             switch ($search['search1']) {
@@ -56,10 +67,17 @@ class OutstandingService
             return null;
         }
 
-//        $query = Vendor::with(['orders'])
-//            -> whereHas('orders', function($query) {
-//
-//            });
+        $query = Vendor::with(['orders'])
+            -> whereHas('orders', function($query) use($search) {
+                $query->whereHas('delivery', function($query2) {
+                    $query2->where('is_balju', 1);
+                    $query2->whereNot('delivery_state_code', 'DLCC');
+                });
+                $query-> whereIn('payment_state_code', ['PSUD', 'PSOC'])
+                    -> where('brand_type_code', $search['brand'])
+                    -> where('misu_amount', '>', 0)
+                    -> where('is_view', 1);
+            });
 
         $query = Orderdata::with(['delivery', 'payments', 'vendor'])
             -> whereHas('delivery', function($query) {

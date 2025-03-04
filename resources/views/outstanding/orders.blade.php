@@ -62,6 +62,7 @@
                         <div class="menu1">
                             <div class="input-group">
                                 <select class="form-select" name="date_type">
+                                    <option value="delivery_date">배송일</option>
                                     <option value="order_time">주문일</option>
                                     <option value="create_ts">수집일</option>
                                 </select>

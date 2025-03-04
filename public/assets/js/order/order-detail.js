@@ -130,30 +130,30 @@ $(document).on('click', '#search_btn', function(e){
 });
 
 // 상품 리스트 검색 input 엔터키 처리
-$('input[name="search_word"]').on('keydown',function(e){
-    e.preventDefault();
-    if(event.keyCode === 13) {
-
-        var form = document.getElementById('product-search-form')
-        const formData = new FormData(form);
-        formData.append('brand_type_code',document.getElementById('brand').value);
-        formData.append('price_type',document.getElementById('price_type').value);
-
-        const queryString = new URLSearchParams(formData).toString();
-
-        $.ajax({
-            type: 'get',
-            url: main_url + "/order/form/products?" + queryString,
-            success : function(data) {
-                $('#product-list').html(data);
-            },
-            error : function(error) {
-                alert('에러 발생!');
-                console.log(error);
-            }
-        });
-    }
-})
+// $('input[name="search_word"]').on('keyup',function(e){
+//     e.preventDefault();
+//     if(event.keyCode === 13) {
+//
+//         var form = document.getElementById('product-search-form')
+//         const formData = new FormData(form);
+//         formData.append('brand_type_code',document.getElementById('brand').value);
+//         formData.append('price_type',document.getElementById('price_type').value);
+//
+//         const queryString = new URLSearchParams(formData).toString();
+//
+//         $.ajax({
+//             type: 'get',
+//             url: main_url + "/order/form/products?" + queryString,
+//             success : function(data) {
+//                 $('#product-list').html(data);
+//             },
+//             error : function(error) {
+//                 alert('에러 발생!');
+//                 console.log(error);
+//             }
+//         });
+//     }
+// })
 
 // 상품 변경
 $('#product-list').on('click', '.add-product-btn', function(e){
