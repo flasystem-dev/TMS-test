@@ -34,4 +34,9 @@ class OutstandingManagementController extends Controller
         return view('outstanding.orders', $data);
     }
 
+    public function vendors(Request $request){
+        $search = $request -> except('page', 'standard');
+
+        $data['vendors'] = OutstandingService::getVendors($search);
+    }
 }

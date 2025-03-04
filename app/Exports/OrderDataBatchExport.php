@@ -119,10 +119,24 @@ class OrderDataBatchExport implements FromQuery, WithHeadings, WithMapping, With
                 OrderExcelDownload::where('id', $this->downloadId)->update(['progress'=>$progress]);
             }
 
+            if (is_null($order->item)) {
+                \Log::info("아이템 실패");
+                \Log::info("주문 번호 : " . $order->order_idx);
+            }
+
             $this->rowNumber++;
 
             $right = $order->delivery->delivery_ribbon_right ?? "";
             $left = !empty($order->delivery->delivery_ribbon_left) ? "(" . $order->delivery->delivery_ribbon_left . ")" : "";
+
+            $payment_type = "";
+            $payment_state = "";
+            $deposit_name = "";
+            foreach ($order->payments as $payment) {
+                $payment_type .= CommonCodeName($payment -> payment_type_code) . "\n";
+                $payment_state .= CommonCodeName($payment -> payment_state_code) . "\n";
+                $deposit_name .= ($payment->deposit_name ?? "") . "\n";
+            }
 
             return [
                 // 번호
@@ -154,11 +168,11 @@ class OrderDataBatchExport implements FromQuery, WithHeadings, WithMapping, With
                 // 적립적립금
                 0,
                 // 결제방법
-                CommonCodeName($order->payment_type_code),
+                $payment_type,
                 // 결제금액
                 $order->total_amount,
                 // 결제상태
-                CommonCodeName($order->payment_state_code),
+                $payment_state,
                 // 승인번호
                 '',
                 // 입금은행
@@ -166,7 +180,7 @@ class OrderDataBatchExport implements FromQuery, WithHeadings, WithMapping, With
                 // 입금일자
                 $order->payment_time,
                 // 입금자명
-                $order->payments->first()?->deposit_name ?? '',
+                $deposit_name,
                 // 주문자명
                 $order->orderer_name,
                 // 희망배송일

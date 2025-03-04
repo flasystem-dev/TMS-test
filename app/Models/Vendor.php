@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CommonCode;
 use Illuminate\Support\Str;
 
+use App\Models\Order\OrderData;
+
 class Vendor extends Model
 {
     use HasFactory;
@@ -27,6 +29,11 @@ class Vendor extends Model
         'is_valid','assurance','assurance_amount','assurance_contractor','assurance_number','assurance_ex_date','deposit_form','assurance_memo','price_type',
         'meta_tag', 'logo_file','service_price_type','service_price','service_percent','service_ex_date','rep_type','is_credit','is_jungsan'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(OrderData::class, 'mall_code', 'idx');
+    }
 
     public function brand_code() {
         if(strlen($this->brand_type)===4){
