@@ -20,7 +20,7 @@ class DeleteOldExcelFiles extends Command
      *
      * @var string
      */
-    protected $description = 'Delete OrderExcel files older than 7 days from storage';
+    protected $description = 'Delete OrderExcel files older than 3 days from storage';
 
     /**
      * Execute the console command.
@@ -31,7 +31,7 @@ class DeleteOldExcelFiles extends Command
         $files = File::files($directory);
 
         foreach ($files as $file) {
-            if (Carbon::createFromTimestamp($file->getMTime())->lt(Carbon::now()->subDays(7))) {
+            if (Carbon::createFromTimestamp($file->getMTime())->lt(Carbon::now()->subDays(3))) {
                 File::delete($file->getRealPath());
 //                $this->info("Deleted: " . $file->getFilename());
             }
