@@ -41,6 +41,8 @@ class AdjustmentQueryBuilder
 
     public static function orderSubQuery($brand, $year, $month)
     {
+        $brand = substr($brand, 0, 4);
+
         $orderSubQuery = OrderDataQueryBuilder::createDBQuery();
 
         $orderSubQuery = AdjustmentOrderQueryBilder::joinDeliveryWithWhere($orderSubQuery, $year, $month);

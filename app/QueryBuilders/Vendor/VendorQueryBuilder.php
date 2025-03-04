@@ -26,7 +26,7 @@ class VendorQueryBuilder
 
     public static function findBrand($query, $brand)
     {
-        $query->where('vendor.brand_type', 'like' ,$brand."%");
+        $query->where('vendor.brand_type', 'like' ,$brand);
         return $query;
     }
 
