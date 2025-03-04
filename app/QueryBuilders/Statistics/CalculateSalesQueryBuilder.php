@@ -24,7 +24,6 @@ class CalculateSalesQueryBuilder
                 DB::raw('SUM(COALESCE(o.vendor_amount, 0 ))         as vendor_amount'),
                 DB::raw('SUM(COALESCE(i.vendor_options_amount, 0 ))  as option_amount'),
             )
-            ->where('o.brand_type_code', 'BTCS')
             ->where('o.is_view', 1)
             ->where('d.is_balju', 1)
             ->whereNot('d.delivery_state_code', 'DLCC')

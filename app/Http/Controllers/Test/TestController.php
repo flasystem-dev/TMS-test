@@ -45,15 +45,16 @@ use App\Models\Product\Product;
 use App\Models\Product\ProductOptionPrice;
 use App\Models\Product\ProductPrice;
 
+use App\Services\Vendor\SchedulerService;
+
 use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
     public static function test(Request $request) {
-        $deleted = OrderPaymentDeleted::find(104233);
-        $deleted -> restore_payment();
-
-        return "success";
+//        SchedulerService::calc_sales();
+//
+//        return "success";
     }
 
     public static function get_api(Request $request) {
