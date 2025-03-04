@@ -120,7 +120,7 @@ class Vendor extends Model
             return $this->sp_card_amount;
         }
         if($this->service_percent===0) { return 0; }
-        return $vendor->card_amount ?? 0;
+        return $this->card_amount ?? 0;
     }
 
     // 수익총액 = 발주수익 + 차액수익 + 기타2 + 기타3 - 카드수수료
