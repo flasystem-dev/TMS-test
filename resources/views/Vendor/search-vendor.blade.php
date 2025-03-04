@@ -61,7 +61,7 @@
                                 <td>{{$vendor->idx}}</td>
                                 <!-- 브랜드 / 상점명 -->
                                 <td>
-                                    <p class="brand_type {{$vendor->brand_code()}}">{{$vendor -> brand_ini()}}</p>
+                                    <p class="brand_type {{$vendor->brand_code()}}">{{BrandAbbr($vendor->brand_code())}}</p>
                                     <p class="brand_type" style="margin-top: 3px" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-content="{{$vendor->mall_name?? ""}}">{{empty($vendor->mall_name)? "없음": $vendor->mall_name}}</p>
                                 </td>
                                 <!-- 대표자 / 연락처 -->

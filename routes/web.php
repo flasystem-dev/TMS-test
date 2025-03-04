@@ -163,6 +163,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
 
 // 플레이오토 2.0
 //Route::get('/PlayAuto2/Shop/Code', [App\Http\Controllers\API\PlayAuto2APIController::class, 'get_shopCode']);
+    Route::get('/PlayAuto2/Order/token', [App\Http\Controllers\API\PlayAuto2APIController::class, 'set_token']);
     Route::get('/PlayAuto2/Order/Auto', [App\Http\Controllers\API\PlayAuto2APIController::class, 'get_order']);
     Route::get('/PlayAuto2/Order/Auto2', [App\Http\Controllers\API\PlayAuto2APIController::class, 'send_data_TMS']);
     Route::get('/PlayAuto2/Order/Auto3', [App\Http\Controllers\API\PlayAuto2APIController::class, 'test_update']);
@@ -293,6 +294,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('dev/vendor', [App\Http\Controllers\Dev\DevController::class, 'vendor']);
     Route::get('dev/statistics/url', [App\Http\Controllers\Dev\DevController::class, 'statistics_url']);
     Route::post('dev/orderItem', [App\Http\Controllers\Dev\DevController::class, 'upsert_orderDataItem']);
+    Route::get('dev/playauto/token', [App\Http\Controllers\API\PlayAuto2APIController::class, 'set_token']);
 });
 
 Route::view('/error/403', 'pages-403')->name('403');

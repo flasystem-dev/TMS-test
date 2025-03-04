@@ -27,6 +27,11 @@
                         <button type="button" class="btn btn-secondary" onclick="upload_excel('user');" style="width: 150px">User</button>
                     </div>
                 </div>
+                <div class="offset-6 col-2">
+                    <div class="input-group mb-3">
+                        <button type="button" class="btn btn-danger" onclick="update_token()">플레이오토 Token</button>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-4">

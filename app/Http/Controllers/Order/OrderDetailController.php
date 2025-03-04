@@ -23,6 +23,7 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
 use App\Models\Order\OrderDataDeleted;
+use App\Models\Order\OrderPaymentDeleted;
 
 use App\Models\Vendor;
 
@@ -113,7 +114,7 @@ class OrderDetailController extends Controller
     public function add_payment(Request $request) {
         $input  = $request -> all();
 
-        $payment_number = OrderPayment::where('order_idx', $request -> order_idx) -> max('payment_number') + 1;
+        $payment_number = OrderPayment::get_min_payment_number($request -> order_idx);
         $order = OrderData::find($request -> order_idx);
 
         $pid = $order->brand_type_code.$order->order_number."-".$payment_number;
@@ -417,6 +418,12 @@ class OrderDetailController extends Controller
             $title .= "<span class='origin_value_text'>{$payment -> payment_number}</span></p>";
             $content = $title . $content;
         }
+
+
+        $deleted = new OrderPaymentDeleted();
+        $deleted -> fill($payment->toArray());
+        $deleted -> log_name = Auth::user()->name;
+        $deleted -> save();
 
         $payment -> delete();
 

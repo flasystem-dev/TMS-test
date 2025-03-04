@@ -264,8 +264,8 @@
                                     <td><textarea class="form-control" name="payment_memo" style="height: 40px; font-size: 12px;" aria-label="payment_memo">{{$payment->payment_memo}}</textarea></td>
                                     <td>
                                         <button type="button" class="btn btn-outline-secondary btn-sm" data-num="{{$payment->payment_number}}" onclick="update_payment(event)">수정</button>
-                                        @if(empty($payment->payment_key))
-                                            <button type="button" class="btn mt-1 btn-outline-danger btn-sm" data-num="{{$payment->payment_number}}" onclick="delete_payment(event)">삭제</button>
+                                        @if($payment->payment_state_code!=="PSDN")
+                                        <button type="button" class="btn mt-1 btn-outline-danger btn-sm" data-num="{{$payment->payment_number}}" onclick="delete_payment(event)">삭제</button>
                                         @endif
                                     </td>
                                 </tr>

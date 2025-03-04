@@ -10,7 +10,7 @@ class AdjustmentService
     {
         $year = $search['year'] ?? date('Y');
         $month = $search['month'] ?? date('m');
-        $brand = $search['brand'] ?? "BTCS";
+        $brand = isset($search['brand']) ? substr($search['brand'], 0, 4) : "BTCS";
         $idxes = $search['mall_code'] ?? "";
         $word = $search['word1'] ?? "";
         $column = $search['sw_1'] ?? "";

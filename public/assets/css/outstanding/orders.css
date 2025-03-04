@@ -46,7 +46,7 @@
 .gs_name, .deli_date, .addr, .ribbon_left, .state_p { margin: 0 auto;}
 
 .ribbon_left { width: 250px; }
-.product-price { color: #6671ff }
+.product-price { color: #212121 }
 
 .payments_area { display: flow-root; align-items: center; }
 .span_PT { display: inline-block; padding: 3px; }

@@ -156,7 +156,8 @@ class PlayAuto2APIController extends Controller
         DB::table('playauto2_token') -> where('idx', 1)
             ->update([
                 'token' => $obj[0]['token'],
-                'sol_no' => $obj[0]['sol_no']
+                'sol_no' => $obj[0]['sol_no'],
+                'create_time' => NOW()
             ]);
 
         DB::table('playauto2_log') -> insert([
@@ -164,6 +165,8 @@ class PlayAuto2APIController extends Controller
             'work_name' => '토큰 저장 API',
             'content' => $response
         ]);
+
+        return response()->json(true);
     }
 
     // TMS 받은 주문 보내기
@@ -172,6 +175,7 @@ class PlayAuto2APIController extends Controller
         try {
             // 플토 2.0 주문 가져오기 ( 신규, 취소, 교환, 반품 )
             $response = self::get_orderToTMS();
+
 
             $arr = json_decode($response,true);
             $data_arr = $arr["results"];

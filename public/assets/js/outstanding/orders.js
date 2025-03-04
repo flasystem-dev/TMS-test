@@ -1,3 +1,4 @@
+var fix = 0;
 $('.datepicker').datepicker();
 
 document.getElementById('search-form').addEventListener('submit', function(e) {

@@ -5,6 +5,8 @@ namespace App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Order\OrderPaymentDeleted;
+
 class OrderPayment extends Model
 {
     use HasFactory;
@@ -19,6 +21,29 @@ class OrderPayment extends Model
         'refund_handler', 'payment_memo',
         'deposit_name', 'document_type', 'is_publish', 'advance_payment'
     ];
+
+    public static function get_min_payment_number($order_idx)
+    {
+        // 사용된 모든 payment_number 가져오기
+        $usedNumbers = OrderPayment::where('order_idx', $order_idx)
+            ->pluck('payment_number')
+            ->merge(OrderPaymentDeleted::where('order_idx', $order_idx)
+                ->pluck('payment_number'))
+            ->unique()
+            ->sort()
+            ->values();
+
+        // 가장 작은 빈 payment_number 찾기
+        $payment_number = 1;
+        foreach ($usedNumbers as $used) {
+            if ($used != $payment_number) {
+                break; // 비어있는 가장 작은 번호 찾으면 종료
+            }
+            $payment_number++;
+        }
+
+        return $payment_number;
+    }
 
     public function get_VA_info() {
         if($this->payment_type_code === "PTVA" && !empty($this->payment_pg)){

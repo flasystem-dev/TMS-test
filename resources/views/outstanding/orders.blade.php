@@ -39,9 +39,9 @@
                         <div class="menu1">
                             <div class="input-group">
                                 <select class="form-select" name="search1">
-                                    <option value="all"                  {{ request()->search==="all"                  ? "selected":""}}>1차 조회항목</option>
-                                    <option value="od_id"                {{ request()->search==="od_id"                ? "selected":""}}>주문번호</option>
-                                    <option value="order_number"         {{ request()->search==="order_number"         ? "selected":""}}>쇼핑몰주문번호</option>
+                                    <option value="all"                  {{ request()->search==="all"              ? "selected":""}}>1차 조회항목</option>
+                                    <option value="od_id"                {{ request()->search==="od_id"            ? "selected":""}}>주문번호</option>
+                                    <option value="rep_name"             {{ request()->search==="rep_name"         ? "selected":""}}>사업자명</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word1" value="{{request()->search_word1}}">
                             </div>
@@ -49,9 +49,9 @@
                         <div class="menu2">
                             <div class="input-group">
                                 <select class="form-select" name="search2">
-                                    <option value="all"                  {{ request()->search==="all"                  ? "selected":""}}>2차 조회항목</option>
-                                    <option value="od_id"                {{ request()->search==="od_id"                ? "selected":""}}>주문번호</option>
-                                    <option value="order_number"         {{ request()->search==="order_number"         ? "selected":""}}>쇼핑몰주문번호</option>
+                                    <option value="all"                  {{ request()->search==="all"               ? "selected":""}}>2차 조회항목</option>
+                                    <option value="od_id"                {{ request()->search==="od_id"             ? "selected":""}}>주문번호</option>
+                                    <option value="order_number"         {{ request()->search==="order_number"      ? "selected":""}}>사업자명</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word2" value="{{request()->search_word2}}">
                             </div>
@@ -143,7 +143,7 @@
                                             </td>
                                             <!-- 주문일/배송일 -->
                                             <td>
-                                                <div style="position: relative" class="date_container simptip-position-bottom simptip-fade" tooltip="{{$order->admin_memo}}" flow="down">
+                                                <div style="position: relative" class="date_container simptip-position-bottom simptip-fade cursor_p" tooltip="{{$order->admin_memo}}" flow="down" onclick="order_detail('{{$order->order_idx}}')">
                                                     <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">{{Carbon::parse($order->order_time)->format('Y-m-d')}}
                                                     <br>
                                                     <span class="deli_date span_date">{{$order->delivery->delivery_date ?? ""}}</span>
@@ -159,7 +159,7 @@
                                                    data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->orderer_name}}"
                                                    onclick="clipBoardCopy(event)">
                                                     {{$order->orderer_name}}</p>
-                                                <span>{{$order->orderer_phone}}</span>
+                                                <span onclick="clipBoardCopy(event)">{{$order->orderer_phone}}</span>
                                             </td>
                                             <!-- 받는분/보내는분 -->
                                             <td>
@@ -217,15 +217,15 @@
 @section('script')
     <script src="{{asset('assets/js/outstanding/orders.js')}}?v={{ time() }}"></script>
     <script>
-        {{--function order_detail(order_idx){--}}
-        {{--    var url = './order-detail/'+order_idx;--}}
+        function order_detail(order_idx){
+            var url = main_url + '/order/order-detail/'+order_idx;
 
-        {{--    @if(Auth::user()->auth < 8)--}}
-        {{--    $('#new_order'+order_idx).hide();--}}
-        {{--    @endif--}}
-        {{--    open_win(url,"주문서"+fix,1440,900,0,0);--}}
-        {{--    fix++;--}}
-        {{--}--}}
+            @if(Auth::user()->auth < 8)
+            $('#new_order'+order_idx).hide();
+            @endif
+            open_win(url,"주문서"+fix,1440,900,0,0);
+            fix++;
+        }
         function dateSel(type){
             var start_date = '';
             var end_date = '';
@@ -269,7 +269,6 @@
             $('#start_date').val(start_date);
             $('#end_date').val(end_date);
         }
-
     </script>
 @endsection
 

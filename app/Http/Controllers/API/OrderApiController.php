@@ -159,12 +159,17 @@ class OrderApiController extends Controller
             'payment_key' => $order['payment_key'],
             'payment_mid' => $order['payment_mid'],
             'payment_receipt_url' => $order['payment_receipt_url'],
-            'payment_result_json' => $order['payment_result_json'],
             'card_name' => !empty($order['card_info']) ? DB::table('code_of_toss_card') -> where('code',$order['card_info']) -> first() -> card  : '',
             'card_num' => $order['card_num']?? '',
             'bank_name' => !empty($order['bank_info']) ? DB::table('code_of_toss_bank_stock') -> where('code',$order['bank_info']) -> first() -> bank : '',
             'bank_num' => $order['bank_num']?? ''
         ]);
+
+        DB::table('payment_result_json') -> insert([
+            'order_idx' => $order_idx,
+            'result_json' => $order['payment_result_json']?? '',
+        ]);
+
 
         OrderDelivery::insert([
             'order_idx' => $order_idx,

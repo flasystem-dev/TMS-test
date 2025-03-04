@@ -21,6 +21,7 @@ use App\Services\Order\OrderService;
 use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
+use App\Models\Order\OrderPaymentDeleted;
 use App\Models\CodeOfNicePay;
 use App\Models\CodeOfCompanyInfo;
 
@@ -207,9 +208,15 @@ class NicePayController extends Controller
         $price = $payment -> payment_amount;
         $moid = $pid;
 
+        $merchantKey = $brand -> nicepay_key;
+        $MID = $brand -> nicepay_mid;
+
+//        $merchantKey = '33F49GnCMS1mFYlGXisbUDzVf2ATWCl9k3R++d5hDd3Frmuos/XLx8XhXpe+LDYAbpGKZYSwtlyyLOtS/8aD7A==';
+//        $MID = 'nictest00m';
+
         $data['goodsName']      = $brand_name[$order ->brand_type_code].$payment->payment_item;
-        $data['merchantKey']    = $brand -> nicepay_key;
-        $data['MID']            = $brand -> nicepay_mid;
+        $data['merchantKey']    = $merchantKey;
+        $data['MID']            = $MID;
         $data['price']          = $price;
         $data['buyerName']      = $request -> paymentName ?? $order->orderer_name;
         $data['buyerTel']       = str_replace("-" ,"", $order -> orderer_phone);
@@ -243,6 +250,7 @@ class NicePayController extends Controller
         $order = OrderData::find($payment->order_idx);
 
         $key = DB::table('code_of_company_info') -> where('brand_type_code', $order->brand_type_code) -> first() -> nicepay_key;
+//        $key = '33F49GnCMS1mFYlGXisbUDzVf2ATWCl9k3R++d5hDd3Frmuos/XLx8XhXpe+LDYAbpGKZYSwtlyyLOtS/8aD7A==';
 
         $merchantKey = $key;
 
@@ -724,7 +732,6 @@ class NicePayController extends Controller
 
         parse_str($data, $response);
 
-
         $result = array();
 
         foreach ($response as $key => $value) {
@@ -732,6 +739,11 @@ class NicePayController extends Controller
         }
 
         try{
+            if(DB::table('order_payment_deleted')->where('payment_pid', $result['MOID'])->exists()) {
+                $deleted = OrderPaymentDeleted::where('payment_pid', $result['MOID'])->first();
+                $deleted -> restore_payment();
+            }
+
             $payment = OrderPayment::where('payment_pid', $result['MOID'])->first();
             $orders = OrderData::with('payments')->where('order_idx', $payment->order_idx) -> get();
 

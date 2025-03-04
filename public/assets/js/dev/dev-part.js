@@ -75,3 +75,20 @@ function upsert_orderItem() {
         }
     });
 }
+
+function update_token() {
+    $.ajax({
+        url : main_url + "/dev/playauto/token",
+        method : "GET",
+        success: function(data) {
+            if(data) {
+                alert("토큰 갱신 완료");
+            }else{
+                alert("토큰 갱신 실패")
+            }
+        },
+        error: function(e) {
+            alert("에러 발생!\n 토큰 갱신 실패")
+        }
+    });
+}

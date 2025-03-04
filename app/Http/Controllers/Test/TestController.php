@@ -21,6 +21,7 @@ use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
 use App\Models\Order\OrderItem;
 use App\Models\Order\OrderItemOption;
+use App\Models\Order\OrderPaymentDeleted;
 
 use App\Models\OrderCart;
 use App\Models\CodeOfCompanyInfo;
@@ -48,6 +49,13 @@ use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
+    public static function test(Request $request) {
+        $deleted = OrderPaymentDeleted::find(104233);
+        $deleted -> restore_payment();
+
+        return "success";
+    }
+
     public static function get_api(Request $request) {
         $orders = $request->input('orders');
 
