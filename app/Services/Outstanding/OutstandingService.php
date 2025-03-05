@@ -74,7 +74,9 @@ class OutstandingService
                 DB::raw('SUM(CASE WHEN order_data.client_id = 0 THEN order_data.misu_amount ELSE 0 END) as personal_misu_amount'),
                 DB::raw('COUNT(CASE WHEN order_data.client_id = 0 THEN order_data.order_idx ELSE NULL END) as personal_misu_count'),
                 DB::raw('SUM(CASE WHEN order_data.client_id != 0 THEN order_data.misu_amount ELSE 0 END) as client_misu_amount'),
-                DB::raw('COUNT(CASE WHEN order_data.client_id != 0 THEN order_data.order_idx ELSE NULL END) as client_misu_count')
+                DB::raw('COUNT(CASE WHEN order_data.client_id != 0 THEN order_data.order_idx ELSE NULL END) as client_misu_count'),
+                DB::raw('SUM(CASE WHEN order_delivery.delivery_date < DATE_SUB(CURDATE(), INTERVAL 3 MONTH) THEN order_data.misu_amount ELSE 0 END) as past_misu_amount'),
+                DB::raw('COUNT(CASE WHEN order_delivery.delivery_date < DATE_SUB(CURDATE(), INTERVAL 3 MONTH) THEN order_data.order_idx ELSE NULL END) as past_misu_count')
             ])
             ->join('order_data', function($join) use ($search) {
                 $join->on('vendor.idx', '=', 'order_data.mall_code')

@@ -28,7 +28,7 @@
         <span class="brand_type {{$order->brand_type_code}}" >{{BrandAbbr($order->brand_type_code)}}</span>
         <!-- 벤더 메뉴 -->
         @if($order->brand_type_code==="BTCS" || $order->brand_type_code==="BTFC")
-            <a href='javascript:void(0);' data-bs-toggle="dropdown" aria-expanded="false"><span class="mall_type">{{ $order->channel()['mall_name'] }}</span></a>
+            <a href='javascript:void(0);' data-bs-toggle="dropdown" aria-expanded="false"><span class="mall_type">{{ $order->channel_name }}</span></a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item order_dropdown_menu" href="#" data-bs-toggle="modal" data-bs-target="#change_vendor_modal">사업자 변경</a></li>
             </ul>

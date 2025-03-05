@@ -102,7 +102,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <table class="table table-striped table-bordered " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <table class="table table-striped table-bordered" id="vendor-table">
                                 <thead>
                                 <tr>
                                     <th style="width: 2%">
@@ -151,10 +151,13 @@
                                             </td>
                                             <!-- 거래처 미수금 / 건수 -->
                                             <td>
-
+                                                <p>{{ number_format($vendor->client_misu_amount) }}</p>
+                                                <p>({{ number_format($vendor->client_misu_count) }})</p>
                                             </td>
-                                            <!-- 장시 미수금 / 건수 -->
+                                            <!-- 장기 미수금 / 건수 -->
                                             <td>
+                                                <p>{{ number_format($vendor->past_misu_amount) }}</p>
+                                                <p>({{ number_format($vendor->past_misu_count) }})</p>
                                             </td>
                                             <!-- 전체 미수금 / 건수 -->
                                             <td>
@@ -191,7 +194,7 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{asset('assets/js/outstanding/orders.js')}}?v={{ time() }}"></script>
+    <script src="{{asset('assets/js/outstanding/vendors.js')}}?v={{ time() }}"></script>
     <script>
         function order_detail(order_idx){
             var url = main_url + '/order/order-detail/'+order_idx;
