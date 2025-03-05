@@ -120,6 +120,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
 
 // 미수금 관리
     Route::get('outstanding/orders', [App\Http\Controllers\Outstanding\OutstandingManagementController::class, 'orders']);
+    Route::get('outstanding/vendors', [App\Http\Controllers\Outstanding\OutstandingManagementController::class, 'vendors']);
 
 // 토스페이먼츠
     Route::get('Tosspayment/Widget/{od_id}', [App\Http\Controllers\Payment\TosspaymentsController::class, 'get_widget']);

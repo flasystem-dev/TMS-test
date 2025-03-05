@@ -6,7 +6,7 @@
     @php
         use Carbon\Carbon;
     @endphp
-    <link href="{{ asset('/assets/css/outstanding/orders.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/outstanding/vendors.css') }}" rel="stylesheet">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -16,11 +16,11 @@
                             <div class="menu1">
                                 <div class="input-group standard-label-container">
                                     <span class="input-group-text">기준</span>
-                                    <input type="radio" class="btn-check" name="standard" id="standard-order" checked>
+                                    <input type="radio" class="btn-check" name="standard" id="standard-order">
                                     <label class="btn select-label standard-label" for="standard-order">주문</label>
                                     <input type="radio" class="btn-check" name="standard" id="standard-client">
                                     <label class="btn select-label standard-label" for="standard-client">거래처</label>
-                                    <input type="radio" class="btn-check" name="standard" id="standard-vendor">
+                                    <input type="radio" class="btn-check" name="standard" id="standard-vendor" checked>
                                     <label class="btn select-label standard-label" for="standard-vendor">사업자</label>
                                 </div>
                             </div>
@@ -118,78 +118,54 @@
                                     <th style="width: 7%">장기 미수금<br>(건수)</th>
                                     <th style="width: 5%">전체 미수금<br>(건수)</th>
                                     <th style="width: 5%">보증 잔액<br>(사용비율)</th>
-                                    <th style="width: 10%">거래명세서<br>증빙서류</th>
-                                    <th style="width: 5%">입금예정일</th>
-                                    <th style="width: 10%">결제메모</th>
+                                    <th style="width: 10%">메모</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if(isset($orders) && $orders->isNotEmpty())
-                                    @foreach($orders as $order)
+                                @if(isset($vendors))
+                                    @foreach($vendors as $vendor)
                                         <tr>
-                                            <!-- 번호 -->
                                             <td>
                                                 <label class="checkboxLabel">
-                                                    <input type="checkbox" name="order_idx" value="{{$order->order_idx}}" data-paytype="{{$order->payment_type_code}}">
+                                                    <input type="checkbox" name="order_idx" value="{{$vendor->idx}}">
                                                 </label>
                                             </td>
+                                            <!-- 번호 -->
                                             <td>
-                                                {{$order->order_idx}}
+                                                {{$vendor->idx}}
                                             </td>
                                             <!-- 브랜드 / 채널 -->
                                             <td>
-                                                <p class="brand_type {{$order->brand_type_code}}">{{ BrandAbbr($order->brand_type_code)}}</p>
-                                                <p class="brand_type {{$order->mall_code}}" style="margin-top: 3px">{{$order->channel_name}}</p>
+                                                <p class="brand_type {{$vendor->brand_code()}}">{{ BrandAbbr($vendor->brand_code())}}</p>
+                                                <p class="brand_type" style="margin-top: 3px">{{$vendor->channel_name}}</p>
                                             </td>
-                                            <!-- 주문일/배송일 -->
+                                            <!-- 보증금액(보증종류) / 계약종료일(계약자) -->
                                             <td>
-                                                <div style="position: relative" class="date_container simptip-position-bottom simptip-fade cursor_p" tooltip="{{$order->admin_memo}}" flow="down" onclick="order_detail('{{$order->order_idx}}')">
-                                                    <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">{{Carbon::parse($order->order_time)->format('Y-m-d')}}
-                                                    <br>
-                                                    <span class="deli_date span_date">{{$order->delivery->delivery_date ?? ""}}</span>
-                                                        @if(!empty($order->admin_memo))
-                                                            <i class="mdi mdi-note-text-outline memo_check"></i>
-                                                        @endif
-                                                    </span>
-                                                </div>
+                                                <p>{{ number_format($vendor->assurance_amount) }} ({{ CommonCodeName($vendor->assurance) }})</p>
+                                                <p>{{ $vendor->assurance_ex_date }} @if(!empty($vendor->assurance_contractor))({{ $vendor->assurance_contractor }})@endif</p>
                                             </td>
-                                            <!-- 주문자/연락처 -->
+                                            <!-- 개인 미수금 / 건수 -->
                                             <td>
-                                                <p class="gs_name cursor_p"
-                                                   data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->orderer_name}}"
-                                                   onclick="clipBoardCopy(event)">
-                                                    {{$order->orderer_name}}</p>
-                                                <span onclick="clipBoardCopy(event)">{{$order->orderer_phone}}</span>
+                                                <p>{{ number_format($vendor->personal_misu_amount) }}</p>
+                                                <p>({{ number_format($vendor->personal_misu_count) }})</p>
                                             </td>
-                                            <!-- 받는분/보내는분 -->
-                                            <td>
-                                                <p class="gs_name"
-                                                   data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->receiver_name ?? ""}}"
-                                                   onclick="clipBoardCopy(event)">
-                                                    {{$order->delivery->receiver_name ?? ""}}</p>
-                                                <p class="ribbon_left cursor_p" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->delivery->delivery_ribbon_left ?? ""}}" onclick="clipBoardCopy(event)">{{$order->delivery->delivery_ribbon_left ?? ""}}</p>
-                                            </td>
-                                            <!-- 주문상품/결제금액 -->
-                                            <td><p class="gs_name">{{$order->delivery->goods_name ?? ""}}</p><p class="amount product-price">{{number_format($order->total_amount)}}원</p></td>
-                                            <!-- 미수금액 -->
-                                            <td>
-                                                <p class="amount">{{number_format($order->misu_amount)}}원</p>
-                                            </td>
-                                            <!-- 결제수단 -->
-                                            <td>
-                                                <p class="state_p {{$order->payment_type_code}}" style="margin: 0 auto;">{{ CommonCodeName($order->payment_type_code) }}</p>
-                                            </td>
-                                            <!-- 거래명세서 / 증빙서류 -->
+                                            <!-- 거래처 미수금 / 건수 -->
                                             <td>
 
                                             </td>
-                                            <!-- 입금예정일 -->
+                                            <!-- 장시 미수금 / 건수 -->
                                             <td>
-
                                             </td>
-                                            <!-- 결제 메모 -->
+                                            <!-- 전체 미수금 / 건수 -->
                                             <td>
-
+                                                <p>{{ number_format($vendor->total_misu_amount) }}</p>
+                                                <p>({{ number_format($vendor->order_count) }})</p>
+                                            </td>
+                                            <!-- 보증 잔액 / 사용비율 -->
+                                            <td>
+                                            </td>
+                                            <!-- 메모 -->
+                                            <td>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -202,10 +178,10 @@
                             </table>
                         </div>
                     </div>
-                    @if(isset($orders) && $orders->isNotEmpty())
+                    @if(isset($vendors))
                         <div class="row">
                             <div class="col-12">
-                                {{ $orders->links() }}
+                                {{ $vendors->links() }}
                             </div>
                         </div>
                     @endif

@@ -35,6 +35,16 @@ class Vendor extends Model
         return $this->hasMany(OrderData::class, 'mall_code', 'idx');
     }
 
+    public function getChannelNameAttribute()
+    {
+        return $this->rep_name ?? "없음";
+    }
+
+    public function getMallNameAttribute()
+    {
+        return $this->mall_name ?? "없음";
+    }
+
     public function brand_code() {
         if(strlen($this->brand_type)===4){
             return $this->brand_type;

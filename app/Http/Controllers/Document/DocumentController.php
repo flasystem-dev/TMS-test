@@ -5,11 +5,17 @@ namespace App\Http\Controllers\Document;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\CommonCode;
 use App\Models\CodeOfCompanyInfo;
+
+use App\Services\Order\OrderService;
+use App\Services\Order\OrderIndexService;
 
 class DocumentController extends Controller
 {
@@ -20,36 +26,31 @@ class DocumentController extends Controller
     }
 
     public function get_orders(Request $request){
-        $search_arr = $request -> except('page');
-
-        $open = $request->query('open');
         $page = $request->query('page');
 
         if($page>1){
             $open="N";
         }
 
-        $result = OrderData::orderList($search_arr);
-        $orders = $result['orders'];
 
-        $commonDate =CommonCode::commonDate();
-        $count = $orders->count();
+        $search = $request -> except('page');
+
+        $data = OrderIndexService::getOrderList($search);
+
+        $data['commonDate'] = CommonCode::commonDate();
+
+        $data = OrderIndexService::countOrderData($data);
+
+        if(self::rateLimit()) {
+            return redirect() -> away('https://flabiz.kr/sub/max_traffic_tms.php');
+        }
+
         $col_style='collapsed';
         $show_box='';
-        foreach ($search_arr as $value) {
-            if (!empty($value)) {
-                $show_box='show';
-                $col_style='';
-            }
-        }
-        foreach ($orders as $order) {
 
-            if($order->order_quantity>1){
-                $order->sub_idx = OrderData::duplicationOrderNumber($order->order_idx);
-            }
-        }
 
-        return view('Document.document-orders', ['orders' => $orders, 'count' => $count,'commonDate'=>$commonDate,'show_box'=>$show_box,'col_style'=>$col_style, 'open' => $open]);
+
+        return view('Document.document-orders', $data);
     }
 
     public static function bank_code(Request $request) {
@@ -71,7 +72,20 @@ class DocumentController extends Controller
 
         return $options;
     }
+    public static function rateLimit()
+    {
+        $hit = DB::table('connection_log')
+            ->select('hit')
+            ->where('user_id', Auth::user()->user_id)
+            ->where('log_date', date('Y-m-d'))
+            ->where('uri', 'order/ecommerce_orders')
+            ->first() -> hit;
 
+        if($hit > 2000) {
+            return true;
+        }
+        return false;
+    }
     public function refund_table(Request $request) {
         $data['order'] = OrderData::find($request -> order_idx);
         return view('Document.include.select-refund', $data);

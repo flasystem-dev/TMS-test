@@ -14,7 +14,7 @@ class OrderDataDeleted extends Model
     const CREATED_AT = 'create_ts';
     const UPDATED_AT = 'update_ts';
     protected $fillable=[
-        'od_id','order_idx','mall_code','brand_type_code','order_number',
+        'od_id','order_idx','mall_code', 'client_id', 'brand_type_code','order_number',
         'order_time','orderer_mall_id','orderer_name','orderer_tel','orderer_phone','orderer_email',
         'order_quantity','payment_type_code','payment_state_code','payment_date',
         'total_amount','pay_amount','discount_amount','refund_amount','misu_amount','supply_amount', 'balju_amount',

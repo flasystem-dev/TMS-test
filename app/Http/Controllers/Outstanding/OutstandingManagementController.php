@@ -38,5 +38,11 @@ class OutstandingManagementController extends Controller
         $search = $request -> except('page', 'standard');
 
         $data['vendors'] = OutstandingService::getVendors($search);
+
+        $data['commonDate'] =CommonCode::commonDate();
+
+        $data['brands'] = DB::table('code_of_company_info')->select('brand_type_code', "brand_ini")->where('is_used', 1) -> get();
+
+        return view('outstanding.vendors', $data);
     }
 }

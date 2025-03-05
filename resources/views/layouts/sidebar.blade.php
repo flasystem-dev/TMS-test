@@ -56,7 +56,8 @@
             <li class="auth_check">
                 <a href="javascript: void(0);" class="has-arrow"> <i class="uil-money-withdraw"></i><span><strike>미수금관리</strike></span></a>
                 <ul class="sub-menu" aria-expanded="true">
-                    <li class="disable"><a href="{{ url("outstanding/orders") }}">미수현황</a></li>
+                    <li class="disable"><a href="{{ url("outstanding/orders") }}">미수현황(주문)</a></li>
+                    <li class="disable"><a href="{{ url("outstanding/vendors") }}">미수현황(사업자)</a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>개인미수</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>법인미수</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>내역서</strike></a></li>

@@ -127,7 +127,7 @@ class BrandSalesController extends Controller
     // 차트 데이터 가져오기
     public static function update_chartData(Request $request) {
         $brand = $request -> brand ?? "BTCP";
-        $year = $request -> year ?? "2024";
+        $year = $request -> year ?? date('Y');
         $dateType = $request -> dateType ?? 'order';
 
         $brand_sales = BrandService::monthly_sales_brand($brand, $year, $dateType);

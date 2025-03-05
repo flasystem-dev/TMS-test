@@ -467,8 +467,8 @@ class TestController extends Controller
 
     public static function samga_api_test() {
         $data = [
-            'od_id'   => '999999_999999',
-            'od_deli_date'  => "2024-11-25",
+            'od_id'   => '999999_9999999',
+            'od_deli_date'  => "2025-04-01",
             'od_deli_time'  => "지금즉시배송",
             'od_name'       => "테스트3",
             'od_b_name'     => "테스트3",
@@ -478,7 +478,7 @@ class TestController extends Controller
             'od_msg_right'  => "테스트3",
             'od_receipt_price'  => 48000,
             'od_memo'       => "♥♥새꽃으로-제작해주세요(재생x)♥♥
-빈소별 개별 배송사진 촬영 꼭 해주세요",
+                                빈소별 개별 배송사진 촬영 꼭 해주세요",
             'key'           => '04cb1ddcc25fd932ef101d3e88d39a451f9dd4c7b461d55a3389c24bc3ccbafe',
             'od_it_name'    => "근조장구 1호",
             'product_code'  => 103

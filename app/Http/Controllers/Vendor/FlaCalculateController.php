@@ -129,7 +129,7 @@ class FlaCalculateController extends Controller
     public function vendorExcelDownload(Request $request){
         $brand = $request->brand;
         $today = date("Y-m-d",time());
-        $brand_name=Vendor::commonName($brand);
+        $brand_name=BrandAbbr($brand);
         return Excel::download(new ExcelDownloadExport($brand),"기타금액업로드양식_{$brand_name}_{$today}.xlsx");
     }
     
