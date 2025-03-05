@@ -62,6 +62,7 @@
                             <div class="menu1">
                                 <div class="input-group">
                                     <select class="form-select" name="date_type">
+                                        <option value="delivery_date">배송일</option>
                                         <option value="order_time">주문일</option>
                                         <option value="create_ts">수집일</option>
                                     </select>
@@ -105,20 +106,20 @@
                             <table class="table table-striped table-bordered" id="vendor-table">
                                 <thead>
                                 <tr>
-                                    <th style="width: 2%">
+                                    <th style="width: 3%">
                                         <label class="checkboxLabel">
                                             <input type="checkbox" name="checkAll">
                                         </label>
                                     </th>
-                                    <th style="width: 3%">번호</th>
-                                    <th style="width: 3%">브랜드<br>채널</th>
-                                    <th style="width: 7%">보증금액(보증종류)<br>계약종료일(계약자)</th>
-                                    <th style="width: 5%">개인 미수금<br>(건수)</th>
+                                    <th style="width: 4%">번호</th>
+                                    <th style="width: 8%">브랜드<br>채널</th>
+                                    <th style="width: 13%">보증금액(보증종류)<br>계약종료일(계약자)</th>
+                                    <th style="width: 10%">개인 미수금<br>(건수)</th>
                                     <th style="width: 10%">거래처 미수금<br>(건수)</th>
-                                    <th style="width: 7%">장기 미수금<br>(건수)</th>
-                                    <th style="width: 5%">전체 미수금<br>(건수)</th>
-                                    <th style="width: 5%">보증 잔액<br>(사용비율)</th>
-                                    <th style="width: 10%">메모</th>
+                                    <th style="width: 10%">장기 미수금<br>(건수)</th>
+                                    <th style="width: 10%">전체 미수금<br>(건수)</th>
+                                    <th style="width: 10%">보증 잔액<br>(사용비율)</th>
+                                    <th>메모</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -166,9 +167,11 @@
                                             </td>
                                             <!-- 보증 잔액 / 사용비율 -->
                                             <td>
+                                                <p>{{ number_format($vendor->assurance_amount - $vendor->total_misu_amount) }}</p>
                                             </td>
                                             <!-- 메모 -->
                                             <td>
+                                                <p>{{ $vendor->vendor_memo }}</p>
                                             </td>
                                         </tr>
                                     @endforeach

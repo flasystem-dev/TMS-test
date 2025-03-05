@@ -28,71 +28,7 @@
                                 <form method="get" action="?" id="order_searchForm">
                                     <div id="flush-collapseTwo" class="accordion-collapse collapse {{request()->sw_1? "show":""}}" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
-                                            <div class="input-group mb-3">
-                                                <div class="btn-group col-md-2 me-4">
-                                                    <button type="button" class="btn btn-light col-md-3 waves-effect">
-                                                <span id="sw_1_title">
-                                                    {{request()->sw_1_view ?? "1차 조회 항목"}}
-                                                </span>
-                                                    </button>
-                                                    <input type="hidden" id="sw_1" name="sw_1" value="{{request()->sw_1?? "all"}}">
-                                                    <input type="hidden" id="sw_1_view" name="sw_1_view" value="{{request()->sw_1_view}}">
-                                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','1차 조회 항목','all');">1차 조회 항목</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','주문번호','od_id');">주문번호</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','쇼핑몰주문번호','order_number');">쇼핑몰주문번호</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','주문인덱스','order_idx');">주문인덱스</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','주문자','orderer_name');">주문자</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','주문자휴대폰','orderer_phone');">주문자휴대폰</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','받는분','receiver_name');">받는분</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','받는분휴대폰','receiver_phone');">받는분휴대폰</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','상품명','goods_name');">상품명</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','배송지주소','delivery_address');">배송지주소</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','관리자메모','admin_memo');">관리자메모</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','보내는분','delivery_ribbon_left');">보내는분</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','배송요청사항','delivery_message');">배송요청사항</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','담당자','handler');">담당자</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','사업자명','rep_name');">사업자명</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','Pass명','name');">Pass명</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_1','입금자명','deposit_name');">입금자명</a>
-                                                    </div>
-                                                </div>
-                                                <input class="form-control col-md-1  me-4" name="word1" type="text" id="selectedName" value="{{request()->word1}}">
-                                                <div class="btn-group col-md-2 me-4">
-                                                    <button type="button" class="btn btn-light col-md-3 waves-effect">
-                                                <span id="sw_2_title">
-                                                    {{request()->sw_2_view ?? "2차 조회 항목"}}
-                                                </span>
-                                                    </button>
-                                                    <input type="hidden" id="sw_2" name="sw_2" value="{{request()->sw_2?? "all"}}">
-                                                    <input type="hidden" id="sw_2_view" name="sw_2_view" value="{{request()->sw_2_view}}">
-                                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','2차 조회 항목','all');">2차 조회 항목</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','주문번호','od_id');">주문번호</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','쇼핑몰주문번호','order_number');">쇼핑몰주문번호</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','주문자','orderer_name');">주문자</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','주문자휴대폰','orderer_phone');">주문자휴대폰</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','받는분','receiver_name');">받는분</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','받는분휴대폰','receiver_phone');">받는분휴대폰</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','상품명','goods_name');">상품명</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','배송지주소','delivery_address');">배송지주소</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','관리자메모','admin_memo');">관리자메모</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','보내는분','delivery_ribbon_left');">보내는분</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','배송요청사항','delivery_message');">배송요청사항</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','담당자','handler');">담당자</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','사업자명','rep_name');">사업자명</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('sw_2','입금자명','deposit_name');">입금자명</a>
-                                                    </div>
-                                                </div>
-                                                <input class="form-control col-md-2  me-4" name="word2" type="text" id="selectedName" value="{{request()->word2}}">
-                                                <button style="border-radius:3px;" class="btn btn-secondary waves-effect waves-light col-md-2">검색하기</button>
-                                            </div>
+
                                             <div class="input-group mb-3">
                                                 <div class="btn-group col-md-2 me-4">
                                                     <button type="button" class="btn btn-light col-md-3 waves-effect">
@@ -132,29 +68,6 @@
                                                 <button type="button" class="btn btn-light" onclick="dateSel('전년');">전년</button>
                                             </div>
                                             <div class="input-group">
-                                                <div class="btn-group col-md-2 me-4">
-                                                    <button type="button" class="btn btn-light col-md-3 waves-effect">
-                                                <span id="mall_code_title">
-                                                    {{request()->mall_code_view?? "오픈마켓선택"}}
-                                                </span>
-                                                    </button>
-                                                    <input type="hidden" id="mall_code" name="mall_code" value="{{request()->mall_code}}">
-                                                    <input type="hidden" id="mall_code_view" name="mall_code_view" value="{{request()->mall_code_view}}">
-                                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','채널선택','');">채널선택</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','옥션','MLAC');">옥션</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','G마켓','MLGM');">G마켓</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','11번가','ML11');">11번가</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','스마트스토어','MLNV');">스마트스토어</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','톡스토어','MLKK');">톡스토어</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','간편주문','MLMW');">간편주문</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','쿠팡','MLCP');">쿠팡</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('mall_code','PASS','PASS');">PASS</a>
-                                                    </div>
-                                                </div>
                                                 <div class="btn-group col-md-2 me-4">
                                                     <button type="button" class="btn btn-light col-md-3 waves-effect">
                                                 <span id="payment_state_code_title">
@@ -199,50 +112,16 @@
                                                 </div>
                                                 <div class="btn-group col-md-2 me-4">
                                                     <button type="button" class="btn btn-light col-md-3 waves-effect">
-                                                <span id="delivery_state_code_title">
-                                                    {{request()->delivery_state_code_view ?? "배송상태선택" }}
-                                                </span>
+                                                        <span id="delivery_state_code_title">
+                                                            {{request()->delivery_state_code_view ?? "주문자명" }}
+                                                        </span>
                                                     </button>
-                                                    <input type="hidden" id="delivery_state_code" name="delivery_state_code" value="{{request()->delivery_state_code}}">
-                                                    <input type="hidden" id="delivery_state_code_view" name="delivery_state_code_view" value="{{request()->delivery_state_code_view}}">
-                                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('delivery_state_code','배송상태선택','');">배송상태선택</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('delivery_state_code','미배송','DLUD');">미배송</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('delivery_state_code','배송중','DLSP');">배송중</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('delivery_state_code','배송완료','DLDN');">배송완료</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('delivery_state_code','취소주문','DLCC');">취소주문</a>
-                                                    </div>
                                                 </div>
                                                 <div class="btn-group col-md-2 me-4">
-                                                    <button type="button" class="btn btn-light col-md-3 waves-effect">
-                                                <span id="receipt_title">
-                                                    {{request()->receipt_view ?? "증빙선택"}}
-                                                </span>
-                                                    </button>
-                                                    <input type="hidden" id="receipt" name="receipt" value="{{request()->receipt}}">
-                                                    <input type="hidden" id="receipt_view" name="receipt_view" value="{{request()->receipt_view}}">
-                                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('receipt','증빙선택','');">증빙선택</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('receipt','미신청','');">미신청</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('receipt','미발행','');">미발행</a>
-                                                        <a class="dropdown-item" href="javascript:select_btn('receipt','발행','');">발행</a>
-                                                    </div>
+                                                    <input class="form-control col-md-1 me-4" name="word1" type="text" id="selectedName" value="{{request()->word1}}">
                                                 </div>
-                                                <div>
-                                                    <div class="form-check form-switch me-4">
-                                                        <input type="checkbox" class="form-check-input" name="cancel_check" value="1" @checked(request()->cancel_check) id="cancel_check">
-                                                        <label class="form-check-label" for="cancel_check">취소주문포함</label>
-                                                    </div>
-                                                    {{--                                            <div class="form-check form-switch me-4">--}}
-                                                    {{--                                                <input type="checkbox" class="form-check-input" name="PSUD_check" value="1" @checked(request()->PSUD_check) id="customSwitch2">--}}
-                                                    {{--                                                <label class="form-check-label" for="customSwitch2">결제대기제외</label>--}}
-                                                    {{--                                            </div>--}}
+                                                <div class="btn-group col-md-2 me-4">
+                                                    <button style="border-radius:3px;" class="btn btn-secondary waves-effect waves-light col-md-2">검색하기</button>
                                                 </div>
                                             </div>
                                         </div>

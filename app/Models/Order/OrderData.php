@@ -39,13 +39,13 @@ class OrderData extends Model
     protected $fillable=[
         'order_idx','od_id','brand_type_code','mall_code', 'client_id', 'group_code','order_number',
         'order_time','orderer_mall_id','orderer_name','orderer_tel','orderer_phone','orderer_email',
-        'order_quantity','payment_type_code','payment_state_code','payment_date', 'payment_time',
+        'order_quantity','payment_type_code','payment_state_code', 'payment_time',
         'total_amount','pay_amount','discount_amount','admin_discount','point_amount','refund_amount','misu_amount','supply_amount', 'balju_amount','vendor_amount',
         'admin_regist','admin_memo',
         'create_ts','update_ts',
         'options_string','options_parse_yn','options_string_display','options_type',
-        'order_claim','order_claim_memo','open_market_goods_url','goods_url','db_num',
-        'new_order_yn','is_new', 'is_view', 'is_highlight', 'is_alim', 'is_tran', 'inflow', 'handler'
+        'order_claim','order_claim_memo','goods_url','db_num',
+        'is_new', 'is_view', 'is_highlight', 'is_alim', 'is_tran', 'inflow', 'handler'
     ];
 
     public function delivery()
