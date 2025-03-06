@@ -22,6 +22,12 @@ class OrderApiController extends Controller
     public function OrderSaveApi(Request $request){
         try{
             $data = $request -> all();
+
+            DB::table('test_table') -> insert([
+                'test1' => "간편주문앱",
+                'test2' => json_encode($data, JSON_UNESCAPED_UNICODE)
+            ]);
+
             $order = $data['order'];
             $delivery = $data['delivery'];
             $etc = $data['etc'];
@@ -112,12 +118,13 @@ class OrderApiController extends Controller
     }
 
     protected static function orderInsert($order_idx, $order,$order_delivery){
-        $bank_name = !empty($order['bank_info']) ? DB::table('code_of_toss_bank_stock') -> where('code',$order['bank_info']) -> first() -> bank : '';
+        $bank_name = !empty($order['bank_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'BANK')-> where('code_no',$order['bank_info']) -> first() -> bank : '';
         $bank_num = '';
         if(!empty($order['bank_num'])) {
             $num = str_split($order['bank_num'], 4);
             $bank_num = $bank_name . " " . implode(" ",$num);
         }
+        DB::beginTransaction();
 
         OrderData::insert([
             'od_id' => $order['od_id'],
@@ -159,9 +166,9 @@ class OrderApiController extends Controller
             'payment_key' => $order['payment_key'],
             'payment_mid' => $order['payment_mid'],
             'payment_receipt_url' => $order['payment_receipt_url'],
-            'card_name' => !empty($order['card_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'CARD') -> where('code_no',$order['card_info']) -> first() -> card  : '',
+            'card_name' => !empty($order['card_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'CARD') -> where('code_no',$order['card_info']) -> value('code_name')  : '',
             'card_num' => $order['card_num']?? '',
-            'bank_name' => !empty($order['bank_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'BANK') -> where('code_no',$order['bank_info']) -> first() -> bank : '',
+            'bank_name' => !empty($order['bank_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'BANK') -> where('code_no',$order['bank_info']) -> value('code_name') : '',
             'bank_num' => $order['bank_num']?? ''
         ]);
 
@@ -229,6 +236,7 @@ class OrderApiController extends Controller
             ]);
         }
 
+        DB::commit();
         return "success";
     }
 
@@ -259,17 +267,16 @@ class OrderApiController extends Controller
         $before_order -> order_quantity            = $order['order_quantity'];
         $before_order -> payment_type_code         = $order['payment_type_code'];
         $before_order -> payment_state_code        = $order['payment_state_code'];
-        $before_order -> payment_time              = $order['payment_date'];
+        $before_order -> payment_time              = $order['payment_time'];
         $before_order -> total_amount              = $order['total_amount'];
         $before_order -> pay_amount                = $order['pay_amount'];
         $before_order -> supply_amount             = $order['supply_amount'];
-        $before_order -> handler                   = $order['admin_regist'];
         $before_order -> create_ts                 = NOW();
         $before_order -> update_ts                 = NOW();
         $before_order -> options_string            = $order['options_string']?? '';
         $before_order -> options_parse_yn          = $order['options_parse_yn']?? '';
         $before_order -> options_type              = $order['options_type'];
-        $before_order -> goods_url                 = $order['open_market_goods_url']?? '';
+        $before_order -> goods_url                 = $order['goods_url']?? '';
         $before_order -> is_new                    = 1;
         $before_order -> save();
 

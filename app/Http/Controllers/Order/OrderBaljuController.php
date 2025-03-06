@@ -54,7 +54,7 @@ class OrderBaljuController extends Controller
             IntranetService::updateOrderData($order, $orderProduct);
 
         //거래 내역서 목록 입력
-            OrderDataTran::insert($data);
+            OrderDataTran::create($input);
 
         return response()->json(['state'=>1, 'msg'=>'발주 성공']);
         }else {

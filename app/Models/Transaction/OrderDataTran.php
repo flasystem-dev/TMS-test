@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class OrderDataTran extends Model
 {
     use HasFactory;
-    protected $table = 'order_date_tran';
+    protected $table = 'order_data_tran';
 
     protected $primaryKey = 'order_idx';
 
@@ -20,12 +20,8 @@ class OrderDataTran extends Model
     public static function orderTranUpdate($encodedData) {
         $decodedData = base64_decode($encodedData);
         $data = json_decode($decodedData, true);
-
         foreach ($data['orders_idx'] as $idx) {
-            DocumentCheck::updateOrCreate(
-                ['order_idx' => $idx],
-                ['tran_check' => 'Y', 'tran_time' => NOW()]
-            );
+
         }
     }
 }
