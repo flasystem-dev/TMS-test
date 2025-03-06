@@ -28,7 +28,7 @@
                             <div class="input-group brand_btns">
                                 <span class="input-group-text">브랜드</span>
                                 @foreach($brands as $brand)
-                                    <input type="checkbox" class="btn-check" name="brand" value="{{$brand->brand_type_code}}" id="select_brand_{{$brand->brand_type_code}}" autocomplete="off" {{request()->input('brand')===$brand->brand_type_code ? "checked" : ""}}>
+                                    <input type="radio" class="btn-check" name="brand" value="{{$brand->brand_type_code}}" id="select_brand_{{$brand->brand_type_code}}" autocomplete="off" {{request()->input('brand')===$brand->brand_type_code ? "checked" : ""}}>
                                     <label class="btn select-label select_brand_{{$brand->brand_type_code}}" for="select_brand_{{$brand->brand_type_code}}">{{$brand->brand_ini}}</label>
                                 @endforeach
                             </div>
@@ -54,6 +54,16 @@
                                     <option value="order_number"         {{ request()->search==="order_number"      ? "selected":""}}>사업자명</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word2" value="{{request()->search_word2}}">
+                            </div>
+                        </div>
+                        <div class="menu2">
+                            <div class="input-group">
+                                <span class="input-group-text">미수 타입</span>
+                                <select class="form-select" name="is_client">
+                                    <option value="all"                  {{ request()->is_client==="all"    ? "selected":""}}>전체</option>
+                                    <option value="0"                    {{ request()->is_client==="0"      ? "selected":""}}>개인 미수</option>
+                                    <option value="1"                    {{ request()->is_client==="1"      ? "selected":""}}>거래처 미수</option>
+                                </select>
                             </div>
                         </div>
                     </div>

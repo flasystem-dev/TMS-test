@@ -25,7 +25,7 @@
             <td>{{$order->order_idx}}</td>
             <!-- 수집일 / 배송일 -->
             <td>
-                <a class="cursor_pointer text-dark" onclick="order_detail('{{$order->order_idx}}');">{{Carbon\Carbon::parse($order->playauto_date)->format('Y-m-d')}}<br>
+                <a class="cursor_pointer text-dark" onclick="order_detail('{{$order->order_idx}}');">{{Carbon\Carbon::parse($order->create_ts)->format('Y-m-d')}}<br>
                     <p class="deli_date">{{$order->delivery->delivery_date}}</p>
                 </a>
             </td>
@@ -48,7 +48,7 @@
                 <p class="state_p mt-1 {{$order->delivery->delivery_state_code}}">{{CommonCodeName($order->delivery->delivery_state_code)}}</p>
             </td>
             <!-- 담당자 -->
-            <td><p class="m-0 fw-bold">{{$order->delivery->send_name}}</p></td>
+            <td><p class="m-0 fw-bold">{{$order->handler}}</p></td>
             <!-- 기타 -->
             <td>
 {{--                <button type="button" class="btn btn-outline-secondary btn-sm">주문</button>--}}

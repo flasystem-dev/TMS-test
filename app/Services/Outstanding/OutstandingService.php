@@ -1,15 +1,12 @@
 <?php
 namespace App\Services\Outstanding;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Order\OrderData;
 use App\Models\Order\OrderItem;
 use App\Models\Order\OrderItemOption;
 use App\Models\Vendor;
-use Illuminate\Support\Facades\Schema;
 
 class OutstandingService
 {
@@ -106,6 +103,6 @@ class OutstandingService
         $query -> groupBy('vendor.idx');
         $query ->havingRaw('SUM(order_data.misu_amount) > 0');
         $query -> orderBy('total_misu_amount', 'desc');
-        return $query -> paginate(15) ->withQueryString();
+        return $query -> get();
     }
 }

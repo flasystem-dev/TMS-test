@@ -3,10 +3,8 @@
     미수현황
 @endsection
 @section('content')
-    @php
-        use Carbon\Carbon;
-    @endphp
-    <link href="{{ asset('/assets/css/outstanding/vendors.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/assets/css/outstanding/vendors.css') }}" rel="stylesheet">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -28,7 +26,7 @@
                                 <div class="input-group brand_btns">
                                     <span class="input-group-text">브랜드</span>
                                     @foreach($brands as $brand)
-                                        <input type="checkbox" class="btn-check" name="brand" value="{{$brand->brand_type_code}}" id="select_brand_{{$brand->brand_type_code}}" autocomplete="off" {{request()->input('brand')===$brand->brand_type_code ? "checked" : ""}}>
+                                        <input type="radio" class="btn-check" name="brand" value="{{$brand->brand_type_code}}" id="select_brand_{{$brand->brand_type_code}}" autocomplete="off" {{request()->input('brand')===$brand->brand_type_code ? "checked" : ""}}>
                                         <label class="btn select-label select_brand_{{$brand->brand_type_code}}" for="select_brand_{{$brand->brand_type_code}}">{{$brand->brand_ini}}</label>
                                     @endforeach
                                 </div>
@@ -103,7 +101,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <table class="table table-striped table-bordered" id="vendor-table">
+                            <table class="table table-striped table-bordered" @if(isset($vendors) && count($vendors) > 0) id="vendor-table" @endif>
                                 <thead>
                                 <tr>
                                     <th style="width: 3%">
@@ -111,7 +109,7 @@
                                             <input type="checkbox" name="checkAll">
                                         </label>
                                     </th>
-                                    <th style="width: 4%">번호</th>
+                                    <th style="width: 4%" class="text-center">번호</th>
                                     <th style="width: 8%">브랜드<br>채널</th>
                                     <th style="width: 13%">보증금액(보증종류)<br>계약종료일(계약자)</th>
                                     <th style="width: 10%">개인 미수금<br>(건수)</th>
@@ -133,7 +131,7 @@
                                             </td>
                                             <!-- 번호 -->
                                             <td>
-                                                {{$vendor->idx}}
+
                                             </td>
                                             <!-- 브랜드 / 채널 -->
                                             <td>
@@ -141,33 +139,54 @@
                                                 <p class="brand_type" style="margin-top: 3px">{{$vendor->channel_name}}</p>
                                             </td>
                                             <!-- 보증금액(보증종류) / 계약종료일(계약자) -->
-                                            <td>
+                                            <td data-order="{{ $vendor->assurance_ex_date }}">
                                                 <p>{{ number_format($vendor->assurance_amount) }} ({{ CommonCodeName($vendor->assurance) }})</p>
-                                                <p>{{ $vendor->assurance_ex_date }} @if(!empty($vendor->assurance_contractor))({{ $vendor->assurance_contractor }})@endif</p>
+                                                <p><span class="fw-bold">{{ $vendor->assurance_ex_date }}</span> @if(!empty($vendor->assurance_contractor))({{ $vendor->assurance_contractor }})@endif</p>
                                             </td>
                                             <!-- 개인 미수금 / 건수 -->
-                                            <td>
-                                                <p>{{ number_format($vendor->personal_misu_amount) }}</p>
-                                                <p>({{ number_format($vendor->personal_misu_count) }})</p>
+                                            <td data-order="{{ $vendor->personal_misu_amount }}">
+                                                @if(!empty($vendor->personal_misu_amount))
+                                                <p class="fw-bold">{{ number_format($vendor->personal_misu_amount) }} 원</p>
+                                                <p>({{ number_format($vendor->personal_misu_count) }} 건)</p>
+                                                @endif
                                             </td>
                                             <!-- 거래처 미수금 / 건수 -->
-                                            <td>
-                                                <p>{{ number_format($vendor->client_misu_amount) }}</p>
-                                                <p>({{ number_format($vendor->client_misu_count) }})</p>
+                                            <td data-order="{{ $vendor->client_misu_amount }}">
+                                                @if(!empty($vendor->client_misu_amount))
+                                                <p class="fw-bold">{{ number_format($vendor->client_misu_amount) }} 원</p>
+                                                <p>({{ number_format($vendor->client_misu_count) }} 건)</p>
+                                                @endif
                                             </td>
                                             <!-- 장기 미수금 / 건수 -->
-                                            <td>
-                                                <p>{{ number_format($vendor->past_misu_amount) }}</p>
-                                                <p>({{ number_format($vendor->past_misu_count) }})</p>
+                                            <td data-order="{{ $vendor->past_misu_amount }}">
+                                                @if(!empty($vendor->past_misu_amount))
+                                                <p class="fw-bold">{{ number_format($vendor->past_misu_amount) }} 원</p>
+                                                <p>({{ number_format($vendor->past_misu_count) }} 건)</p>
+                                                @endif
                                             </td>
                                             <!-- 전체 미수금 / 건수 -->
-                                            <td>
-                                                <p>{{ number_format($vendor->total_misu_amount) }}</p>
-                                                <p>({{ number_format($vendor->order_count) }})</p>
+                                            <td data-order="{{ $vendor->total_misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($vendor->total_misu_amount) }} 원</p>
+                                                <p>({{ number_format($vendor->order_count) }} 건)</p>
                                             </td>
                                             <!-- 보증 잔액 / 사용비율 -->
-                                            <td>
-                                                <p>{{ number_format($vendor->assurance_amount - $vendor->total_misu_amount) }}</p>
+                                            @php
+                                                $warning_text = "";
+                                                if(!empty($vendor->assurance_amount)) {
+                                                    $percentage = (int)($vendor->total_misu_amount / $vendor->assurance_amount * 100);
+                                                    if($percentage > 60) {
+                                                        $warning_text = "text-warning";
+                                                    }
+                                                    if($percentage > 90) {
+                                                        $warning_text = "text-danger";
+                                                    }
+                                                }
+                                            @endphp
+                                            <td data-order="{{ $vendor->assurance_amount - $vendor->total_misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($vendor->assurance_amount - $vendor->total_misu_amount) }} 원</p>
+                                                @if(!empty($vendor->assurance_amount))
+                                                <p class="fw-bold {{ $warning_text }}">({{ $percentage }}%)</p>
+                                                @endif
                                             </td>
                                             <!-- 메모 -->
                                             <td>
@@ -177,26 +196,27 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="13" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
+                                        <td colspan="10" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
                                     </tr>
                                 @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    @if(isset($vendors))
-                        <div class="row">
-                            <div class="col-12">
-                                {{ $vendors->links() }}
-                            </div>
-                        </div>
-                    @endif
+{{--                    @if(isset($vendors))--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-12">--}}
+{{--                                {{ $vendors->links() }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
                 </div>
             </div>
         </div> <!-- end col -->
     </div>
 @endsection
 @section('script')
+    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
     <script src="{{asset('assets/js/outstanding/vendors.js')}}?v={{ time() }}"></script>
     <script>
         function order_detail(order_idx){

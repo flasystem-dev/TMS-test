@@ -33,7 +33,7 @@ class OrderDetailListQueryBuilder
             'order_data.create_ts as create_ts', 'order_data.orderer_name as orderer_name', 'order_data.orderer_phone as orderer_phone', 'order_data.orderer_tel as orderer_tel', 'order_data.group_code as group_code',
             'order_data.total_amount as total_amount', 'order_data.discount_amount as discount_amount', 'order_data.payment_time as payment_time', 'order_data.order_time as order_time',
             'order_data.payment_state_code as payment_state_code', 'order_data.payment_type_code as payment_type_code',
-            'order_data.is_highlight as is_highlight', 'order_data.new_order_yn as new_order_yn', 'order_data.admin_memo as admin_memo', 'order_data.is_view as is_view',
+            'order_data.is_highlight as is_highlight', 'order_data.admin_memo as admin_memo', 'order_data.is_view as is_view',
             'order_data.order_quantity as order_quantity', 'order_data.goods_url as goods_url', 'order_data.inflow as inflow', 'order_data.handler as handler',
 
             'order_delivery.delivery_date as delivery_date', 'order_delivery.delivery_time as delivery_time',

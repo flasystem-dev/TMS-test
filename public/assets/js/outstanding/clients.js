@@ -1,7 +1,7 @@
 var fix = 0;
 $('.datepicker').datepicker();
 
-$('#vendor-table').DataTable({
+$('#client-table').DataTable({
     paging: true,
     lengthMenu: [[20, 50 , 100, -1], [20, 50 , 100, "전체"]],
     pageLength: 20, // 기본 페이지 길이 설정,
@@ -22,7 +22,7 @@ $('#vendor-table').DataTable({
         var start = settings._iDisplayStart; // 현재 페이지 시작 번호
 
         // 현재 표시된 행만 순회
-        $('#vendor-table tbody tr').each(function(index) {
+        $('#client-table tbody tr').each(function(index) {
             var $tds = $(this).find('td');
             if ($tds.length > 1) {
                 $tds.eq(1).text(start + index + 1);
@@ -34,7 +34,7 @@ $('#vendor-table').DataTable({
 document.getElementById('search-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const checkboxes = document.querySelectorAll('input[name="brand"]');
+    const checkboxes = document.querySelectorAll('input[name="brand[]"]');
     const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
 
     if (!isChecked) {

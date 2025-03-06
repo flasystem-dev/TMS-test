@@ -46,7 +46,7 @@
                 <a href="javascript: void(0);" class="has-arrow"> <i class="uil-receipt-alt"></i><span>증빙</span></a>
                 <ul class="sub-menu" aria-expanded="true">
                     <li class="disable"><a href="javascript: void(0);"><strike>전체주문관리</strike></a></li>
-                    <li class="disable"><a href="javascript: void(0);"><strike>거래내역서</strike></a></li>
+                    <li class="disable"><a href="{{ url('document/document-orders') }}">거래내역서</a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>영수증</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>계산서</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>견적서</strike></a></li>
@@ -58,6 +58,7 @@
                 <ul class="sub-menu" aria-expanded="true">
                     <li class="disable"><a href="{{ url("outstanding/orders") }}">미수현황(주문)</a></li>
                     <li class="disable"><a href="{{ url("outstanding/vendors") }}">미수현황(사업자)</a></li>
+                    <li class="disable"><a href="{{ url("outstanding/clients") }}">미수현황(거래처)</a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>개인미수</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>법인미수</strike></a></li>
                     <li class="disable"><a href="javascript: void(0);"><strike>내역서</strike></a></li>
