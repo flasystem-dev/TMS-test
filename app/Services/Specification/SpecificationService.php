@@ -3,6 +3,7 @@ namespace App\Services\Specification;
 
 use App\Services\Vendor\AdjustmentService;
 use App\QueryBuilders\Specification\SpecificationQueryBuilder;
+use Carbon\Carbon;
 
 class SpecificationService
 {
@@ -41,5 +42,17 @@ class SpecificationService
                 SpecificationQueryBuilder::upsert_specification($vendor, $year, $month, $deposit_date);
             }
         }
+    }
+
+    public static function checkDateforEdit($year, $month)
+    {
+        // 오늘 기준 전달 (전월) 계산
+        $lastMonth = Carbon::now()->subMonth()->startOfMonth(); // 전달의 1일
+
+        // 입력된 연도, 월을 Carbon으로 변환
+        $inputDate = Carbon::createFromDate($year, $month, 1); // 입력값의 1일
+
+        // 비교: 입력된 날짜가 전달 이전인지 확인
+        return !$inputDate->lt($lastMonth); // lt() → 미만 (less than)
     }
 }

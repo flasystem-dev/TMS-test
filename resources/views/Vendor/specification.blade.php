@@ -149,10 +149,12 @@
                 </div>
             </div>
         </div>
+        @if($canEdit)
         @if(Auth::user()->auth === 6 || Auth::user()->auth === 10)
         <div class="text-end">
             <button type="button" class="btn btn-danger" onclick="location.href='{{url('/vendor/specification-form/edit'."/".$sp->id)}}'">수정 페이지로</button>
         </div>
+        @endif
         @endif
     </div>
 </div> <!-- 내용 끝 ( col ) -->

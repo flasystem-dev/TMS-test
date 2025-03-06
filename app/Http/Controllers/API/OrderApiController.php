@@ -289,7 +289,7 @@ class OrderApiController extends Controller
         $payment_tbl -> payment_mid                = $order['payment_mid'];
         $payment_tbl -> payment_receipt_url        = $order['payment_receipt_url'];
         $payment_tbl -> payment_result_json        = $order['payment_result_json'];
-        $payment_tbl -> payment_time               = $order['payment_date'];
+        $payment_tbl -> payment_time               = $order['payment_time'];
         $payment_tbl -> card_name                  = $card_info?? '';
         $payment_tbl -> card_num                   = $order['card_num']?? '';
         $payment_tbl -> bank_name                  = $band_info?? '';

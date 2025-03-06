@@ -25,6 +25,9 @@ class SpecificationController extends Controller
     // 명세서 뷰
     public function specificationForm($sp_id){
         $data['sp'] = SpecificationService::getSpecificationWithVendor($sp_id);
+
+        $data['canEdit'] = SpecificationService::checkDateforEdit($data['sp']['year'], $data['sp']['month']);
+
         return view('Vendor.specification',$data);
     }
     
