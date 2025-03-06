@@ -35,7 +35,7 @@
                                 <div class="input-group">
                                     <select class="form-select" name="search">
                                         <option value="all"             {{ request()->search==="all"             ? "selected":""}}>전체</option>
-                                        <option value="name"            {{ request()->search==="name"            ? "selected":""}}>이름</option>
+                                        <option value="name"            {{ request()->search==="name"            ? "selected":""}}>업체명</option>
                                         <option value="tel"             {{ request()->search==="tel"             ? "selected":""}}>연락처</option>
                                         <option value="ceo_name"        {{ request()->search==="ceo_name"        ? "selected":""}}>대표자명</option>
                                         <option value="business_number" {{ request()->search==="business_number" ? "selected":""}}>사업자번호</option>
@@ -75,7 +75,7 @@
                             <tr>
                                 <th style="width: 50px;">번호</th>
                                 <th style="width: 60px;">브랜드</th>
-                                <th>이름</th>
+                                <th>업체명</th>
                                 <th>사업자등록번호</th>
                                 <th>대표자</th>
                                 <th>업태</th>
@@ -104,7 +104,7 @@
                                         <p class="brand_type">없음</p>
                                         @endif
                                     </td>
-                                    <!-- 이름 -->
+                                    <!-- 업체명 -->
                                     <td>
                                         <p class="cursor_p fw-bold" onclick="clientForm({{$client->id}})">{{ $client -> name }}</p>
                                     </td>

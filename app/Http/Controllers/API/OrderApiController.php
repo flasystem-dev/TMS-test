@@ -146,7 +146,7 @@ class OrderApiController extends Controller
             'options_string_display' => $order['options_string_display']?? '',
             'options_type' => $order['options_type'],
             'goods_url' => $order['open_market_goods_url']?? '',
-            'new_order_yn' => 'Y'
+            'is_new' => 1
         ]);
 
         OrderPayment::insert([

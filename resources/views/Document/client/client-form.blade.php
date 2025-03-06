@@ -57,7 +57,7 @@
                     @endif
                     <div class="form_row">
                         <div class="mb-3 input-group">
-                            <span class="input-group-text">이름</span>
+                            <span class="input-group-text">업체명</span>
                             <input type="text" class="form-control" name="name" value="{{ optional($client) -> name }}">
                         </div>
                         <div class="mb-3 input-group">
@@ -171,6 +171,7 @@
                     </div>
 
                     <div class="flex-wrap gap-3 mt-3" style="text-align: right;">
+                        <button type="button" class="btn btn-secondary me-3" data-bs-target="#search_word_modal" data-bs-toggle="modal">검색어 관리</button>
                         <button type="button" class="btn btn-primary waves-effect waves-light w-md" onclick="clientUpsert()">저장</button>
                     </div>
                 </div>

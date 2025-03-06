@@ -2,6 +2,7 @@
 namespace App\Services\Order;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -19,15 +20,25 @@ class OrderIndexService
 {
     public static function getOrderList($search)
     {
-        $subQuery = OrderDataQueryBuilder::createQuery();
+        $subQuery = OrderData::select('order_idx',   'od_id',                'mall_code',            'brand_type_code',          'order_number',         'group_code',
+            'orderer_name',             'orderer_tel',          'orderer_phone',        'payment_type_code',        'payment_state_code',
+            'payment_time',             'total_amount',         'discount_amount',      'admin_memo',               'create_ts',
+            'goods_url',             'is_view',              'is_highlight',             'inflow',
+            'order_quantity',           'order_time',  'handler' , 'is_new'
+        );
 
-        $subQuery = OrderIndexQueryBuilder::subQuerySelect($subQuery);
+        // 브랜드 검색
+        $brands = ["BTCP", "BTCC", "BTSP", "BTBR", "BTOM", "BTCS", "BTFC"];
+        $filtered_brand = array_filter($brands, fn($brand) => session($brand) === 'Y');
+        if(!empty($filtered_brand)) {
+            $subQuery->whereIn('order_data.brand_type_code',$filtered_brand);
+        }
+        // 주문제거
+        if(Auth::user()->auth < 10) {
+            $subQuery -> where('order_data.is_view', 1);
+        }
 
-        $subQuery = OrderIndexQueryBuilder::sessionBrandFilter($subQuery);
-
-        $subQuery = OrderDataQueryBuilder::isView($subQuery);
-
-        $query = OrderDataQueryBuilder::createQuery();
+        $query = OrderData::Query();
 
         $query = OrderIndexQueryBuilder::orderIndexJoinTable($query, $subQuery);
 

@@ -12,6 +12,8 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
 
+use App\Models\Document\OrderDataTran;
+
 use App\Services\Order\OrderService;
 use App\Services\Message\MessageService;
 use App\Services\Order\OrderDetailService;
@@ -51,7 +53,11 @@ class OrderBaljuController extends Controller
         if($result==="0") {
             IntranetService::updateOrderData($order, $orderProduct);
 
-            return response()->json(['state'=>1, 'msg'=>'발주 성공']);
+        //거래 내역서 목록 입력
+            //OrderDataTran::insert($data);
+
+
+        return response()->json(['state'=>1, 'msg'=>'발주 성공']);
         }else {
             \Log::error('[인트라넷 발주 실패]');
             \Log::error('[에러코드] : '.$result);
