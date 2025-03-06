@@ -54,7 +54,9 @@ class OrderBaljuController extends Controller
             IntranetService::updateOrderData($order, $orderProduct);
 
         //거래 내역서 목록 입력
-            OrderDataTran::create($input);
+            $orderDelivery = OrderDelivery::find($input['order_idx']);
+            $orderData = array_merge($order->toArray(), $orderDelivery->toArray());
+            OrderDataTran::create($orderData);
 
         return response()->json(['state'=>1, 'msg'=>'발주 성공']);
         }else {

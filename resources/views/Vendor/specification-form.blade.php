@@ -102,9 +102,9 @@
                             <tr>
                                 <td class="center" colspan="2">3. 카드결제수수료 3.3%</td>
                                 <td class="right">
-                                    <p class="m-0 mb-1">실제 카드수수료 : <span id="sp_card_charge_fee_text">{{number_format($sp->sp_card_fee)}}</span></p>
+                                    <p class="m-0 mb-1">계산된 수수료 : <span id="sp_card_charge_fee_text">{{number_format($sp->sp_card_fee)}}</span></p>
                                     - &nbsp;&nbsp;
-                                    <input type="number" name="sp_card_charge_fee" id="sp_card_charge_fee"
+                                    <input type="number" name="sp_card_fee" id="sp_card_fee"
                                            class="form-control sp_input_cd_fee" value="{{$sp->sp_card_fee}}">
                                 </td>
                                 <td class="center ft-11">당월 카드결제 총액
@@ -143,14 +143,19 @@
                             </tr>
                             <tr>
                                 <td class="center" colspan="2">a. 수익 항목의 원천징수 3.3%</td>
-                                <td class="right" id="totalTax" data-tax="{{$sp->rep_type==='개인'}}">{{number_format($sp->sp_tax_amount)}}</td>
+                                <td class="right">
+                                    <p class="m-0 mb-1">계산된 원천징수 : <span id="sp_tax_amount_text" data-tax="{{$sp->rep_type==='개인'}}">{{number_format($sp->sp_tax_amount)}}</span></p>
+                                    <input type="number" name="sp_tax_amount" id="sp_tax_amount"
+                                           class="form-control sp_input_lg" value="{{$sp->sp_tax_amount}}">
+{{--                                    id="totalTax" data-tax="{{$sp->rep_type==='개인'}}">{{number_format($sp->sp_tax_amount)}}--}}
+                                </td>
                                 <td class="center ft-11">소득세 3%, 주민세 0.3%</td>
                             </tr>
 
                             <tr>
                                 <td class="center" colspan="2">b. 서비스 이용료</td>
                                 <td class="right">
-                                    <input type="number" name="sp_service_price_dc" id="sp_service_price_dc"
+                                    <input type="number" name="sp_service_price_dc" id="sp_service_fee"
                                            class="form-control sp_input_lg" value="{{$sp->sp_service_fee}}">
                                 </td>
                                 <td class="center ft-11">당월 서비스 이용료</td>
@@ -211,5 +216,5 @@
 
 @endsection
 @section('script')
-    <script src="{{asset('assets/js/vendor/specification-form.js')}}"></script>
+    <script src="{{asset('assets/js/vendor/specification-form.js')}}?v={{ time() }}"></script>
 @endsection
