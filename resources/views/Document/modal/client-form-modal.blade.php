@@ -73,26 +73,28 @@
                 </div>
             </div>
             <div class="modal-body">
+                <template id="search-word-template">
                     <div class="row mb-3">
                         <div class="col-8">
                             <input type="text" class="form-control search-word" aria-label="search_word" value="">
-                            <input type="hidden" class="previous-word" value="">
                         </div>
                         <div class="col-2 d-grid">
-                            <button type="button" class="btn btn-outline-success edit-search-word">수정</button>
+                            <button type="button" class="btn btn-outline-primary edit-search-word">등록</button>
                         </div>
                         <div class="col-2 d-grid">
                             <button type="button" class="btn btn-outline-danger delete-search-word">삭제</button>
                         </div>
                     </div>
-                <div class="row">
+                </template>
+                <div class="row mb-3">
                     <div class="col-8">
-                        <input type="text" class="form-control search-word" aria-label="search_word">
+                        <input type="text" class="form-control search-word" aria-label="search_word" value="">
                     </div>
-                    <div class="col-2 d-grid pe-1">
-                        <button type="button" class="btn btn-primary add-search-word">추가</button>
+                    <div class="col-2 d-grid">
+                        <button type="button" class="btn btn-outline-success edit-search-word">수정</button>
                     </div>
-                    <div class="col-2 d-grid ps-1">
+                    <div class="col-2 d-grid">
+                        <button type="button" class="btn btn-outline-danger delete-search-word">삭제</button>
                     </div>
                 </div>
             </div>
