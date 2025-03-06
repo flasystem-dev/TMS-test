@@ -12,7 +12,7 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
 
-use App\Models\Document\OrderDataTran;
+use App\Models\Transaction\OrderDataTran;
 
 use App\Services\Order\OrderService;
 use App\Services\Message\MessageService;
@@ -54,8 +54,7 @@ class OrderBaljuController extends Controller
             IntranetService::updateOrderData($order, $orderProduct);
 
         //거래 내역서 목록 입력
-            //OrderDataTran::insert($data);
-
+            OrderDataTran::insert($data);
 
         return response()->json(['state'=>1, 'msg'=>'발주 성공']);
         }else {

@@ -135,17 +135,17 @@ class OrderApiController extends Controller
             'order_quantity' => $order['order_quantity'],
             'payment_type_code' => $order['payment_type_code'],
             'payment_state_code' => $order['payment_state_code'],
-            'payment_time' => $order['payment_date'] == '0000-00-00 00:00:00' ? NULL : $order['payment_date'],
+            'payment_time' => $order['payment_time'] == '0000-00-00 00:00:00' ? NULL : $order['payment_time'],
             'total_amount' => $order['total_amount'] / $order['order_quantity'],
             'pay_amount' => $order['pay_amount'] / $order['order_quantity'],
             'supply_amount' => $order['supply_amount'] / $order['order_quantity'],
-            'handler' => $order['admin_regist'],
+            'handler' => '',
             'create_ts' => NOW(),
             'options_string' => $order['options_string']?? '',
             'options_parse_yn' => $order['options_parse_yn']?? '',
             'options_string_display' => $order['options_string_display']?? '',
             'options_type' => $order['options_type'],
-            'goods_url' => $order['open_market_goods_url']?? '',
+            'goods_url' => $order['goods_url']?? '',
             'is_new' => 1
         ]);
 
@@ -159,9 +159,9 @@ class OrderApiController extends Controller
             'payment_key' => $order['payment_key'],
             'payment_mid' => $order['payment_mid'],
             'payment_receipt_url' => $order['payment_receipt_url'],
-            'card_name' => !empty($order['card_info']) ? DB::table('code_of_toss_card') -> where('code',$order['card_info']) -> first() -> card  : '',
+            'card_name' => !empty($order['card_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'CARD') -> where('code_no',$order['card_info']) -> first() -> card  : '',
             'card_num' => $order['card_num']?? '',
-            'bank_name' => !empty($order['bank_info']) ? DB::table('code_of_toss_bank_stock') -> where('code',$order['bank_info']) -> first() -> bank : '',
+            'bank_name' => !empty($order['bank_info']) ? DB::table('code_of_toss_card_bank')->where('type', 'BANK') -> where('code_no',$order['bank_info']) -> first() -> bank : '',
             'bank_num' => $order['bank_num']?? ''
         ]);
 
