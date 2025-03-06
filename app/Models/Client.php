@@ -17,7 +17,7 @@ class Client extends Model
 
     protected $fillable=[
         'id', 'brand', 'name', 'tel', 'email', 'fax', 'address', 'ceo_name', 'business_number', 'tax_business_number', 'business_type','business_kind',
-        'assurance', 'assurance_amount', 'assurance_ex_date', 'contract', 'charge_ex_date', 'memo', 'is_valid', 'created_at', 'updated_at'
+        'assurance', 'assurance_amount', 'assurance_ex_date', 'contract', 'charge_ex_date', 'memo', 'is_valid', 'search_words', 'created_at', 'updated_at'
     ];
 
     public function managers() {

@@ -179,27 +179,6 @@ class Vendor extends Model
         return $this->service_price;
     }
 
-    public function service_fee2($year, $month) {
-        if($this->service_percent===0) { return 0; }
-
-        $month_check = str_pad($month, 2, '0', STR_PAD_LEFT);
-        $yearMonth = $year."-".$month_check;
-
-        if (Str::startsWith($this->registered_date, $yearMonth)){
-            return 0;
-        }
-        if($this->service_price===999999){
-            $registered_date = Carbon::parse($this->registered_date);
-
-            if($registered_date->lessThan('2016-10-01') && $this->vendor_amount() > 1000000 ) {
-                return 55000;
-            }
-
-            return 33000;
-        }
-        return $this->service_price;
-    }
-
     // 원청징수 합계
     public function tax_amount() {
         if(!is_null($this->sp_tax_amount)){

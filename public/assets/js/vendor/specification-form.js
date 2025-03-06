@@ -21,7 +21,7 @@ function calc_specification() {
     var service_price = parseInt(document.getElementById('sp_service_fee').value);
 
     // 발주 수익
-    var profit = order_amount / 100 * service_percent;
+    var profit = vendor_amount / 100 * service_percent;
     document.getElementById('profit').innerText = profit.toLocaleString();
     // 차액 수익
     var diff_amount = order_amount - vendor_amount - option_amount;
@@ -36,7 +36,8 @@ function calc_specification() {
     let totalTax_ele = document.getElementById('sp_tax_amount_text');
     var totalTax = 0;
     if(totalTax_ele.dataset.tax) {
-        totalTax =  Math.floor((revenue / 100 * 3.3) / 10) * 10;
+        totalTax = Math.floor((revenue / 100 * 3) / 10) * 10;
+        totalTax += Math.floor((revenue / 100 * 0.3) / 10) * 10;
     }
     totalTax_ele.innerText = totalTax.toLocaleString();
     // 기타 금액2
@@ -47,6 +48,7 @@ function calc_specification() {
     $('.deduction').text(deduction.toLocaleString());
     // 실 지급액
     document.getElementById('payment_amount').innerText = (revenue - deduction).toLocaleString();
+    document.getElementById('sp_settlement_amount').value = revenue - deduction;
 }
 
 document.getElementById('sp_card_amount').addEventListener('input', function(){

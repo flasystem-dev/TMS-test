@@ -86,7 +86,7 @@
                             </tr>
                             <tr>
                                 <td class="center" colspan="2">1. 발주수익</td>
-                                <td class="right" id="profit">{{number_format($sp->revenue_amount)}}</td>
+                                <td class="right" id="profit">{{number_format($sp->profit_amount)}}</td>
                                 <td class="center ft-11">
                                     발주총액의
                                     <input type="number" name="sp_service_percent" id="sp_service_percent"
@@ -197,6 +197,7 @@
                                 <td colspan="3" class="highlight center">실 지급액 (A-B)</td>
                                 <td class="highlight right"
                                     id="payment_amount">{{number_format($sp->sp_settlement_amount)}}</td>
+                                <input type="hidden" name="sp_settlement_amount" id="sp_settlement_amount" value="{{$sp->sp_settlement_amount}}">
                             </tr>
                         </table>
                         <div class=" p-2 center ft-11">
