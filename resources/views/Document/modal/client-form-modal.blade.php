@@ -62,42 +62,45 @@
 <!-- 회원 모달 끝 -->
 
 <!-- 검색어 등록 모달 -->
-<div class="modal fade" id="search_word_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="search-words-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">검색어 등록</h1>
                 <div>
-                    <button type="button" class="btn btn-primary me-3">추가</button>
+                    <button type="button" class="btn btn-primary me-3" id="add-template">추가</button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
-            <div class="modal-body">
+            <form id="search-word-form">
+            <div class="modal-body" id="search-words-container">
                 <template id="search-word-template">
                     <div class="row mb-3">
-                        <div class="col-8">
-                            <input type="text" class="form-control search-word" aria-label="search_word" value="">
-                        </div>
-                        <div class="col-2 d-grid">
-                            <button type="button" class="btn btn-outline-primary edit-search-word">등록</button>
+                        <div class="col-10">
+                            <input type="text" class="form-control search-word" name="search_words[]" aria-label="search_word" value="">
                         </div>
                         <div class="col-2 d-grid">
                             <button type="button" class="btn btn-outline-danger delete-search-word">삭제</button>
                         </div>
                     </div>
                 </template>
-                <div class="row mb-3">
-                    <div class="col-8">
-                        <input type="text" class="form-control search-word" aria-label="search_word" value="">
+                @if($client->search_words)
+                    @foreach($client->search_words as $word)
+                    <div class="row mb-3">
+                        <div class="col-10">
+                            <input type="text" class="form-control search-word" name="search_words[]" aria-label="search_word" value="{{$word}}">
+                        </div>
+                        <div class="col-2 d-grid">
+                            <button type="button" class="btn btn-outline-danger delete-search-word">삭제</button>
+                        </div>
                     </div>
-                    <div class="col-2 d-grid">
-                        <button type="button" class="btn btn-outline-success edit-search-word">수정</button>
-                    </div>
-                    <div class="col-2 d-grid">
-                        <button type="button" class="btn btn-outline-danger delete-search-word">삭제</button>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-lg" id="register-words">등록</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

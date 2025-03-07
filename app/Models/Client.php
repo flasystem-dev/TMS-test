@@ -15,6 +15,10 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'search_words' => 'json',
+    ];
+
     protected $fillable=[
         'id', 'brand', 'name', 'tel', 'email', 'fax', 'address', 'ceo_name', 'business_number', 'tax_business_number', 'business_type','business_kind',
         'assurance', 'assurance_amount', 'assurance_ex_date', 'contract', 'charge_ex_date', 'memo', 'is_valid', 'search_words', 'created_at', 'updated_at'
@@ -34,58 +38,6 @@ class Client extends Model
             return collect(explode('/', $this->contract))->last();
         }
         return "";
-    }
-
-########################################################################################################################
-########################################################################################################################
-    public static function index_clientList($search) {
-        $clients = Client::query();
-
-        if($search) {
-
-            if($search['brand']!=="all") {
-                $clients->where('brand', 'like', "%".$search['brand']."%");
-            }
-
-            if(isset($search['search'])){
-                $search_column = [
-                    'name',
-                    'tel',
-                    'ceo_name',
-                    'business_number',
-                    'memo'
-                ];
-
-
-                if($search['search']!== "all") {
-                    switch ($search['search']) {
-                        case 'tel':
-                        case 'business_number':
-                            $clients->whereRaw("REPLACE(" . $search['search'] . ", '-', '') LIKE ?", ["%" . str_replace('-', '', $search['search_word']) . "%"]);
-                            break;
-                        default:
-                            $clients->where($search['search'], "like", "%".$search['search_word']."%");
-                    }
-                }else {
-
-                    $clients -> where(function($query) use ($search_column,$search){
-                        foreach ($search_column as $column) {
-                            switch ($search_column) {
-                                case 'tel':
-                                case 'business_number':
-                                    $query->orWhereRaw("REPLACE(" . $column . ", '-', '') LIKE ?", ["%" . str_replace('-', '', $search['search_word']) . "%"]);
-                                    break;
-                                default:
-                                    $query->orWhere($column, "like", "%".$search['search_word']."%");
-
-                            }
-
-                        };
-                    });
-                }
-            }
-        }
-        return $clients -> get();
     }
 ########################################################################################################################
 ########################################################################################################################

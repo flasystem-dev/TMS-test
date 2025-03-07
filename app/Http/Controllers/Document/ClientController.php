@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
+use App\Services\Client\ClientService;
+
 use App\Models\Client;
 use App\Models\ClientManager;
 use App\Models\User;
@@ -19,9 +21,9 @@ class ClientController extends Controller
     public function index(Request $request) {
         $search = $request -> except('page');
 
-        $clients = Client::index_clientList($search);
+        $data['clients'] = ClientService::getClients($search);
         $data['brands'] = DB::table('code_of_company_info') -> select('brand_type_code', 'brand_ini') -> where('is_used', 1) -> get();
-        $data['clients'] = $clients;
+        
         return view('Document.client.index', $data);
     }
 
@@ -141,6 +143,19 @@ class ClientController extends Controller
         session() -> flash("update", 1);
         return response() -> json(true);
     }
+    
+    ################################################  거래처 - 검색어 등록  ###############################################
+    public function register_searchWords(Request $request) {
+        $words = array_filter($request->search_words);
+        $id = $request -> id;
+
+        Client::where('id', $id)->update([
+            'search_words' => empty($words) ? null : $words
+        ]);
+
+        return response() -> json(true);
+    }
+    
 
 ########################################################################################################################
 #####################################################  삭제  ############################################################

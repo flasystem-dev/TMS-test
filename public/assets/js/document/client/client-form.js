@@ -1,5 +1,14 @@
 $('.datepicker').datepicker();
 
+document.addEventListener("DOMContentLoaded", function () {
+    var modalId = sessionStorage.getItem("modalOpen");
+    if (modalId) {
+        var modal = new bootstrap.Modal(document.getElementById(modalId));
+        modal.show();
+        sessionStorage.removeItem("modalOpen");
+    }
+});
+
 // 거래처 업서트
 function clientUpsert() {
     const form = document.getElementById('client_form');
@@ -260,3 +269,51 @@ contract_file.addEventListener('change', function(){
 function popup_contract(url) {
     open_win(url, "계약서", 600, 700, 1000, 50);
 }
+
+// 검색어 등록 템플릿 추가
+document.getElementById('add-template').addEventListener('click', function(){
+    let template = document.getElementById('search-word-template');
+    let container = document.getElementById('search-words-container');
+    let clone = template.content.cloneNode(true);
+
+    container.appendChild(clone);
+})
+
+// 검색어 등록 제거
+document.getElementById('search-words-container').addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-search-word')) {
+        event.stopPropagation();
+        let row = event.target.closest('.row');
+        if (row) {
+            row.remove();
+        }
+    }
+});
+
+// 검색어 등록
+document.getElementById('search-word-form').addEventListener('submit', function(event){
+    event.preventDefault();
+
+    let formData = new FormData(this);
+    formData.append('id', document.querySelector('input[name="id"]').value);
+
+    let url = main_url + "/document/client/form/words";
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if(response){
+                sessionStorage.setItem("modalOpen", "search-words-modal");
+                location.reload();
+            }
+            console.log('성공:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('에러:', error);
+        }
+    });
+});

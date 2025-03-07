@@ -16,7 +16,7 @@ class OutstandingOrderService
             return null;
         }
 
-        $query = Orderdata::with(['delivery', 'payments', 'vendor'])
+        $query = Orderdata::with(['delivery', 'payments', 'vendor', 'pass'])
             -> whereHas('delivery', function($query) {
                 $query->where('is_balju', 1);
                 $query->whereNot('delivery_state_code', 'DLCC');

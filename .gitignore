@@ -7,3 +7,4 @@ app/Console/Kernel.php
 .log
 public/assets/images
 public/tms
+/app/Http/Controllers/Excel/OrderExcelController.php

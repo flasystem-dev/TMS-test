@@ -20,10 +20,10 @@ class OutstandingClientService
         $query = Client::select([
             'clients.*', 'order_data.brand_type_code',
             DB::raw("
-            CASE 
-                WHEN order_data.brand_type_code IN ('BTCS', 'BTFC') THEN vendor.rep_name 
-                ELSE vendor_pass.name 
-            END AS rep_name
+                CASE 
+                    WHEN order_data.brand_type_code IN ('BTCS', 'BTFC') THEN vendor.rep_name 
+                    ELSE vendor_pass.name 
+                END AS rep_name
             "),
             DB::raw('SUM(order_data.misu_amount) as total_misu_amount'),
             DB::raw('count(DISTINCT order_data.order_idx) as total_misu_count'),
@@ -65,9 +65,33 @@ class OutstandingClientService
                 ->whereNotIn('order_data.brand_type_code', ['BTCS', 'BTFC']);
         });
 
+        if(!empty($search['search_word1'])){
+            $word = $search['search_word1'];
+
+            if($search['search1'] === "all"){
+                $query -> where(function($query) use ($word) {
+                    $search_columns = [
+                        'clients.name',
+                        'clients.search_words'
+                    ];
+                    foreach ($search_columns as $column) {
+                        switch ($column) {
+                            case 'search_words':
+                                $query->orWhereRaw("JSON_SEARCH($column, 'one', ?) IS NOT NULL", ["%$word%"]);
+                                break;
+                            default:
+                                $query->orWhere($column, "like", "%$word%");
+                        }
+                    }
+                });
+            }else {
+                $query->orWhere($search['search1'], "like", "%$word%");
+            }
+        }
+
         $query -> groupBy('order_data.mall_code');
         $query -> havingRaw('SUM(order_data.misu_amount) > 0');
-        $query -> orderBy('total_misu_amount', 'desc');
+        $query -> orderBy('clients.id', 'desc');
 
         return $query -> get();
     }

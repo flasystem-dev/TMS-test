@@ -109,6 +109,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::get('document/client/index', [App\Http\Controllers\Document\ClientController::class, 'index']);
     Route::get('document/client/client-form/{id}', [App\Http\Controllers\Document\ClientController::class, 'clientForm']);
     Route::post('document/client/client-form', [App\Http\Controllers\Document\ClientController::class, 'clientUpsert']);
+    Route::post('document/client/form/words', [App\Http\Controllers\Document\ClientController::class, 'register_searchWords']);
     // 거래처 담당자
     Route::get('document/client/manager-form/{id}', [App\Http\Controllers\Document\ClientController::class, 'managerForm']);
     Route::post('document/client/manager-form', [App\Http\Controllers\Document\ClientController::class, 'managerUpsert']);

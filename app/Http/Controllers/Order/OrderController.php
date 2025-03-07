@@ -9,6 +9,8 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderPayment;
 use App\Models\Vendor;
+use App\Models\Transaction\OrderDataTran;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CodeOfCompanyInfo;
@@ -191,6 +193,11 @@ class OrderController extends Controller
         $contents = Common::log_contents_frame("상태 변경", $delivery->delivery_state_code, $request->state);
         $delivery->delivery_state_code = $request->state;
         $delivery->save();
+
+        //배송상태변경
+        $orderDataTran = OrderDataTran::find($request->order_idx);
+        $orderDataTran->delivery_state_code =$delivery->delivery_state_code;
+        $orderDataTran->save();
 
         DB::table('order_log')->insert([
             "od_id" => $order->od_id,

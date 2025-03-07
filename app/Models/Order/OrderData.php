@@ -116,8 +116,7 @@ class OrderData extends Model
                 return CommonCodeName($this->mall_code) ?? "";
         }
     }
-
-
+    
     // 채널명
     public function channel() {
         $commonCodes = Cache::get('common_codes', collect());

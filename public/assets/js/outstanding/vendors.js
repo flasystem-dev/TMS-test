@@ -31,6 +31,7 @@ $('#vendor-table').DataTable({
     }
 });
 
+// 검색 필터
 document.getElementById('search-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -43,3 +44,57 @@ document.getElementById('search-form').addEventListener('submit', function(e) {
     }
     e.target.submit();
 })
+
+// 사업자 정보 팝업
+document.querySelectorAll('.vendor-info').forEach(function(element){
+    element.addEventListener('click', function(e) {
+        let tr = this.closest('tr');
+        let vendor_idx = tr.querySelector('input[name="vendor_idx[]"]').value;
+
+        console.log(vendor_idx);
+        let url = main_url + "/vendor/fla-business/view/" + vendor_idx;
+        open_win(url, '사업자 정보', 1100, 800, 500, 50)
+    })
+});
+
+document.querySelectorAll('.misu-orders').forEach(function(element){
+    element.addEventListener('click', function(e) {
+        let tr = this.closest('tr');
+        let vendor_idx = tr.querySelector('input[name="vendor_idx[]"]').value;
+        let type = this.dataset.type;
+
+        const params = new URLSearchParams(window.location.search);
+
+        switch (type) {
+            case 'personal':
+                params.set('is_client', '0');
+                break;
+            case 'client':
+                params.set('is_client', '1');
+                break;
+            case 'past':
+                params.set('date_type', 'delivery_date');
+                params.set('end_date', getPreviousMonthLastDay());
+                break;
+            case 'total':
+                break;
+        }
+
+
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+
+        console.log(vendor_idx);
+
+    })
+});
+
+function getPreviousMonthLastDay() {
+    let today = new Date();
+    let lastDayOfPreviousMonth = new Date(today.getFullYear(), today.getMonth() - 1, 0);
+
+    let year = lastDayOfPreviousMonth.getFullYear();
+    let month = String(lastDayOfPreviousMonth.getMonth() + 1).padStart(2, '0'); // 1~9월 앞에 0 추가
+    let day = String(lastDayOfPreviousMonth.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}

@@ -126,7 +126,7 @@
                                         <tr>
                                             <td>
                                                 <label class="checkboxLabel">
-                                                    <input type="checkbox" name="order_idx" value="{{$vendor->idx}}">
+                                                    <input type="checkbox" name="vendor_idx[]" value="{{$vendor->idx}}">
                                                 </label>
                                             </td>
                                             <!-- 번호 -->
@@ -140,34 +140,34 @@
                                             </td>
                                             <!-- 보증금액(보증종류) / 계약종료일(계약자) -->
                                             <td data-order="{{ $vendor->assurance_ex_date }}">
-                                                <p>{{ number_format($vendor->assurance_amount) }} ({{ CommonCodeName($vendor->assurance) }})</p>
-                                                <p><span class="fw-bold">{{ $vendor->assurance_ex_date }}</span> @if(!empty($vendor->assurance_contractor))({{ $vendor->assurance_contractor }})@endif</p>
+                                                <p class="cursor_p vendor-info">{{ number_format($vendor->assurance_amount) }} ({{ CommonCodeName($vendor->assurance) }})</p>
+                                                <p class="cursor_p vendor-info"><span class="fw-bold">{{ $vendor->assurance_ex_date }}</span> @if(!empty($vendor->assurance_contractor))({{ $vendor->assurance_contractor }})@endif</p>
                                             </td>
                                             <!-- 개인 미수금 / 건수 -->
                                             <td data-order="{{ $vendor->personal_misu_amount }}">
                                                 @if(!empty($vendor->personal_misu_amount))
                                                 <p class="fw-bold">{{ number_format($vendor->personal_misu_amount) }} 원</p>
-                                                <p>({{ number_format($vendor->personal_misu_count) }} 건)</p>
+                                                <p class="cursor_p misu-orders" data-type="personal">({{ number_format($vendor->personal_misu_count) }} 건)</p>
                                                 @endif
                                             </td>
                                             <!-- 거래처 미수금 / 건수 -->
                                             <td data-order="{{ $vendor->client_misu_amount }}">
                                                 @if(!empty($vendor->client_misu_amount))
                                                 <p class="fw-bold">{{ number_format($vendor->client_misu_amount) }} 원</p>
-                                                <p>({{ number_format($vendor->client_misu_count) }} 건)</p>
+                                                <p class="cursor_p misu-orders" data-type="client">({{ number_format($vendor->client_misu_count) }} 건)</p>
                                                 @endif
                                             </td>
                                             <!-- 장기 미수금 / 건수 -->
                                             <td data-order="{{ $vendor->past_misu_amount }}">
                                                 @if(!empty($vendor->past_misu_amount))
                                                 <p class="fw-bold">{{ number_format($vendor->past_misu_amount) }} 원</p>
-                                                <p>({{ number_format($vendor->past_misu_count) }} 건)</p>
+                                                <p class="cursor_p misu-orders" data-type="past">({{ number_format($vendor->past_misu_count) }} 건)</p>
                                                 @endif
                                             </td>
                                             <!-- 전체 미수금 / 건수 -->
                                             <td data-order="{{ $vendor->total_misu_amount }}">
                                                 <p class="fw-bold">{{ number_format($vendor->total_misu_amount) }} 원</p>
-                                                <p>({{ number_format($vendor->order_count) }} 건)</p>
+                                                <p class="cursor_p misu-orders" data-type="total">({{ number_format($vendor->order_count) }} 건)</p>
                                             </td>
                                             <!-- 보증 잔액 / 사용비율 -->
                                             @php

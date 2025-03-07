@@ -42,6 +42,7 @@
                                     <option value="all"                  {{ request()->search==="all"              ? "selected":""}}>1차 조회항목</option>
                                     <option value="od_id"                {{ request()->search==="od_id"            ? "selected":""}}>주문번호</option>
                                     <option value="rep_name"             {{ request()->search==="rep_name"         ? "selected":""}}>사업자명</option>
+                                    <option value="idx"                  {{ request()->search==="idx"              ? "selected":""}}>사업자 인덱스</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word1" value="{{request()->search_word1}}">
                             </div>

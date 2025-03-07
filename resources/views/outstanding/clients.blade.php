@@ -25,7 +25,6 @@
                             <div class="menu2">
                                 <div class="input-group brand_btns">
                                     <span class="input-group-text">브랜드</span>
-                                    {{--                                    {{dd(request()->input('brand'))}}--}}
                                     @foreach($brands as $brand)
                                         <input type="checkbox" class="btn-check" name="brand[]"
                                                value="{{$brand->brand_type_code}}"
@@ -45,8 +44,8 @@
                                         <option value="all" {{ request()->search==="all"              ? "selected":""}}>
                                             1차 조회항목
                                         </option>
-                                        <option value="od_id" {{ request()->search==="od_id"            ? "selected":""}}>
-                                            주문번호
+                                        <option value="clients.name" {{ request()->search==="od_id"            ? "selected":""}}>
+                                            거래처명
                                         </option>
                                         <option value="rep_name" {{ request()->search==="rep_name"         ? "selected":""}}>
                                             사업자명
@@ -62,8 +61,8 @@
                                         <option value="all" {{ request()->search==="all"               ? "selected":""}}>
                                             2차 조회항목
                                         </option>
-                                        <option value="od_id" {{ request()->search==="od_id"             ? "selected":""}}>
-                                            주문번호
+                                        <option value="name" {{ request()->search==="od_id"             ? "selected":""}}>
+                                            거래처명
                                         </option>
                                         <option value="order_number" {{ request()->search==="order_number"      ? "selected":""}}>
                                             사업자명

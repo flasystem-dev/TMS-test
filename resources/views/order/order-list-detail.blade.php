@@ -93,7 +93,7 @@
                                                     <option value="deposit_name"         {{ request()->search==="deposit_name"         ? "selected":""}}>입금자명</option>
                                                     <option value="admin_memo"           {{ request()->search==="admin_memo"           ? "selected":""}}>관리자메모</option>
                                                     <option value="payment_memo"         {{ request()->search==="payment_memo"         ? "selected":""}}>결제메모</option>
-                                                    <option value="send_name"            {{ request()->search==="send_name"            ? "selected":""}}>담당자</option>
+                                                    <option value="handler"              {{ request()->search==="handler"              ? "selected":""}}>담당자</option>
                                                 </select>
                                                 <input type="text" class="form-control" name="search_word" value="{{request()->search_word}}">
                                             </div>
