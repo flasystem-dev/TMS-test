@@ -35,7 +35,8 @@ class OutstandingClientService
                     ->where('order_data.misu_amount', '>', 0)
                     ->whereIn('order_data.brand_type_code', $search['brand'])
                     ->whereIn('order_data.payment_state_code', ['PSUD', 'PSOC'])
-                    ->where('order_data.is_view', 1);
+                    ->where('order_data.is_view', 1)
+                    ->groupBy('order_data.client_id');
 
                 switch ($search['date_type']) {
                     case 'order_time':
@@ -89,7 +90,7 @@ class OutstandingClientService
             }
         }
 
-        $query -> groupBy('order_data.mall_code');
+        $query -> groupBy('order_data.mall_code', 'order_data.brand_type_code');
         $query -> havingRaw('SUM(order_data.misu_amount) > 0');
         $query -> orderBy('clients.id', 'desc');
 

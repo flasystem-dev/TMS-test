@@ -3,10 +3,10 @@
     미수현황
 @endsection
 @section('content')
-    @php
-        use Carbon\Carbon;
-    @endphp
-    <link href="{{ asset('/assets/css/outstanding/orders.css') }}" rel="stylesheet">
+@php
+    use Carbon\Carbon;
+@endphp
+<link href="{{ asset('/assets/css/outstanding/orders.css') }}" rel="stylesheet">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -39,10 +39,10 @@
                         <div class="menu1">
                             <div class="input-group">
                                 <select class="form-select" name="search1">
-                                    <option value="all"                  {{ request()->search==="all"              ? "selected":""}}>1차 조회항목</option>
-                                    <option value="od_id"                {{ request()->search==="od_id"            ? "selected":""}}>주문번호</option>
-                                    <option value="rep_name"             {{ request()->search==="rep_name"         ? "selected":""}}>사업자명</option>
-                                    <option value="idx"                  {{ request()->search==="idx"              ? "selected":""}}>사업자 인덱스</option>
+                                    <option value="all"                  {{ request()->search1==="all"              ? "selected":""}}>1차 조회항목</option>
+                                    <option value="od_id"                {{ request()->search1==="od_id"            ? "selected":""}}>주문번호</option>
+                                    <option value="rep_name"             {{ request()->search1==="rep_name"         ? "selected":""}}>사업자명</option>
+                                    <option value="client_name"          {{ request()->search1==="client_name"         ? "selected":""}}>거래처명</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word1" value="{{request()->search_word1}}">
                             </div>
@@ -50,9 +50,10 @@
                         <div class="menu2">
                             <div class="input-group">
                                 <select class="form-select" name="search2">
-                                    <option value="all"                  {{ request()->search==="all"               ? "selected":""}}>2차 조회항목</option>
-                                    <option value="od_id"                {{ request()->search==="od_id"             ? "selected":""}}>주문번호</option>
-                                    <option value="order_number"         {{ request()->search==="order_number"      ? "selected":""}}>사업자명</option>
+                                    <option value="all"                  {{ request()->search2==="all"               ? "selected":""}}>2차 조회항목</option>
+                                    <option value="od_id"                {{ request()->search2==="od_id"             ? "selected":""}}>주문번호</option>
+                                    <option value="rep_name"             {{ request()->search2==="rep_name"          ? "selected":""}}>사업자명</option>
+                                    <option value="client_name"          {{ request()->search2==="client_name"         ? "selected":""}}>거래처명</option>
                                 </select>
                                 <input type="text" class="form-control" name="search_word2" value="{{request()->search_word2}}">
                             </div>
@@ -170,7 +171,11 @@
                                                 <p class="gs_name cursor_p"
                                                    data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="{{$order->orderer_name}}"
                                                    onclick="clipBoardCopy(event)">
-                                                    {{$order->orderer_name}}</p>
+                                                    {{$order->orderer_name}}
+                                                    @if($order->client)
+                                                        ({{$order->client->name}})
+                                                    @endif
+                                                </p>
                                                 <span onclick="clipBoardCopy(event)">{{$order->orderer_phone}}</span>
                                             </td>
                                             <!-- 받는분/보내는분 -->

@@ -57,13 +57,18 @@ document.querySelectorAll('.vendor-info').forEach(function(element){
     })
 });
 
+// 미수 주문 정보 이동
 document.querySelectorAll('.misu-orders').forEach(function(element){
     element.addEventListener('click', function(e) {
         let tr = this.closest('tr');
         let vendor_idx = tr.querySelector('input[name="vendor_idx[]"]').value;
         let type = this.dataset.type;
+        let name = tr.querySelector('.channel-name').textContent;
 
         const params = new URLSearchParams(window.location.search);
+
+        params.set('search1', 'rep_name');
+        params.set('search_word1', name);
 
         switch (type) {
             case 'personal':
@@ -80,14 +85,15 @@ document.querySelectorAll('.misu-orders').forEach(function(element){
                 break;
         }
 
+        const orderUrl = main_url + "/outstanding/orders";
 
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        const newUrl = `${orderUrl}?${params.toString()}`;
 
-        console.log(vendor_idx);
-
+        window.open(newUrl, '_blank');
     })
 });
 
+// 전전달 마지막 날 가져오기
 function getPreviousMonthLastDay() {
     let today = new Date();
     let lastDayOfPreviousMonth = new Date(today.getFullYear(), today.getMonth() - 1, 0);

@@ -16,7 +16,9 @@ class OutstandingOrderService
             return null;
         }
 
-        $query = Orderdata::with(['delivery', 'payments', 'vendor', 'pass'])
+        $query = Orderdata::with(['delivery', 'payments', 'vendor', 'pass', 'client'])
+//            -> join('order_delivery as delivery', 'order_data.order_idx', '=', 'delivery.order_idx')
+            
             -> whereHas('delivery', function($query) {
                 $query->where('is_balju', 1);
                 $query->whereNot('delivery_state_code', 'DLCC');
@@ -39,34 +41,72 @@ class OutstandingOrderService
 
         }
 
-        switch ($search['is_client']) {
-            case '0':
-                $query -> where('client_id', 0);
-                break;
-            case '1':
-                $query -> whereNot('client_id', 0);
-                break;
-        }
-
-        if(!empty($search['search_word1'])){
-            switch ($search['search1']) {
-                case 'all':
-
+        if(isset($search['is_client'])) {
+            switch ($search['is_client']) {
+                case '0':
+                    $query -> where('client_id', 0);
                     break;
-                case 'od_id':
-                    $query -> where('od_id', $search['search_word1']);
-                    break;
-                case 'rep_name':
-                    $query -> whereHas('vendor', function($query) use ($search) {
-                        $query->where('rep_name', 'like', '%'.$search['search_word1'].'%');
-                    });
+                case '1':
+                    $query -> whereNot('client_id', 0);
                     break;
             }
         }
 
+        if(!empty($search['search_word1'])){
+            if($search['search1'] === 'all'){
 
+            }else {
+                switch ($search['search1']) {
+                    case 'od_id':
+                        $query -> where('od_id', $search['search_word1']);
+                        break;
+                    case 'rep_name':
+                        if($search['brand'] === "BTCS" || $search['brand'] === "BTFC") {
+                            $query -> whereHas('vendor', function($query) use ($search) {
+                                $query->where('rep_name', 'like', '%'.$search['search_word1'].'%');
+                            });
+                        } else {
+                            $query -> whereHas('pass', function($query) use ($search) {
+                                $query->where('name', 'like', '%'.$search['search_word1'].'%');
+                            });
+                        }
+                        break;
+                    case 'client_name':
+                        $query -> whereHas('client', function($query) use ($search) {
+                            $query->where('name', 'like', '%'.$search['search_word1'].'%');
+                        });
+                }
+            }
+        }
+
+        if(!empty($search['search_word2'])){
+            if($search['search2'] === 'all'){
+
+            }else {
+                switch ($search['search2']) {
+                    case 'od_id':
+                        $query -> where('od_id', $search['search_word2']);
+                        break;
+                    case 'rep_name':
+                        if($search['brand'] === "BTCS" || $search['brand'] === "BTFC") {
+                            $query -> whereHas('vendor', function($query) use ($search) {
+                                $query->where('rep_name', 'like', '%'.$search['search_word2'].'%');
+                            });
+                        } else {
+                            $query -> whereHas('pass', function($query) use ($search) {
+                                $query->where('name', 'like', '%'.$search['search_word2'].'%');
+                            });
+                        }
+                        break;
+                    case 'client_name':
+                        $query -> whereHas('client', function($query) use ($search) {
+                            $query->where('name', 'like', '%'.$search['search_word2'].'%');
+                        });
+                }
+            }
+        }
 
         $query -> orderBy('create_ts', 'desc');
-        return $query -> paginate(15) ->withQueryString();
+        return $query -> paginate(10) ->withQueryString();
     }
 }

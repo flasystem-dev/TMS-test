@@ -55,9 +55,11 @@ class OrderBaljuController extends Controller
 
             //거래 내역서 목록 입력
             if($order->group_code=='vendor'){
-                $orderDelivery = OrderDelivery::find($input['order_idx']);
+                $order_idx = $input['order_idx'];
+                $condition = ['order_idx'=>$order_idx];
+                $orderDelivery = OrderDelivery::find($order_idx);
                 $orderData = array_merge($order->toArray(), $orderDelivery->toArray());
-                OrderDataTran::create($orderData);
+                OrderDataTran::updateOrCreate($condition,$orderData);
             }
 
         return response()->json(['state'=>1, 'msg'=>'발주 성공']);

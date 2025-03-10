@@ -150,7 +150,7 @@
                                         <tr>
                                             <td>
                                                 <label class="checkboxLabel">
-                                                    <input type="checkbox" name="order_idx" value="{{$client->id}}">
+                                                    <input type="checkbox" name="client_id[]" value="{{$client->id}}">
                                                 </label>
                                             </td>
                                             <!-- 번호 -->
@@ -159,28 +159,27 @@
                                             </td>
                                             <!-- 브랜드 / 채널 -->
                                             <td>
-                                                <p class="brand_type {{$client->brand_type_code}}">{{ BrandAbbr($client->brand_type_code)}}</p>
-                                                <p class="brand_type"
-                                                   style="margin-top: 3px">{{ $client->rep_name }}</p>
+                                                <p class="brand_type {{$client->brand_type_code}}" >{{ BrandAbbr($client->brand_type_code)}}</p>
+                                                <p class="brand_type" style="margin-top: 3px">{{ $client->rep_name }}</p>
                                             </td>
                                             <!-- 거래처 명 -->
                                             <td>
-                                                <p>{{ $client -> name }}</p>
+                                                <p class="client-name" data-brand="{{ $client->brand_type_code }}">{{ $client -> name }}</p>
                                             </td>
                                             <!-- 보증금액(보증종류) / 계약종료일 -->
                                             <td data-order="{{ $client->assurance_ex_date }}">
-                                                <p>{{ number_format($client->assurance_amount) }}</p>
-                                                <p>{{ $client->assurance_ex_date }}</p>
+                                                <p class="cursor_p client-info">{{ number_format($client->assurance_amount) }}</p>
+                                                <p class="cursor_p client-info">{{ $client->assurance_ex_date }}</p>
                                             </td>
                                             <!-- 미수금 / 건수 -->
                                             <td data-order="{{ $client->total_misu_amount }}">
                                                 <p class="fw-bold">{{ number_format($client->total_misu_amount) }}</p>
-                                                <p>({{ number_format($client->total_misu_count) }})</p>
+                                                <p class="cursor_p misu-orders" type="total">({{ number_format($client->total_misu_count) }})</p>
                                             </td>
                                             <!-- 장기 미수금 / 건수 -->
                                             <td data-order="{{ $client->past_misu_amount }}">
                                                 <p class="fw-bold">{{ number_format($client->past_misu_amount) }}</p>
-                                                <p>({{ number_format($client->past_misu_count) }})</p>
+                                                <p class="cursor_p misu-orders" type="past">({{ number_format($client->past_misu_count) }})</p>
                                             </td>
                                             <!-- 보증 잔액 / (사용비율) -->
                                             @php

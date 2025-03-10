@@ -52,7 +52,9 @@ Class OrderDetailListService
         if(!empty($search['total_amount'])) {
             $query = OrderDetailListQueryBuilder::searchAmount($query, $search['total_amount']);
         }
-        
+
+        $query -> where('client_id', 2);
+
         // 총 금액 계산
         $data['orders_amount'] = OrderDetailListQueryBuilder::sumAmount($query);
 

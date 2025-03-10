@@ -136,7 +136,7 @@
                                             <!-- 브랜드 / 채널 -->
                                             <td>
                                                 <p class="brand_type {{$vendor->brand_code()}}">{{ BrandAbbr($vendor->brand_code())}}</p>
-                                                <p class="brand_type" style="margin-top: 3px">{{$vendor->channel_name}}</p>
+                                                <p class="brand_type channel-name" style="margin-top: 3px" >{{$vendor->channel_name}}</p>
                                             </td>
                                             <!-- 보증금액(보증종류) / 계약종료일(계약자) -->
                                             <td data-order="{{ $vendor->assurance_ex_date }}">

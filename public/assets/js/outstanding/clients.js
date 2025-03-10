@@ -43,3 +43,56 @@ document.getElementById('search-form').addEventListener('submit', function(e) {
     }
     e.target.submit();
 })
+
+// 거래처 정보 팝업
+document.querySelectorAll('.client-info').forEach(function(element){
+    element.addEventListener('click', function(e) {
+        let tr = this.closest('tr');
+        let client_id = tr.querySelector('input[name="client_id[]"]').value;
+
+        console.log(vendor_idx);
+        let url = main_url + "/document/client/client-form/" + client_id;
+        open_win(url, '거래처 정보', 1100, 800, 500, 50)
+    })
+});
+
+// 미수 주문 정보 이동
+document.querySelectorAll('.misu-orders').forEach(function(element){
+    element.addEventListener('click', function(e) {
+        let tr = this.closest('tr');
+        let client_id = tr.querySelector('input[name="client_id[]"]').value;
+        let type = this.dataset.type;
+        let name = tr.querySelector('.client-name').textContent;
+        let brand = tr.querySelector('.client-name').dataset.brand;
+
+        const params = new URLSearchParams(window.location.search);
+        params.set('brand', brand);
+        params.set('search1', 'client_name');
+        params.set('search_word1', name);
+
+        switch (type) {
+            case 'past':
+                params.set('date_type', 'delivery_date');
+                params.set('end_date', getPreviousMonthLastDay());
+                break;
+        }
+
+        const orderUrl = main_url + "/outstanding/orders";
+
+        const newUrl = `${orderUrl}?${params.toString()}`;
+
+        window.open(newUrl, '_blank');
+    })
+});
+
+// 전전달 마지막 날 가져오기
+function getPreviousMonthLastDay() {
+    let today = new Date();
+    let lastDayOfPreviousMonth = new Date(today.getFullYear(), today.getMonth() - 1, 0);
+
+    let year = lastDayOfPreviousMonth.getFullYear();
+    let month = String(lastDayOfPreviousMonth.getMonth() + 1).padStart(2, '0'); // 1~9월 앞에 0 추가
+    let day = String(lastDayOfPreviousMonth.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}

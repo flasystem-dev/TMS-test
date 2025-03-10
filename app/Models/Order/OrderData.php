@@ -25,6 +25,7 @@ use App\Models\Product\Product;
 
 use App\Models\Vendor;
 use App\Models\VendorPass;
+use App\Models\Client;
 use App\Models\TMS_Product;
 use App\Models\Payment\CodeOfNicePay;
 use App\Utils\Common;
@@ -74,6 +75,10 @@ class OrderData extends Model
 
     public function pass() {
         return $this->hasOne(VendorPass::class, 'id', 'mall_code');
+    }
+
+    public function client() {
+        return $this->hasOne(Client::class, 'id', 'client_id');
     }
 
     public function event_url() {
