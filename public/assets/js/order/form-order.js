@@ -450,7 +450,7 @@ $('#deli_now_label').on('click',function(){
 function form_submit(e){
     let btn = e.target;
 
-    const mallCodeInput = document.querySelector('input[name="mall_code"]');
+    const mallCodeInput = document.querySelector('select[name="mall_code"]');
 
     if (!mallCodeInput || mallCodeInput.value.trim() === "") {
         alert('사업자를 선택해주세요.');
