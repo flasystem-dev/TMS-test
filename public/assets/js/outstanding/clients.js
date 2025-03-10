@@ -62,13 +62,16 @@ document.querySelectorAll('.misu-orders').forEach(function(element){
         let tr = this.closest('tr');
         let client_id = tr.querySelector('input[name="client_id[]"]').value;
         let type = this.dataset.type;
-        let name = tr.querySelector('.client-name').textContent;
+        let client_name = tr.querySelector('.client-name').textContent;
+        let channel_name = tr.querySelector('.channel-name').textContent;
         let brand = tr.querySelector('.client-name').dataset.brand;
 
         const params = new URLSearchParams(window.location.search);
         params.set('brand', brand);
-        params.set('search1', 'client_name');
-        params.set('search_word1', name);
+        params.set('search1', 'rep_name');
+        params.set('search_word1', channel_name);
+        params.set('search2', 'client_name');
+        params.set('search_word2', client_name);
 
         switch (type) {
             case 'past':

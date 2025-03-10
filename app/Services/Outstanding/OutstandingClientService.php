@@ -90,7 +90,7 @@ class OutstandingClientService
             }
         }
 
-        $query -> groupBy('order_data.mall_code', 'order_data.brand_type_code');
+        $query -> groupBy('clients.id', 'order_data.mall_code', 'order_data.brand_type_code');
         $query -> havingRaw('SUM(order_data.misu_amount) > 0');
         $query -> orderBy('clients.id', 'desc');
 

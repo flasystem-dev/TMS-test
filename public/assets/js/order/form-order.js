@@ -450,7 +450,9 @@ $('#deli_now_label').on('click',function(){
 function form_submit(e){
     let btn = e.target;
 
-    if(document.querySelector('input[name="mall_code"]') && document.querySelector('input[name="mall_code"]').value === "" ) {
+    const mallCodeInput = document.querySelector('input[name="mall_code"]');
+
+    if (!mallCodeInput || mallCodeInput.value.trim() === "") {
         alert('사업자를 선택해주세요.');
         return;
     }

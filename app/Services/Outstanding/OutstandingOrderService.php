@@ -18,7 +18,7 @@ class OutstandingOrderService
 
         $query = Orderdata::with(['delivery', 'payments', 'vendor', 'pass', 'client'])
 //            -> join('order_delivery as delivery', 'order_data.order_idx', '=', 'delivery.order_idx')
-            
+
             -> whereHas('delivery', function($query) {
                 $query->where('is_balju', 1);
                 $query->whereNot('delivery_state_code', 'DLCC');
@@ -52,29 +52,31 @@ class OutstandingOrderService
             }
         }
 
-        if(!empty($search['search_word1'])){
-            if($search['search1'] === 'all'){
+        for ($i=1; $i<=2; $i++) {
+            if(!empty($search['search_word1'])){
+                if($search['search1'] === 'all'){
 
-            }else {
-                switch ($search['search1']) {
-                    case 'od_id':
-                        $query -> where('od_id', $search['search_word1']);
-                        break;
-                    case 'rep_name':
-                        if($search['brand'] === "BTCS" || $search['brand'] === "BTFC") {
-                            $query -> whereHas('vendor', function($query) use ($search) {
-                                $query->where('rep_name', 'like', '%'.$search['search_word1'].'%');
-                            });
-                        } else {
-                            $query -> whereHas('pass', function($query) use ($search) {
+                }else {
+                    switch ($search['search1']) {
+                        case 'od_id':
+                            $query -> where('od_id', $search['search_word1']);
+                            break;
+                        case 'rep_name':
+                            if($search['brand'] === "BTCS" || $search['brand'] === "BTFC") {
+                                $query -> whereHas('vendor', function($query) use ($search) {
+                                    $query->where('rep_name', 'like', '%'.$search['search_word1'].'%');
+                                });
+                            } else {
+                                $query -> whereHas('pass', function($query) use ($search) {
+                                    $query->where('name', 'like', '%'.$search['search_word1'].'%');
+                                });
+                            }
+                            break;
+                        case 'client_name':
+                            $query -> whereHas('client', function($query) use ($search) {
                                 $query->where('name', 'like', '%'.$search['search_word1'].'%');
                             });
-                        }
-                        break;
-                    case 'client_name':
-                        $query -> whereHas('client', function($query) use ($search) {
-                            $query->where('name', 'like', '%'.$search['search_word1'].'%');
-                        });
+                    }
                 }
             }
         }

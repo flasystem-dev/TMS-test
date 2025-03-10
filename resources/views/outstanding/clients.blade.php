@@ -160,7 +160,7 @@
                                             <!-- 브랜드 / 채널 -->
                                             <td>
                                                 <p class="brand_type {{$client->brand_type_code}}" >{{ BrandAbbr($client->brand_type_code)}}</p>
-                                                <p class="brand_type" style="margin-top: 3px">{{ $client->rep_name }}</p>
+                                                <p class="brand_type channel-name" style="margin-top: 3px">{{ $client->rep_name }}</p>
                                             </td>
                                             <!-- 거래처 명 -->
                                             <td>
