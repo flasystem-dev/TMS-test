@@ -57,6 +57,14 @@ class TestController extends Controller
 //        return "success";
     }
 
+    public static function get_api2(Request $request) {
+        DB::table('test_table') -> insert([
+            'test1' => "BMSv2 배송결과 재전송",
+            'test2' => $request->getContent()
+        ]);
+        return response() -> json(["완료"]);
+    }
+
     public static function get_api(Request $request) {
         $orders = $request->input('orders');
 

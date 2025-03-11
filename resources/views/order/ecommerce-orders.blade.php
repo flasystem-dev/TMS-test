@@ -25,7 +25,7 @@
                     <div class="text-center order_top_data3">
                         <i class="fas fa-external-link-alt"></i>
                         <strong>미발주</strong><br>
-                        @if(Auth::user()->dep=="꽃파는사람들")
+                        @if(Auth::user()->dep==="꽃파는사람들")
                             <a href="?delivery_state_code=DLUD"><strong class="font-big link-danger">{{ $isNotBalju }}건</strong></a>
                         @else
                             <a href="?PSUD_check=1&delivery_state_code=DLUD"><strong class="font-big link-danger">{{ $isNotBalju }}건</strong></a>

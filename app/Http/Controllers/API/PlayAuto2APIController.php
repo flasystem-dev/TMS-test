@@ -1252,7 +1252,7 @@ class PlayAuto2APIController extends Controller
         }
 
         // 구글 API
-        $deliveryTime = self::useGoogleAPI($time, $deliveryTime);
+//        $deliveryTime = self::useGoogleAPI($time, $deliveryTime);
 
         // MM*DD 의 경우 체크
         if (empty($deliveryTime['deliveryTime']['date'])) {

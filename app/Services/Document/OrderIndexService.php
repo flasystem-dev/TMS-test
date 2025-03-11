@@ -14,62 +14,22 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\Order\OrderItem;
 use App\Models\Order\OrderItemOption;
+use App\Models\Transaction\OrderDataTran;
 
 
 class OrderIndexService
 {
-    public static function getOrderList($search)
+    public static function getTranList($search)
     {
-//        $subQuery = OrderData::select('order_idx',   'od_id',                'mall_code',            'brand_type_code',          'order_number',         'group_code',
-//            'orderer_name',          'orderer_tel',          'orderer_phone',        'payment_type_code',        'payment_state_code',
-//            'payment_time',          'total_amount',         'discount_amount',      'admin_memo',               'create_ts',
-//            'goods_url',             'is_view',              'is_highlight',             'inflow',
-//            'order_quantity',        'order_time',  'handler' , 'is_new'
-//        );
-
-        // 브랜드 검색
-//        $brands = ["BTCP", "BTCC", "BTSP", "BTBR", "BTOM", "BTCS", "BTFC"];
-//        $filtered_brand = array_filter($brands, fn($brand) => session($brand) === 'Y');
-//
-//        if(!empty($filtered_brand)) {
-//            $subQuery->whereIn('order_data.brand_type_code',$filtered_brand);
-//        }
-
-        // 주문제거
-//        if(Auth::user()->auth < 10) {
-//            $subQuery -> where('order_data.is_view', 1);
-//        }
-
-//        $query = OrderData::Query();
-
-        $query = OrderData::Join('order_delivery', 'order_data.order_idx', '=', 'order_delivery.order_idx')
-            ->leftJoinSub(
-                DB::table('order_payment')
-                    ->select('order_idx', DB::raw("GROUP_CONCAT(deposit_name SEPARATOR ' || ') as deposit_names"))
-                    ->groupBy('order_idx'),
-                'order_payment',
-                'order_data.order_idx',
-                '=',
-                'order_payment.order_idx'
-            )
-            ->leftJoin('vendor', 'order_data.mall_code', '=', 'vendor.idx')
-            ->leftJoin('vendor_pass', 'order_data.mall_code', '=', 'vendor_pass.id');
 
         // 브랜드 검색
         $brands = ["BTCP", "BTCC", "BTSP", "BTBR", "BTOM", "BTCS", "BTFC"];
         $filtered_brand = array_filter($brands, fn($brand) => session($brand) === 'Y');
 
-        if(!empty($filtered_brand)) {
-            $query->whereIn('order_data.brand_type_code',$filtered_brand);
-        }
-
-        if(Auth::user()->auth < 10) {
-            $query -> where('order_data.is_view', 1);
-        }
 
         if($search) {
-            $order_columns = Schema::getColumnListing((new OrderData)->getTable());
-            $delivery_columns = Schema::getColumnListing((new OrderDelivery)->getTable());
+            $order_tran_columns = Schema::getColumnListing((new OrderDataTran)->getTable());
+
 
             // 나머지 검색
             $query = OrderIndexQueryBuilder::searchColumn($query, $search, $order_columns, $delivery_columns);
@@ -101,8 +61,6 @@ class OrderIndexService
         $query = OrderDataQueryBuilder::orderBy($query);
 
         $data['orders'] = OrderIndexQueryBuilder::paginate($query);
-
-//        dd($data['orders']);
 
         return $data;
     }

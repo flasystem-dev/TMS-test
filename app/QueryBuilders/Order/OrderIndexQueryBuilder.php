@@ -17,7 +17,7 @@ class OrderIndexQueryBuilder
         $query -> select('order_idx',   'od_id',                'mall_code',            'brand_type_code',          'order_number',         'group_code',
             'orderer_name',             'orderer_tel',          'orderer_phone',        'payment_type_code',        'payment_state_code',
             'payment_time',             'total_amount',         'discount_amount',      'admin_memo',               'create_ts',
-            'goods_url',             'is_view',              'is_highlight',             'inflow',
+            'goods_url',                'is_view',              'is_highlight',             'inflow',
             'order_quantity',           'order_time',  'handler' , 'is_new'
         );
         return $query;
@@ -213,6 +213,8 @@ class OrderIndexQueryBuilder
     public static function paginate($query)
     {
         $perPage = session('perPage') ?? 20;
+
+//        dd($query -> toSql());
 
         return $query ->simplePaginate($perPage) -> withQueryString();
     }

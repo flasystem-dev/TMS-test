@@ -31,6 +31,7 @@
             <a href='javascript:void(0);' data-bs-toggle="dropdown" aria-expanded="false"><span class="mall_type">{{ $order->channel_name }}</span></a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item order_dropdown_menu" href="#" data-bs-toggle="modal" data-bs-target="#change_vendor_modal">사업자 변경</a></li>
+                <li><a class="dropdown-item order_dropdown_menu" href="#" data-bs-toggle="modal" data-bs-target="#change_vendor_modal">거래처 변경</a></li>
             </ul>
         @else
             <a href='javascript:void(0);' onclick="market_open('{{$order->admin_url}}');"><span class="mall_type {{$order->mall_code}}">{{CommonCodeName($order->mall_code) ?? "브랜드몰"}}</span></a>
@@ -374,7 +375,7 @@
     <!-- end row -->
 
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="delivery_info_top">
@@ -488,83 +489,11 @@
                 </div>
             </div>
         </div> <!-- end col -->
-        <div class="fixed">
-            <div class="card {{$order->options_parse_yn==='N'? "red_zone": ""}}">
-                <div class="card-body">
-                    <h4 class="card-title">주문 옵션</h4>
-                    <div class="display_option">
-                        @if($order -> options_type === "O")
-                            @php $img_data = $DB::table('order_data_image') -> select('filename') -> where('order_idx','=',$order -> order_idx) -> first(); @endphp
-                            <img src="{{ $img_data -> filename }}" alt="사진" width="50" height="50" class="position-absolute top-0 end-0 mt-3 me-4" onclick="popup_IMG('{{ $img_data -> filename }}');"><br>
-                            @if(!empty($order->options_string_display))
-                                <p class="ms-1 mb-0">{{ $order->options_string_display }}</p>
-                            @endif
-                        @else
-                            @if($order->option_str_arr)
-                                @foreach($order->option_str_arr as $option)
-                                    <span class="number_option">{{ $loop->index+1}}/{{$order->order_quantity}} 주문건 옵션</span>
-                                    {{$option}}
-                                    @if(!$loop->last)
-                                        <hr class="option_hr"/>
-                                    @endif
-                                @endforeach
-                            @else
-                                @if($order->event_url)
-                                    <p class="ms-1 mb-0">주문정보 URL 주소</p>
-                                    <p class="ms-1 mb-0">{{$order->event_url->url}}</p>
-                                    <button type="button" class="btn btn-outline-primary" onclick="popup_URL('{{$order->event_url->url}}');">URL</button>
-                                @endif
-                                {{$order->options_string_display}}
-                                <hr>
-                                {{$order->options_string}}
-                            @endif
-                        @endif
-                    </div>
-                </div>
-            </div>
+    </div> <!-- end row -->
+    <div class="row">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">CS 기록</h4>
-                    <div class="mb-3">
-                        <label class="form-label">클레임</label>
-                        <div>
-                            <textarea class="form-control" name="order_claim_memo">{{$order->order_claim_memo}}</textarea>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">관리자메모</label>
-                        <button type="button" class="btn btn-outline-secondary btn-sm ms-5" onclick="insert_time('date');">날짜</button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm ms-1" onclick="insert_time('time');">시간</button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm ms-1" onclick="insert_time('datetime');">날짜+시간</button>
-                        <div>
-                            <textarea class="form-control" name="admin_memo">{{$order->admin_memo}}</textarea>
-                        </div>
-                    </div>
-{{--                    <div>--}}
-{{--                        <div class="input-group">--}}
-{{--                            <span class="input-group-text" id="send_name">담당자</span>--}}
-{{--                            <input type="text" class="form-control" name="send_name" value="{{$order->send_name}}">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <table style="">
-                        <tbody><tr>
-                            <td align="center"><p class="all_price_title">주문일</p></td>
-                            <td align="center" class="all_price">{{$order->order_time}}</td>
-                        </tr>
-                        <tr>
-                            <td align="center"><p class="all_price_title">결제일</p></td><td align="center" class="all_price">{{$order->payment_time}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    @if(!empty($order->inflow))
                     <div class="row mb-2">
                         <div class="col-12">
                             <div class="input-group mb-1 rounded radio_text">
@@ -596,7 +525,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-1 rounded radio_text">
@@ -619,7 +547,83 @@
                 </div>
             </div>
         </div>
-    </div> <!-- end row -->
+    </div>
+
+    <div class="fixed">
+        <div class="card {{$order->options_parse_yn==='N'? "red_zone": ""}}">
+            <div class="card-body">
+                <h4 class="card-title">주문 옵션</h4>
+                <div class="display_option">
+                    @if($order -> options_type === "O")
+                        @php $img_data = $DB::table('order_data_image') -> select('filename') -> where('order_idx','=',$order -> order_idx) -> first(); @endphp
+                        <img src="{{ $img_data -> filename }}" alt="사진" width="50" height="50" class="position-absolute top-0 end-0 mt-3 me-4" onclick="popup_IMG('{{ $img_data -> filename }}');"><br>
+                        @if(!empty($order->options_string_display))
+                            <p class="ms-1 mb-0">{{ $order->options_string_display }}</p>
+                        @endif
+                    @else
+                        @if($order->option_str_arr)
+                            @foreach($order->option_str_arr as $option)
+                                <span class="number_option">{{ $loop->index+1}}/{{$order->order_quantity}} 주문건 옵션</span>
+                                {{$option}}
+                                @if(!$loop->last)
+                                    <hr class="option_hr"/>
+                                @endif
+                            @endforeach
+                        @else
+                            @if($order->event_url)
+                                <p class="ms-1 mb-0">주문정보 URL 주소</p>
+                                <p class="ms-1 mb-0">{{$order->event_url->url}}</p>
+                                <button type="button" class="btn btn-outline-primary" onclick="popup_URL('{{$order->event_url->url}}');">URL</button>
+                            @endif
+                            {{$order->options_string_display}}
+                            <hr>
+                            {{$order->options_string}}
+                        @endif
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">CS 기록</h4>
+                <div class="mb-3">
+                    <label class="form-label">클레임</label>
+                    <div>
+                        <textarea class="form-control" name="order_claim_memo">{{$order->order_claim_memo}}</textarea>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">관리자메모</label>
+                    <button type="button" class="btn btn-outline-secondary btn-sm ms-5" onclick="insert_time('date');">날짜</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm ms-1" onclick="insert_time('time');">시간</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm ms-1" onclick="insert_time('datetime');">날짜+시간</button>
+                    <div>
+                        <textarea class="form-control" name="admin_memo">{{$order->admin_memo}}</textarea>
+                    </div>
+                </div>
+                {{--                    <div>--}}
+                {{--                        <div class="input-group">--}}
+                {{--                            <span class="input-group-text" id="send_name">담당자</span>--}}
+                {{--                            <input type="text" class="form-control" name="send_name" value="{{$order->send_name}}">--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table style="">
+                    <tbody><tr>
+                        <td align="center"><p class="all_price_title">주문일</p></td>
+                        <td align="center" class="all_price">{{$order->order_time}}</td>
+                    </tr>
+                    <tr>
+                        <td align="center"><p class="all_price_title">결제일</p></td><td align="center" class="all_price">{{$order->payment_time}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </form>
 @endsection
 @section('script')

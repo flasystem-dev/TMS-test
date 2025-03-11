@@ -13,9 +13,12 @@ use App\Models\Order\OrderData;
 use App\Models\Order\OrderDelivery;
 use App\Models\CommonCode;
 use App\Models\CodeOfCompanyInfo;
+use App\Transaction\OrderDataTran;
 
 use App\Services\Order\OrderService;
 use App\Services\Order\OrderIndexService;
+
+
 
 class DocumentController extends Controller
 {

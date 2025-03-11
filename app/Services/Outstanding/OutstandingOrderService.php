@@ -25,8 +25,8 @@ class OutstandingOrderService
             })
             -> whereIn('payment_state_code', ['PSUD', 'PSOC'])
             -> where('brand_type_code', $search['brand'])
-            -> where('misu_amount', '>', 0)
-            -> where('is_view', 1);
+            -> where('misu_amount', '>', 0);
+//            -> where('is_view', 1)
 
         switch ($search['date_type']) {
             case 'delivery_date' :

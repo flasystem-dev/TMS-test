@@ -97,7 +97,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('order/vendor/balju', [App\Http\Controllers\Order\OrderDetailController::class, 'update_baljuAmount']);
 
 // 증빙서류 관련
-    Route::get('Document/document-orders', [App\Http\Controllers\Document\DocumentController::class, 'get_orders']);
+    Route::get('document/document-orders', [App\Http\Controllers\Document\DocumentController::class, 'get_orders']);
     Route::get('Document/cancel/bank', [App\Http\Controllers\Document\DocumentController::class, 'bank_code']);
     Route::get('Document/cancel/table', [App\Http\Controllers\Document\DocumentController::class, 'refund_table']);
     Route::get('Document/transaction-orders', [App\Http\Controllers\Document\TransactionController::class, 'transaction']);

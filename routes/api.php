@@ -85,7 +85,7 @@ Route::post('ETC/Test', [App\Http\Controllers\Test\TestController::class, 'get_f
 Route::get('test/bmsv2', [App\Http\Controllers\Test\TestController::class, 'BMSv2_response_api']);
 Route::post('test/bmsv2/delivery', [App\Http\Controllers\Test\TestController::class, 'test_api_data']);
 Route::post('test/api', [App\Http\Controllers\Test\TestController::class, 'get_api']);
-
+Route::post('test/api2', [App\Http\Controllers\Test\TestController::class, 'get_api2']);
 
 // Document
 Route::get('Document/transaction/view', [App\Http\Controllers\Document\TransactionController::class, 'transaction_document']) -> name('transaction-view');

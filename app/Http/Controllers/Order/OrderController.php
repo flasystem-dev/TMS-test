@@ -45,8 +45,6 @@ class OrderController extends Controller
             return redirect() -> away('https://flabiz.kr/sub/max_traffic_tms.php');
         }
 
-//        dd($data['orders']->items());
-//        dd($data['isNotBalju']);
         return view('order.ecommerce-orders', $data);
     }
 
@@ -116,7 +114,6 @@ class OrderController extends Controller
                     -> where('order_idx', "=", $item -> order_idx)
                     -> update(['admin_memo' => $item -> admin_memo."\n".$memo_content,
                         'payment_state_code' => 'PSDN',
-                        'new_order_yn' => 'N',
                         'update_ts' => NOW()
                     ]);
             }
@@ -167,7 +164,6 @@ class OrderController extends Controller
                         'payment_state_code' => $payment_state_code_ToComplete[$state_code],
                         'refund_amount' => DB::raw('pay_amount'),
                         'pay_amount' => 0,
-                        'new_order_yn' => 'N',
                         'update_ts' => NOW()
                     ]);
             }
@@ -239,7 +235,6 @@ class OrderController extends Controller
         $state = $request -> payment_state_code;
         $payment_time = $request -> payment_time;
         $payment_memo = $request -> payment_memo;
-        $handler = $request -> handler;
 
         foreach ($orders as $idx) {
             $order = OrderData::find($idx);
@@ -280,7 +275,7 @@ class OrderController extends Controller
 
             DB::table('order_log') -> insert([
                 "od_id" => $order->od_id,
-                "log_by_name" => $handler,
+                "log_by_name" => Auth::user() -> name,
                 "log_time" => NOW(),
                 "log_status" => "일괄 처리",
                 "log_content" => $contents

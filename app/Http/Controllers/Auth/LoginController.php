@@ -52,7 +52,7 @@ class LoginController extends Controller
     // 로그인 후 부서 별 주문 다르게 보이게
     protected function authenticated(Request $request , $user) {
 
-        $brands = CodeOfCompanyInfo::all();
+        $brands = DB::table('code_of_company_info') -> select('brand_type_code')->where('is_used', 1)-> get();
 
         switch($user -> dep) {
             case '꽃파는총각':

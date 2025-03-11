@@ -6,6 +6,7 @@
 @php
     use Carbon\Carbon;
 @endphp
+@include('outstanding.modal.orders-modal')
 <link href="{{ asset('/assets/css/outstanding/orders.css') }}" rel="stylesheet">
     <div class="row">
         <div class="col-12">
@@ -108,6 +109,19 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#deposit_completed">일괄입금</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-12">
