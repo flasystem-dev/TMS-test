@@ -51,15 +51,14 @@ use App\Services\Vendor\SchedulerService;
 
 use Illuminate\Support\Facades\Mail;
 
+use App\Services\GoogleAPIService;
+
 class TestController extends Controller
 {
     public static function test(Request $request) {
         $time = "25년 3월 20일";
 
-        $languageClient = new LanguageClient([
-            'keyFilePath' => base_path()."/google_keyFile.json",
-            "projectId" => 'My First Project'
-        ]);
+
         $day_str = "";
 
         if(strpos($time,'오전')!==false){
@@ -86,7 +85,7 @@ class TestController extends Controller
             $day_str = "오후";
         }
 
-        $result = $languageClient->analyzeEntities($time) ->entitiesByType('DATE');
+        $result = GoogleAPIService::dateText($time);
 
         dd($result);
     }

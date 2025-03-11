@@ -161,7 +161,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-//        Google\Cloud\Language\LanguageServiceProvider::class, // 구글 API
 
         /*
          * Package Service Providers...

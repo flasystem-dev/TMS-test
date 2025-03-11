@@ -38,7 +38,7 @@ class DocumentController extends Controller
 
         $search = $request -> except('page');
 
-        $data = OrderIndexService::getOrderList($search);
+        $data = OrderDataTran::orderBy('order_idx', 'desc')->get();
 
         $data['commonDate'] = CommonCode::commonDate();
 

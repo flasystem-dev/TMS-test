@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Google\Cloud\Language\LanguageClient;
+use App\Services\GoogleAPIService;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -1252,7 +1253,7 @@ class PlayAuto2APIController extends Controller
         }
 
         // 구글 API
-//        $deliveryTime = self::useGoogleAPI($time, $deliveryTime);
+        $deliveryTime = self::useGoogleAPI($time, $deliveryTime);
 
         // MM*DD 의 경우 체크
         if (empty($deliveryTime['deliveryTime']['date'])) {
@@ -1340,10 +1341,10 @@ class PlayAuto2APIController extends Controller
     // 구글 Cloud Natural Language API 라이브러리 사용
     public static function useGoogleAPI($time, $deliveryTime)
     {
-        $languageClient = new LanguageClient([
-            'keyFilePath' => base_path()."/google_keyFile.json",
-            "projectId" => 'My First Project'
-        ]);
+//        $languageClient = new LanguageClient([
+//            'keyFilePath' => base_path()."/google_keyFile.json",
+//            "projectId" => 'My First Project'
+//        ]);
         $day_str = "";
 
         if(strpos($time,'오전')!==false){
@@ -1370,30 +1371,25 @@ class PlayAuto2APIController extends Controller
             $day_str = "오후";
         }
 
-        $result = $languageClient->analyzeEntities($time) ->entitiesByType('DATE');
+//        $result = $languageClient->analyzeEntities($time) ->entitiesByType('DATE');
 
-        if($result != [])
+        $result = GoogleAPIService::dateText($time);
+
+        if(!empty($result))
         {
-            for($i=0; $i<10; $i++){
-                if(isset($result[$i])){
-
-                    $year = $result[$i]['metadata']['year'] ?? date('Y');
-                    $month = $result[$i]['metadata']['month'] ?? date('m');
-                    $date = $result[$i]['metadata']['day'] ?? date('d');
-                    $deliveryTime['deliveryTime']['date'] = Carbon::create($year,$month,$date,'0','0','0','Asia/Seoul') -> toDateString();
-                    $day = $result[$i]['name'];
-//                    $day_arr = self::removeAM_PM($day);
-                    $parse_time = str_replace($day, "", $time);
-                    $parse_time = $day_str.$parse_time;
-                    if($parse_time == '') {
-                        $deliveryTime['deliveryTime']['time'] = $time;
-                    }else {
-                        $deliveryTime['deliveryTime']['time'] = $parse_time;
-                    }
-                }
+            $year = $result['metadata']['year'] ?? date('Y');
+            $month = $result['metadata']['month'] ?? date('m');
+            $date = $result['metadata']['day'] ?? date('d');
+            $deliveryTime['deliveryTime']['date'] = Carbon::create($year,$month,$date,'0','0','0','Asia/Seoul') -> toDateString();
+            $day = $result['name'];
+            $parse_time = str_replace($day, "", $time);
+            $parse_time = $day_str.$parse_time;
+            if(empty($parse_time)) {
+                $deliveryTime['deliveryTime']['time'] = $time;
+            }else {
+                $deliveryTime['deliveryTime']['time'] = $parse_time;
             }
         }
-
         return $deliveryTime;
     }
 
