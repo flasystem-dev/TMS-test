@@ -8,3 +8,4 @@ app/Console/Kernel.php
 public/assets/images
 public/tms
 /app/Http/Controllers/Excel/OrderExcelController.php
+/google_keyFile.json

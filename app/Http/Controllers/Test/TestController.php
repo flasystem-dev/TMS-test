@@ -14,6 +14,8 @@ use App\Http\Controllers\API\PlayAuto2APIController;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Imagick\Driver;
 
+use Google\Cloud\Language\LanguageClient;
+
 use App\QueryBuilders\Statistics\CalculateSalesQueryBuilder;
 
 use App\Models\Order\OrderData;
@@ -52,9 +54,41 @@ use Illuminate\Support\Facades\Mail;
 class TestController extends Controller
 {
     public static function test(Request $request) {
-//        SchedulerService::calc_sales();
-//
-//        return "success";
+        $time = "25년 3월 20일";
+
+        $languageClient = new LanguageClient([
+            'keyFilePath' => base_path()."/google_keyFile.json",
+            "projectId" => 'My First Project'
+        ]);
+        $day_str = "";
+
+        if(strpos($time,'오전')!==false){
+            $time = str_replace('오전', "", $time);
+            $day_str = "오전";
+
+        }else if(strpos($time,'오후')!==false){
+            $time =  str_replace('오후', "", $time);
+            $day_str = "오후";
+
+        }else if(strpos($time,'am')!==false) {
+            $time = str_replace('am', "", $time);
+            $day_str = "오전";
+
+        }else if(strpos($time,'pm')!==false) {
+            $time = str_replace('pm', "", $time);
+            $day_str = "오후";
+        }else if(strpos($time,'AM')!==false) {
+            $time = str_replace('AM', "", $time);
+            $day_str = "오전";
+
+        }else if(strpos($time,'PM')!==false) {
+            $time = str_replace('PM', "", $time);
+            $day_str = "오후";
+        }
+
+        $result = $languageClient->analyzeEntities($time) ->entitiesByType('DATE');
+
+        dd($result);
     }
 
     public static function get_api2(Request $request) {
