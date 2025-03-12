@@ -277,7 +277,8 @@ class OrderData extends Model
         $refund_amount = 0;
 
         $payment_number = $this->payments->min('payment_number');
-        $count = 0;
+        $PSCCcount = 0;
+        $PSDNcount = 0;
 
         foreach ($this->payments as $payment) {
             if ($payment->payment_number === $payment_number) {
@@ -291,12 +292,13 @@ class OrderData extends Model
                 case "PSDN":
                     $pay_amount += (int)$payment->payment_amount;
                     $refund_amount += (int)$payment->refund_amount;
+                    $PSDNcount++;
                     break;
                 case "PSCC":
                     if (!empty($payment->payment_pg)) {
                         $refund_amount += (int)$payment->refund_amount;
                     }
-                    $count++;
+                    $PSCCcount++;
                     break;
             }
         }
@@ -305,7 +307,8 @@ class OrderData extends Model
             'pay_amount' => $pay_amount,
             'misu_amount' => $misu_amount,
             'refund_amount' => $refund_amount,
-            'canceled_count' => $count,
+            'canceled_count' => $PSCCcount,
+            'payed_count' => $PSDNcount
         ];
     }
 
@@ -318,6 +321,7 @@ class OrderData extends Model
         $this->misu_amount = $calc_data['misu_amount'];
         $this->refund_amount = $calc_data['refund_amount'];
 
+
         if ($payment_cnt !== 0 && $payment_cnt === $calc_data['canceled_count']) {
             $this->payment_state_code = "PSCC";
         } elseif ($this->total_amount !== $this->pay_amount + $this->misu_amount) {
@@ -326,6 +330,10 @@ class OrderData extends Model
             $this->payment_state_code = "PSDN";
         } else {
             $this->payment_state_code = "PSUD";
+        }
+
+        if($this->delivery->delivery_state_code === 'DLCC' && $calc_data['canceled_count'] !== 0) {
+            $this->payment_state_code = "PSOC";
         }
     }
 

@@ -39,20 +39,19 @@ class DocumentController extends Controller
         $search = $request -> all();
 
         $query = OrderTranIndexService::getTranQuery($search);
+
         $data = $query->get();
         $data['sum_amount']= $query->sum('total_amount');
         $data['commonDate'] = CommonCode::commonDate();
-
         $data['orders_count'] = $data->count();
-        $data['orders'] = OrderTranIndexService::pagenate($query);
+        $data['orders'] = OrderTranIndexService::paginate($query);
+
         if(self::rateLimit()) {
             return redirect() -> away('https://flabiz.kr/sub/max_traffic_tms.php');
         }
 
         $col_style='collapsed';
         $show_box='';
-
-
 
         return view('Document.document-orders', $data);
     }

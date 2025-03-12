@@ -194,7 +194,7 @@
                             </thead>
                             <tbody>
 
-                            @if($orders->items())
+                            @if($orders->count())
                                 @foreach($orders as $order)
                                     @php
                                         $today = Carbon::now()->format('Y-m-d');
