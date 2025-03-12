@@ -61,8 +61,6 @@ class QueueWorkCustom extends Command
             return;
         }
 
-        Log::info("Starting queue worker with queues: " . $queueNames);
-
         // Laravel의 기본 queue:work 명령어 실행
         Artisan::call('queue:work', [
             '--queue' => $queueNames,

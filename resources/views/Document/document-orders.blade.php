@@ -42,7 +42,6 @@
                                                         <i class="mdi mdi-chevron-down"></i>
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="javascript:select_btn('date_type','주문수집일','create_ts');">주문수집일</a>
                                                         <a class="dropdown-item" href="javascript:select_btn('date_type','배송요청일','delivery_date');">배송요청일</a>
                                                         <a class="dropdown-item" href="javascript:select_btn('date_type','주문시간','order_time');">주문시간</a>
                                                     </div>

@@ -82,6 +82,11 @@ class PaymentService
             self::auto_webhook_order_log($order, $newPayment);
 
             OrderService::amountStateVerification($order->order_idx);
+
+            if($order->delivery->delivery_state_code === "DLCC") {
+                $order -> payment_state_code = "PSOC";
+                $order -> save();
+            }
         }
     }
 

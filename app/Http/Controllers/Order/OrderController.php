@@ -197,7 +197,7 @@ class OrderController extends Controller
 
         DB::table('order_log')->insert([
             "od_id" => $order->od_id,
-            "log_by_name" => $request->handler,
+            "log_by_name" => Auth::user() -> name,
             "log_time" => NOW(),
             "log_status" => "배송 상태 변경",
             "log_content" => $contents

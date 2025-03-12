@@ -60,9 +60,9 @@
                             <div class="menu1">
                                 <div class="input-group">
                                     <select class="form-select" name="date_type">
-                                        <option value="delivery_date">배송일</option>
-                                        <option value="order_time">주문일</option>
-                                        <option value="create_ts">수집일</option>
+                                        <option value="delivery_date"  {{ request()->date_type==="delivery_date" ? 'selected' : "" }} >배송일</option>
+                                        <option value="order_time"     {{ request()->date_type==="order_time"    ? 'selected' : "" }} >주문일</option>
+                                        <option value="create_ts"      {{ request()->date_type==="create_ts"     ? 'selected' : "" }} >수집일</option>
                                     </select>
                                     <input type="date" class="form-control datepicker" id="start_date" name="start_date" value="{{request()->start_date ?? now()->subMonths(3)->format('Y-m-d') }}">
                                     <input type="date" class="form-control datepicker" id="end_date" name='end_date' value="{{request()->end_date ?? $commonDate['today']}}">
@@ -115,6 +115,7 @@
                                     <th style="width: 10%">개인 미수금<br>(건수)</th>
                                     <th style="width: 10%">거래처 미수금<br>(건수)</th>
                                     <th style="width: 10%">장기 미수금<br>(건수)</th>
+                                    <th style="width: 10%">전월 미수금<br>(건수)</th>
                                     <th style="width: 10%">전체 미수금<br>(건수)</th>
                                     <th style="width: 10%">보증 잔액<br>(사용비율)</th>
                                     <th>메모</th>
@@ -158,19 +159,27 @@
                                                 @endif
                                             </td>
                                             <!-- 장기 미수금 / 건수 -->
-                                            <td data-order="{{ $vendor->past_misu_amount }}">
-                                                @if(!empty($vendor->past_misu_amount))
-                                                <p class="fw-bold">{{ number_format($vendor->past_misu_amount) }} 원</p>
-                                                <p class="cursor_p misu-orders" data-type="past">({{ number_format($vendor->past_misu_count) }} 건)</p>
+                                            <td data-order="{{ $vendor->longTerm_misu_amount }}">
+                                                @if(!empty($vendor->longTerm_misu_amount))
+                                                <p class="fw-bold">{{ number_format($vendor->longTerm_misu_amount) }} 원</p>
+                                                <p class="cursor_p misu-orders" data-type="longTerm">({{ number_format($vendor->longTerm_misu_count) }} 건)</p>
+                                                @endif
+                                            </td>
+                                            <!-- 전월 미수금 / 건수 -->
+                                            <td data-order="{{ $vendor->monthAgo_misu_amount }}">
+                                                @if(!empty($vendor->monthAgo_misu_amount))
+                                                    <p class="fw-bold">{{ number_format($vendor->monthAgo_misu_amount) }} 원</p>
+                                                    <p class="cursor_p misu-orders" data-type="monthAgo">({{ number_format($vendor->monthAgo_misu_count) }} 건)</p>
                                                 @endif
                                             </td>
                                             <!-- 전체 미수금 / 건수 -->
                                             <td data-order="{{ $vendor->total_misu_amount }}">
                                                 <p class="fw-bold">{{ number_format($vendor->total_misu_amount) }} 원</p>
-                                                <p class="cursor_p misu-orders" data-type="total">({{ number_format($vendor->order_count) }} 건)</p>
+                                                <p class="cursor_p misu-orders" data-type="total">({{ number_format($vendor->total_misu_count) }} 건)</p>
                                             </td>
                                             <!-- 보증 잔액 / 사용비율 -->
                                             @php
+                                                $percentage = 0;
                                                 $warning_text = "";
                                                 if(!empty($vendor->assurance_amount)) {
                                                     $percentage = (int)($vendor->total_misu_amount / $vendor->assurance_amount * 100);
@@ -182,34 +191,27 @@
                                                     }
                                                 }
                                             @endphp
-                                            <td data-order="{{ $vendor->assurance_amount - $vendor->total_misu_amount }}">
+                                            <td data-order="{{ $percentage }}">
                                                 <p class="fw-bold">{{ number_format($vendor->assurance_amount - $vendor->total_misu_amount) }} 원</p>
-                                                @if(!empty($vendor->assurance_amount))
+                                                @if(!empty($percentage))
                                                 <p class="fw-bold {{ $warning_text }}">({{ $percentage }}%)</p>
                                                 @endif
                                             </td>
                                             <!-- 메모 -->
                                             <td>
-                                                <p>{{ $vendor->vendor_memo }}</p>
+                                                <p>{{ $vendor->support_memo }}</p>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="10" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
+                                        <td colspan="11" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
                                     </tr>
                                 @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
-{{--                    @if(isset($vendors))--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-12">--}}
-{{--                                {{ $vendors->links() }}--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
                 </div>
             </div>
         </div> <!-- end col -->

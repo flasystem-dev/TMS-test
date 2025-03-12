@@ -207,8 +207,12 @@
                             <input type="text" class="form-control datepicker" id="service_ex_date" name="service_ex_date"  value="@isset($vendor_info['service_ex_date']) {{ $vendor_info['service_ex_date'] }} @endisset" autocomplete="off">
                         </div>
                         <div class="mb-3 input-group">
-                            <span class="input-group-text">사업자 메모</span>
+                            <span class="input-group-text">CS 메모</span>
                             <textarea class="form-control" name="vendor_memo" aria-label="vendor_memo">@isset($vendor_info['vendor_memo']){{$vendor_info['vendor_memo']}}@endisset</textarea>
+                        </div>
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">지원 메모</span>
+                            <textarea class="form-control" name="support_memo" aria-label="support_memo">@isset($vendor_info['support_memo']){{$vendor_info['support_memo']}}@endisset</textarea>
                         </div>
                         <h4 class="card-title mb-4">정산정보</h4>
                         <div class="mb-3 input-group input_select">
@@ -283,7 +287,10 @@
                                 <a class="input-group-text file_exist" onclick="check_pw_info('{{$vendor_info['bank_file']}}')">첨부된 파일 보기<i class="bx bx-link-external ms-2"></i></a>
                             @endif
                         </div>
-
+                        <div class="mb-3 input-group">
+                            <span class="input-group-text">정산 메모</span>
+                            <textarea class="form-control" name="settlement_memo" aria-label="settlement_memo">@isset($vendor_info['settlement_memo']){{$vendor_info['settlement_memo']}}@endisset</textarea>
+                        </div>
                         <div class="flex-wrap gap-3 mt-3" style="text-align: right;">
                             <button type="submit" class="btn btn-primary waves-effect waves-light w-md">저장</button>
                         </div>

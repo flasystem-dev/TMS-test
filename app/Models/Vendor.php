@@ -24,9 +24,9 @@ class Vendor extends Model
     protected $fillable=[
         'idx', 'brand_type' , 'vendor_id','mall_name','service_type','gen_number','did_number','domain','rep_name',
         'rep_tel','rep_email','partner_name','partner_tel','partner_email','recommend_person','registered_date','created_date', 'updated_date',
-        'vendor_memo','iden_name','iden_file','rr_number1','rr_number2','company_name','company_addr','business_number','business_file','bank_code',
+        'vendor_memo','support_memo', 'iden_name','iden_file','rr_number1','rr_number2','company_name','company_addr','business_number','business_file','bank_code',
         'bank_number','name_of_deposit','bank_file','membership_pay_done','membership','membership_pay_type','membership_pay_date','membership_pay_name','membership_memo',
-        'is_valid','assurance','assurance_amount','assurance_contractor','assurance_number','assurance_ex_date','deposit_form','assurance_memo','price_type',
+        'is_valid','assurance','assurance_amount','assurance_contractor','assurance_number','assurance_ex_date','deposit_form','settlement_memo','price_type',
         'meta_tag', 'logo_file','service_price_type','service_price','service_percent','service_ex_date','rep_type','is_credit','is_jungsan'
     ];
 

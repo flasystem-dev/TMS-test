@@ -1236,7 +1236,7 @@ class PlayAuto2APIController extends Controller
             ]
         ];
 
-        if ($time == '') return $deliveryTime;
+        if (empty($time)) return $deliveryTime;
         
         // 해당 글자가 존재하는지 확인
         if (Str::contains($time, ['오늘', '바로', '즉시', '금일'])) {

@@ -62,6 +62,13 @@ function select_btn(id,value,hidden){
     $('#'+id+'_title').text(value);
     $('#'+id+'_view').val(value);
 }
+$(document).ready(function() {
+// 지역추가금
+    $('#client_id').select2({
+        placeholder: "거래처를 선택해주세요.",
+        dropdownParent: $('#location_price'),
+    });
+})
 function nr_send(e,order_idx) {
     let $this = e.target;
     var name = document.getElementById('handler').value

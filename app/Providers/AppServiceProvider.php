@@ -15,15 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(PredictionServiceClient::class, function () {
-
-            $options = [
-                'projectId' => env('GOOGLE_CLOUD_PROJECT'),
-                'keyFilePath' => env('GOOGLE_CLOUD_KEY_FILE'),
-
-            ];
-            return new PredictionServiceClient($options);
-        });
+        
     }
 
     /**

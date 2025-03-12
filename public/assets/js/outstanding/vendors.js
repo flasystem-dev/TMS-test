@@ -7,14 +7,14 @@ $('#vendor-table').DataTable({
     pageLength: 20, // 기본 페이지 길이 설정,
     "order": [],
     "columnDefs": [
-        { "targets": [0, 2, 9], "orderable": false },
+        { "targets": [0, 2, 10], "orderable": false },
         {
             "targets": 1, // 첫 번째 열을 순서 열로 설정
             "searchable": false, // 검색 영향 없음
             "orderable": false, // 정렬 영향 없음
         },
         { "targets": 3, "orderable": true, "type": "date" }, // 3번째 열 날짜 정렬
-        { "targets": [4, 5, 6, 7, 8], "orderable": true, "type": "num" },
+        { "targets": [4, 5, 6, 7, 8, 9], "orderable": true, "type": "num" },
     ],
     "fnDrawCallback": function(settings) {
         if (!settings.aoData || settings.aoData.length === 0) return;

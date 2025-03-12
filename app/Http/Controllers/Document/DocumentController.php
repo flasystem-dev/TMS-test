@@ -16,7 +16,7 @@ use App\Models\CodeOfCompanyInfo;
 use App\Transaction\OrderDataTran;
 
 use App\Services\Order\OrderService;
-use App\Services\Order\OrderIndexService;
+use App\Services\Document\OrderTranIndexService;
 
 
 
@@ -36,13 +36,14 @@ class DocumentController extends Controller
         }
 
 
-        $search = $request -> except('page');
+        $search = $request -> all();
 
-        $data = OrderDataTran::orderBy('order_idx', 'desc')->get();
-
+        $query = OrderTranIndexService::getTranQuery($search);
+        $data = $query->get();
+        $data['sum_amount']= $query->sum('total_amount');
         $data['commonDate'] = CommonCode::commonDate();
 
-        $data = OrderIndexService::countOrderData($data);
+        $data['orders_count'] = $data->count();
 
         if(self::rateLimit()) {
             return redirect() -> away('https://flabiz.kr/sub/max_traffic_tms.php');

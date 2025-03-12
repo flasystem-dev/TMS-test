@@ -135,11 +135,13 @@
                                     <th style="width: 4%" class="text-center">번호</th>
                                     <th style="width: 8%">브랜드<br>채널</th>
                                     <th style="width: 15%">거래처 명</th>
-                                    <th style="width: 10%">보증금액(보증종류)<br>계약종료일</th>
-                                    <th style="width: 10%">미수금<br>(건수)</th>
-                                    <th style="width: 10%">장기 미수금<br>(건수)</th>
-                                    <th style="width: 10%">보증 잔액<br>(사용비율)</th>
-                                    <th style="width: 10%">청구기간</th>
+                                    <th style="width: 8%">보증금액(보증종류)<br>계약종료일</th>
+                                    <th style="width: 8%">미수금<br>(건수)</th>
+                                    <th style="width: 8%">장기 미수금<br>(건수)</th>
+                                    <th style="width: 8%">전월 미수금<br>(건수)</th>
+                                    <th style="width: 8%">전체 미수금<br>(건수)</th>
+                                    <th style="width: 8%">보증 잔액<br>(사용비율)</th>
+                                    <th style="width: 5%">청구기간</th>
                                     <th style="width: 10%">결제방식<br>결제일(독촉여부)</th>
                                     <th>메모</th>
                                 </tr>
@@ -172,17 +174,28 @@
                                                 <p class="cursor_p client-info">{{ $client->assurance_ex_date }}</p>
                                             </td>
                                             <!-- 미수금 / 건수 -->
-                                            <td data-order="{{ $client->total_misu_amount }}">
-                                                <p class="fw-bold">{{ number_format($client->total_misu_amount) }}</p>
-                                                <p class="cursor_p misu-orders" type="total">({{ number_format($client->total_misu_count) }})</p>
+                                            <td data-order="{{ $client->misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($client->misu_amount) }}</p>
+                                                <p class="cursor_p misu-orders" type="search">({{ number_format($client->misu_count) }})</p>
                                             </td>
                                             <!-- 장기 미수금 / 건수 -->
-                                            <td data-order="{{ $client->past_misu_amount }}">
-                                                <p class="fw-bold">{{ number_format($client->past_misu_amount) }}</p>
-                                                <p class="cursor_p misu-orders" type="past">({{ number_format($client->past_misu_count) }})</p>
+                                            <td data-order="{{ $client->longTerm_misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($client->longTerm_misu_amount) }}</p>
+                                                <p class="cursor_p misu-orders" type="longTerm">({{ number_format($client->longTerm_misu_count) }})</p>
+                                            </td>
+                                            <!-- 전월 미수금 / 건수 -->
+                                            <td data-order="{{ $client->monthAgo_misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($client->monthAgo_misu_amount) }}</p>
+                                                <p class="cursor_p misu-orders" type="monthAgo">({{ number_format($client->monthAgo_misu_count) }})</p>
+                                            </td>
+                                            <!-- 전체 미수금 / 건수 -->
+                                            <td data-order="{{ $client->total_misu_amount }}">
+                                                <p class="fw-bold">{{ number_format($client->total_misu_amount) }} 원</p>
+                                                <p class="cursor_p misu-orders" type="total">({{ number_format($client->total_misu_count) }} 건)</p>
                                             </td>
                                             <!-- 보증 잔액 / (사용비율) -->
                                             @php
+                                                $percentage = 0;
                                                 $warning_text = "";
                                                 if(!empty($client->assurance_amount)) {
                                                     $percentage = (int)($client->total_misu_amount / $client->assurance_amount * 100);
@@ -194,10 +207,10 @@
                                                     }
                                                 }
                                             @endphp
-                                            <td data-order="{{ $client->assurance_amount - $client->total_misu_amount }}">
-                                                <p class="fw-bold">{{ number_format($client->assurance_amount - $client->total_misu_amount) }}</p>
-                                                @if(!empty($client->assurance_amount))
-                                                    <p class="fw-bold {{ $warning_text }}">({{ $percentage }}%)</p>
+                                            <td data-order="{{ $percentage }}">
+                                                <p class="fw-bold">{{ number_format($client->assurance_amount - $client->total_misu_amount) }} 원</p>
+                                                @if(!empty($percentage))
+                                                <p class="fw-bold {{ $warning_text }}">({{ $percentage }}%)</p>
                                                 @endif
                                             </td>
                                             <!-- 청구기간 -->

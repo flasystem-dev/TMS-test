@@ -366,7 +366,7 @@
                                     </td>
                                     <td class="center" style="vertical-align: center;">
                                         @if(Auth::user() -> auth > 9)
-                                            <a href="javascript:order_log_popup('{{ $order -> od_id }}');" class="text-dark">{{$order->order_idx}}</a>
+                                            <a href="javascript:order_log_popup('{{ $order -> od_id }}');" class="text-dark cursor_p">{{$order->order_idx}}</a>
                                         @else
                                             {{$order->order_idx}}
                                         @endif

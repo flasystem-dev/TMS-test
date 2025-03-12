@@ -745,7 +745,7 @@ class NicePayController extends Controller
             }
 
             $payment = OrderPayment::where('payment_pid', $result['MOID'])->first();
-            $orders = OrderData::with('payments')->where('order_idx', $payment->order_idx) -> get();
+            $orders = OrderData::with('delivery', 'payments')->where('order_idx', $payment->order_idx) -> get();
 
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
 

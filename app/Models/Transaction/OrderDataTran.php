@@ -15,7 +15,9 @@ class OrderDataTran extends Model
 
     public $timestamps = false;
 
-    protected $fillable= ['order_idx', 'brand_type_code', 'mall_code', 'client_id', 'total_amount', 'order_time', 'delivery_date', 'orderer_name', 'orderer_phone', 'reciever_name', 'reciever_phone', 'delivery_ribbon_left', 'delivery_address', 'payment_name', 'goods_name', 'etc', 'create_ts','is_tran'];
+    protected $fillable= ['order_idx', 'brand_type_code', 'mall_code', 'client_id', 'total_amount', 'order_time', 'delivery_date',
+        'orderer_name', 'orderer_phone', 'reciever_name', 'reciever_phone', 'delivery_ribbon_left', 'delivery_address', 'delivery_state_code',
+        'payment_name', 'goods_name', 'etc', 'create_ts','is_tran'];
 
     public static function orderTranUpdate($encodedData) {
         $decodedData = base64_decode($encodedData);
