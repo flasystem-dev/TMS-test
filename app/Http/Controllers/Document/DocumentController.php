@@ -44,7 +44,7 @@ class DocumentController extends Controller
         $data['commonDate'] = CommonCode::commonDate();
 
         $data['orders_count'] = $data->count();
-
+        $data['orders'] = OrderTranIndexService::pagenate($query);
         if(self::rateLimit()) {
             return redirect() -> away('https://flabiz.kr/sub/max_traffic_tms.php');
         }

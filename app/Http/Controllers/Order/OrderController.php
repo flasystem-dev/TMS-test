@@ -192,8 +192,10 @@ class OrderController extends Controller
 
         //배송상태변경
         $orderDataTran = OrderDataTran::find($request->order_idx);
-        $orderDataTran->delivery_state_code =$delivery->delivery_state_code;
-        $orderDataTran->save();
+        if($orderDataTran) {
+            $orderDataTran->delivery_state_code =$delivery->delivery_state_code;
+            $orderDataTran->save();
+        }
 
         DB::table('order_log')->insert([
             "od_id" => $order->od_id,

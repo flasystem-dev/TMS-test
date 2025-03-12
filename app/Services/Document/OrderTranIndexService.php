@@ -29,7 +29,14 @@ class OrderTranIndexService
         return $query;
     }
 
+    public static function paginate($query)
+    {
+        $perPage = session('perPage') ?? 20;
 
+//        dd($query -> toSql());
+
+        return $query ->simplePaginate($perPage) -> withQueryString();
+    }
     public static function getSumAmount($query){
 
     }
