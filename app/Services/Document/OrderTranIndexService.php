@@ -22,9 +22,9 @@ class OrderTranIndexService
     public static function getTranQuery($search)
     {
         $query = OrderDataTran::orderby('order_idx', 'desc');
+        $query = self::sessionBrandFilter($query);
+        // 나머지 검색
         if($search) {
-            $query = self::sessionBrandFilter($query);
-            // 나머지 검색
         }
         return $query;
     }

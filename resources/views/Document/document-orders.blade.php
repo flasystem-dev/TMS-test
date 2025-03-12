@@ -203,7 +203,7 @@
                                         $delivery_date = Carbon::parse($order->delivery_date)->format('Y-m-d');
                                     @endphp
 
-                                    <tr class="ordersTable_tr {{$order->is_highlight? "is_highlight": ""}} {{$order->is_view? '' : "not_view"}}" >
+                                    <tr class="ordersTable_tr" >
                                         <!-- 번호 -->
                                         <td class="center" style="padding: 0;">
                                             <label class="checkboxLabel">
@@ -229,48 +229,18 @@
 
 
                                         </td>
-                                        <!-- 수집일/배송일 -->
+                                        <!-- 주문일/배송일 -->
                                         <td class="center">
                                             <div style="position: relative" class="date_container simptip-position-bottom simptip-fade cursor_p" tooltip="{{$order->admin_memo}}" flow="down">
 
-                                            <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">{{$order->create_ts}}
-                                                @switch($order->inflow)
-                                                    @case("mall")
-                                                        <i class="bx bx-cart inflow_check icon_font_size"
-                                                           data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="몰"
-                                                        ></i>
-                                                        @break
-                                                    @case("call")
-                                                        <i class="bx bx-phone inflow_check icon_font_size"
-                                                           data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="전화"
-                                                        ></i>
-                                                        @break
-                                                    @case("sms")
-                                                        <i class="bx bx-envelope inflow_check icon_font_size"
-                                                           data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="문자"
-                                                        ></i>
-                                                        @break
-                                                    @case("talk")
-                                                        <i class="far fa-comment inflow_check"
-                                                           data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top" data-bs-content="카톡"
-                                                        ></i>
-                                                        @break
-                                                    @case("channel")
-                                                        <i class="far fa-comments inflow_check"
-                                                           data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="click focus hover" data-bs-placement="top" data-bs-content="플친"
-                                                        ></i>
-                                                        @break
-                                                @endswitch
-                                            <br>
-                                            <span class="deli_date span_date
-                                                 @if ($today === $delivery_date) today_delivery
-                                                @elseif ($tomorrow === $delivery_date) tomorrow_delivery
-                                                 @endif
-                                                ">{{$order->delivery_date}} {{$order->delivery_time}}
-                                            </span>
-                                            @if(!empty($order->admin_memo))
-                                                    <i class="mdi mdi-note-text-outline memo_check"></i>
-                                                @endif
+                                            <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">
+                                                 <input type="text" class="modify_text" value="{{$order->create_ts}}">
+                                                <span class="deli_date span_date">
+                                                    <input type="text" class="modify_text" value="{{$order->delivery_date}}">
+                                                </span>
+                                                @if(!empty($order->admin_memo))
+                                                        <i class="mdi mdi-note-text-outline memo_check"></i>
+                                                    @endif
                                             </span>
                                             </div>
                                         </td>

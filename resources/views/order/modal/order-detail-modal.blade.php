@@ -183,7 +183,6 @@
                 <form id="payment_type_form">
                     <input type="hidden" name="order_idx" value="{{$order->order_idx}}">
                     <input type="hidden" name="payment_number" value="">
-                    <input type="hidden" name="handler" value="{{Auth::user()->name}}">
                     <div class="input-group mb-3">
                         <span class="input-group-text">결제수단</span>
                         <select class="form-select" name="payment_type_code" aria-label="payment_type_code">

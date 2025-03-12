@@ -1,4 +1,7 @@
 $('.datepicker').datepicker();
+
+const order_idx = document.getElementById('order-idx').value;
+
 function ribbon_msg(msg){
     $('#delivery_ribbon_right').val(msg);
 }
@@ -474,11 +477,42 @@ function change_payment_type() {
     }
 }
 
-// 결제 수단 변경
+// 결제 상태 변경
 function change_payment_state() {
     if(confirm("결제상태를 변경하시겠습니까?")) {
         let form = document.getElementById('payment_state_form');
         let formData = new FormData(form);
+
+        $.ajax({
+            url: main_url + "/order/detail/payment-state",
+            method: "POST",
+            data: formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                if(data) {
+                    opener.location.reload();
+                    location.reload();
+                }else {
+                    alert("[수정 실패] 개발팀에 문의하세요.");
+                }
+            },
+            error: function(e) {
+                alert("[에러발생]개발팀에 문의하세요.");
+                console.log(e);
+            }
+        })
+    }
+}
+
+// 결제 - 환불 상태로 변경
+function change_payment_state_PSCC(payment_number) {
+    if(confirm("환불상태로 변경하시겠습니까?")) {
+        let formData = new FormData();
+        formData.append('order_idx', order_idx)
+        formData.append('payment_number', payment_number)
+        formData.append('payment_state_code', 'PSCC')
 
         $.ajax({
             url: main_url + "/order/detail/payment-state",
