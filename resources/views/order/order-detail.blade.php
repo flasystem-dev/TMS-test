@@ -220,7 +220,7 @@
                                                 @endif
                                                 @if(!empty($payment->payment_key) && $payment->payment_state_code==="PSDN")
                                                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#refund_modal" data-number="{{$payment->payment_number}}" style="background-color: #fd8b8b; color: #fff">환불</a></li>
-                                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#refund_modal" data-number="{{$payment->payment_number}}" style="background-color: #fd8b8b; color: #fff">수기 환불</a></li>
+{{--                                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#refund_modal" data-number="{{$payment->payment_number}}" style="background-color: #999999; color: #fff">수기 환불</a></li>--}}
                                                 @endif
                                             </ul>
                                         </div>

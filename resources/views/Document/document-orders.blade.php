@@ -178,23 +178,24 @@
                                         <input type="checkbox" name="checkAll">
                                     </label>
                                 </th>
-                                <th>번호</th>
-                                <th style="width: 7%">브랜드<br>채널</th>
-                                <th style="width: 7%">수집일<br>배송일</th>
-                                <th>주문자<br>연락처</th>
-                                <th>받는분<br>연락처</th>
-                                <th>주문상품<br>합계금액</th>
-                                <th>배송지<br>보내는분</th>
-                                <th style="width: 7%">결제수단</th>
-                                <th style="width: 6%">결제상태<br>배송상태</th>
-                                <th>담당자</th>
-                                <th>전송</th>
-                                <th>기타</th>
+                                <th>주문번호</th>
+                                <th>브랜드</th>
+                                <th style="width: 7%">주문일<br>배송일</th>
+                                <th>주문자명<br>주문자연락처</th>
+                                <th>받는분<br>받는분연락처</th>
+                                <th>보내는분<br>(리본문구)</th>
+                                <th>배송지</th>
+                                <th>입금자명</th>
+                                <th>상품명</th>
+                                <th>결제금액</th>
+                                <th style="width: 7%">등록일</th>
+                                <th>비고</th>
+                                <th>수정</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @if($orders->count())
+                            @if($orders->items())
                                 @foreach($orders as $order)
                                     @php
                                         $today = Carbon::now()->format('Y-m-d');
@@ -226,11 +227,6 @@
                                         <td class="center">
                                             <p class="brand_type {{$order->brand_type_code}}">{{ BrandAbbr($order->brand_type_code)}}</p>
 
-                                            <a href="javascript:open_win('{{$order->channel_url()}}', 'vendor_domain', 1000, 900, 50, 50)" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="right" data-bs-content="{{$order->channel_mall()}}">
-                                                <p class="brand_type {{$order->mall_code}}" style="margin-top: 3px">
-                                                    {{$order->channel_name()}}
-                                                </p>
-                                            </a>
 
                                         </td>
                                         <!-- 수집일/배송일 -->
@@ -357,25 +353,7 @@
                                         <td class="center" id="send_name{{$order->order_idx}}">{{$order->handler}}</td>
                                         <!-- 전송 -->
                                         <td class="center" id="send_area{{$order->order_idx}}">
-                                            @if($order -> brand_type_code === 'BTCS' || $order -> brand_type_code === 'BTFC')
-                                                @if($order->is_balju === 1)
-                                                    <span>완료</span>
-                                                @elseif(optional($order->is_credit()) && $order->delivery_state_code!=="DLDN" )
-                                                    <button class="btn btn-primary btn-soft-primary btn-sm" onclick="send_intranet('{{ $order->order_idx }}');">발주</button>
-                                                @elseif($order->payment_state_code === 'PSDN' && $order->delivery_state_code!=="DLDN")
-                                                    <button class="btn btn-primary btn-soft-primary btn-sm" onclick="send_intranet('{{ $order->order_idx }}');">발주</button>
-                                                @else
-                                                    <div></div>
-                                                @endif
-                                            @else
-                                                @if($order->is_balju === 1)
-                                                    <span>완료</span>
-                                                @elseif(!($order->payment_state_code === 'PSDN' || $order->payment_type_code === 'PTDP'))
-                                                    <div></div>
-                                                @else
-                                                    <button id="send_btn{{$order->order_idx}}" class="btn btn-primary btn-soft-primary btn-sm" onclick="nr_send(event,'{{ $order->order_idx }}');">전송</button>
-                                                @endif
-                                            @endif
+
                                         </td>
                                         <!-- 배송사진 -->
                                         <td class="center" style="max-width: 110px;">

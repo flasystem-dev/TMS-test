@@ -40,10 +40,10 @@ class DocumentController extends Controller
 
         $query = OrderTranIndexService::getTranQuery($search);
 
-        $data = $query->get();
+      
         $data['sum_amount']= $query->sum('total_amount');
         $data['commonDate'] = CommonCode::commonDate();
-        $data['orders_count'] = $data->count();
+        $data['orders_count'] = $query->get()->count();
         $data['orders'] = OrderTranIndexService::paginate($query);
 
         if(self::rateLimit()) {
