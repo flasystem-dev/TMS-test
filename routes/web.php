@@ -90,6 +90,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::post('order/detail/payment', [App\Http\Controllers\Order\OrderDetailController::class, 'add_payment']);
     Route::post('order/detail/payment-type', [App\Http\Controllers\Order\OrderDetailController::class, 'change_payment_type']);
     Route::post('order/detail/payment-state', [App\Http\Controllers\Order\OrderDetailController::class, 'change_payment_state_code']);
+    Route::post('order/detail/payment-state/PSCC', [App\Http\Controllers\Order\OrderDetailController::class, 'change_payment_state_code_PSCC']);
     Route::post('order/detail/payment/data', [App\Http\Controllers\Order\OrderDetailController::class, 'update_payments']);
     Route::delete('order/detail/payment', [App\Http\Controllers\Order\OrderDetailController::class, 'delete_payment']);
     Route::get('order/detail/alim-talk', [App\Http\Controllers\Order\OrderDetailController::class, 'get_template_data']);
@@ -233,7 +234,7 @@ Route::middleware(['auth','auth-check'])->group(function () {
     Route::get('vendor/check_id_dup', [App\Http\Controllers\Vendor\FlaBusinessController::class, 'checkIdDup'])->name('check_id_dup');
     Route::get('vendor/check_domain_dup', [App\Http\Controllers\Vendor\FlaBusinessController::class, 'checkDomainDup'])->name('check_domain_dup');
     Route::get('vendor/form/recommend', [App\Http\Controllers\Vendor\FlaBusinessController::class, 'get_vendor_list']);
-    
+
 // 사업자 정산
     Route::get('vendor/fla-cal-list', [App\Http\Controllers\Vendor\FlaCalculateController::class, 'flaCalList'])->name('cal-list');
     Route::get('vendor/fla-cal-list-test', [App\Http\Controllers\Vendor\FlaCalculateController::class, 'test_flaCalList']);

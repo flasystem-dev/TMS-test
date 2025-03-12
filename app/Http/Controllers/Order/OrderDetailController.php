@@ -299,6 +299,57 @@ class OrderDetailController extends Controller
         return true;
     }
 
+    ################################################### 결제 - 환불 상태 변경 #############################################
+    public function change_payment_state_code_PSCC(Request $request) {
+        $contents = "<p class='column_container'>";
+        $contents .= "<span class='column_log_text'>[결제 번호]</span>";
+        $contents .= "<span class='origin_value_text'>{$request -> payment_number}</span></p>";
+
+        $payment = OrderPayment::where('order_idx', $request -> order_idx) -> where('payment_number', $request -> payment_number) -> first();
+
+        $contents .= Common::log_contents_frame("결제 환불상태 변경", CommonCodeName($payment->payment_state_code), CommonCodeName($request -> payment_state_code));
+
+        switch ($payment -> payment_state_code) {
+            case 'PSDN':
+            case 'PSUD':
+                if ($request->payment_state_code === "PSCC") {
+                    $payment->cancel_amount = $payment->payment_amount;
+                    $payment->payment_amount = 0;
+                }
+                break;
+            case 'PSCC':
+                switch ($request -> payment_state_code) {
+                    case "PSDN":
+                    case "PSUD":
+                        $payment -> payment_amount = $payment -> cancel_amount;
+                        $payment -> cancel_amount = 0;
+                }
+                break;
+        }
+
+        if(($request->payment_state_code === "PSDN") && empty($payment->payment_time)) {
+            $payment -> payment_time = NOW();
+        }
+
+        $payment -> payment_state_code = $request -> payment_state_code;
+        $payment -> save();
+
+        $order = OrderData::find($request->order_idx);
+
+        DB::table('order_log') -> insert([
+            "od_id" => $order->od_id,
+            "log_by_name" => Auth::user()->name,
+            "log_time" => NOW(),
+            "log_status" => "결제 변경",
+            "log_content" => $contents
+        ]);
+
+        OrderService::amountStateVerification($order->order_idx);
+
+        Session::flash('update', 1);
+        return true;
+    }
+
     ############################################### 결제 - 결제 수단 변경 #################################################
     public function change_payment_type(Request $request) {
         $contents = "<p class='column_container'>";

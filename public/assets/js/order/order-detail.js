@@ -515,7 +515,7 @@ function change_payment_state_PSCC(payment_number) {
         formData.append('payment_state_code', 'PSCC')
 
         $.ajax({
-            url: main_url + "/order/detail/payment-state",
+            url: main_url + "/order/detail/payment-state/PSCC",
             method: "POST",
             data: formData,
             async: false,
