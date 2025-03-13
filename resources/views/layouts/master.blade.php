@@ -42,6 +42,7 @@
     <!-- JAVASCRIPT -->
     @include('layouts.vendor-scripts')
     <script>
+        window.setCommonDate(@json(commonDate()));
         window.onload = function() {
             $('.loader').fadeOut(500)
         }

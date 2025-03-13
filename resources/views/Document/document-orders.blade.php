@@ -234,10 +234,8 @@
                                             <div style="position: relative" class="date_container simptip-position-bottom simptip-fade cursor_p" tooltip="{{$order->admin_memo}}" flow="down">
 
                                             <span class="span_date" onclick="order_detail('{{$order->order_idx}}');">
-                                                 <input type="text" class="modify_text" value="{{$order->create_ts}}">
-                                                <span class="deli_date span_date">
-                                                    <input type="text" class="modify_text" value="{{$order->delivery_date}}">
-                                                </span>
+                                                 <input type="text" class="modify_text" value="{{ date('Y-m-d', strtotime($order->create_ts)) }}">
+                                                 <input type="text" class="modify_text" value="{{ date('Y-m-d', strtotime($order->create_ts)) }}">
                                                 @if(!empty($order->admin_memo))
                                                         <i class="mdi mdi-note-text-outline memo_check"></i>
                                                     @endif

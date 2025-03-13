@@ -285,7 +285,7 @@ label.checkbox_toggle_label::before {
 .PTMN { background-color: #7a7a7a; }
 .PTTD { background-color: #ad7bff; }
 .PTDB { background-color: #2cc577; }
-.PTDP { background-color: #bbaf6d; }
+.PTDP { background-color: #db9fa7; }
 
 
 .order_top_data_container { display: flex; justify-content: space-between; }
@@ -974,3 +974,11 @@ label{
 .product_select_table .product_option .custom-option-name::placeholder { color: #d1d1d1; }
 .product_select_table .product_option .custom-option-price { display: inline-block; width: 100px; height: 25px; padding: 3px 5px; text-align: end;}
 .product_select_table .product_option .custom-option-delete { width: 20px; height: 20px; padding: 0; line-height: 1;}
+
+.modify_text {
+    margin: 2px;
+    height: 20px;
+    border: solid 1px #adadad;
+    border-radius: 3px;
+    text-align:center;
+}

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    미수현황
+    미수현황 (거래처)
 @endsection
 @section('content')
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -12,17 +12,6 @@
                     <form method="get" id="search-form">
                         <div class="search_area_menu1 mb-3">
                             <div class="menu1">
-                                <div class="input-group standard-label-container">
-                                    <span class="input-group-text">기준</span>
-                                    <input type="radio" class="btn-check" name="standard" id="standard-order">
-                                    <label class="btn select-label standard-label" for="standard-order">주문</label>
-                                    <input type="radio" class="btn-check" name="standard" id="standard-client" checked>
-                                    <label class="btn select-label standard-label" for="standard-client">거래처</label>
-                                    <input type="radio" class="btn-check" name="standard" id="standard-vendor">
-                                    <label class="btn select-label standard-label" for="standard-vendor">사업자</label>
-                                </div>
-                            </div>
-                            <div class="menu2">
                                 <div class="input-group brand_btns">
                                     <span class="input-group-text">브랜드</span>
                                     @foreach($brands as $brand)
@@ -83,25 +72,25 @@
                                         <option value="create_ts">수집일</option>
                                     </select>
                                     <input type="date" class="form-control datepicker" id="start_date" name="start_date"
-                                           value="{{request()->start_date ?? now()->subMonths(3)->format('Y-m-d') }}">
+                                           value="{{request()->start_date ?? now()->subMonths(3)->toDateString() }}">
                                     <input type="date" class="form-control datepicker" id="end_date" name='end_date'
-                                           value="{{request()->end_date ?? $commonDate['today']}}">
+                                           value="{{request()->end_date ?? now()->toDateString() }}">
                                 </div>
                             </div>
                             <div class="menu2">
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-light" onclick="dateSel('어제');">어제</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('오늘');">오늘</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('내일');">내일</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('이번주');">이번주</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('이번달');">이번달</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('지난주');">지난주</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('지지난달');">지지난달</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('지난달');">지난달</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('3개월');">3개월</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('6개월');">6개월</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('금년');">금년</button>
-                                    <button type="button" class="btn btn-light" onclick="dateSel('전년');">전년</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('어제');">어제</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('오늘');">오늘</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('내일');">내일</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('이번주');">이번주</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('이번달');">이번달</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('지난주');">지난주</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('지지난달');">지지난달</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('지난달');">지난달</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('3개월');">3개월</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('6개월');">6개월</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('금년');">금년</button>
+                                    <button type="button" class="btn btn-light" onclick="DateSelector.select('전년');">전년</button>
                                 </div>
                             </div>
                             <div class="menu3">
@@ -133,7 +122,7 @@
                                         </label>
                                     </th>
                                     <th style="width: 4%" class="text-center">번호</th>
-                                    <th style="width: 8%">브랜드<br>채널</th>
+                                    <th style="width: 7%">브랜드<br>채널</th>
                                     <th style="width: 15%">거래처 명</th>
                                     <th style="width: 8%">보증금액(보증종류)<br>계약종료일</th>
                                     <th style="width: 8%">미수금<br>(건수)</th>
@@ -170,8 +159,10 @@
                                             </td>
                                             <!-- 보증금액(보증종류) / 계약종료일 -->
                                             <td data-order="{{ $client->assurance_ex_date }}">
+                                                @if(!empty($client->assurance_amount))
                                                 <p class="cursor_p client-info">{{ number_format($client->assurance_amount) }}</p>
                                                 <p class="cursor_p client-info">{{ $client->assurance_ex_date }}</p>
+                                                @endif
                                             </td>
                                             <!-- 미수금 / 건수 -->
                                             <td data-order="{{ $client->misu_amount }}">
@@ -229,7 +220,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="10" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
+                                        <td colspan="13" class="text-center"><h4 class="my-4">데이터가 없습니다.</h4></td>
                                     </tr>
                                 @endif
                                 </tbody>
@@ -243,62 +234,8 @@
 @endsection
 @section('script')
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{asset('assets/js/outstanding/outstanding.js')}}?v={{ time() }}"></script>
     <script src="{{asset('assets/js/outstanding/clients.js')}}?v={{ time() }}"></script>
-    <script>
-        function order_detail(order_idx) {
-            var url = main_url + '/order/order-detail/' + order_idx;
-
-            @if(Auth::user()->auth < 8)
-            $('#new_order' + order_idx).hide();
-            @endif
-            open_win(url, "주문서" + fix, 1440, 900, 0, 0);
-            fix++;
-        }
-
-        function dateSel(type) {
-            var start_date = '';
-            var end_date = '';
-            if (type == '오늘') {
-                start_date = '{{$commonDate['today']}}';
-                end_date = '{{$commonDate['today']}}';
-            } else if (type == '어제') {
-                start_date = '{{$commonDate['yesterday']}}';
-                end_date = '{{$commonDate['yesterday']}}';
-            } else if (type == '내일') {
-                start_date = '{{$commonDate['tomorrow']}}';
-                end_date = '{{$commonDate['tomorrow']}}';
-            } else if (type == '이번주') {
-                start_date = '{{$commonDate['week']}}';
-                end_date = '{{$commonDate['today']}}';
-            } else if (type == '이번달') {
-                start_date = '{{$commonDate['month']}}';
-                end_date = '{{$commonDate['month_e']}}';
-            } else if (type == '지난주') {
-                start_date = '{{$commonDate['preg_week_s']}}';
-                end_date = '{{$commonDate['preg_week_e']}}';
-            } else if (type == '지난달') {
-                start_date = '{{$commonDate['preg_month_s']}}';
-                end_date = '{{$commonDate['preg_month_e']}}';
-            } else if (type == '지지난달') {
-                start_date = '{{$commonDate['2month_ago_s']}}';
-                end_date = '{{$commonDate['2month_ago_e']}}';
-            } else if (type == '3개월') {
-                start_date = '{{$commonDate['month3']}}';
-                end_date = '{{$commonDate['month_e']}}';
-            } else if (type == '6개월') {
-                start_date = '{{$commonDate['month6']}}';
-                end_date = '{{$commonDate['month_e']}}';
-            } else if (type == '금년') {
-                start_date = '{{$commonDate['year']}}';
-                end_date = '{{$commonDate['year_e']}}';
-            } else if (type == '전년') {
-                start_date = '{{$commonDate['preg_year_s']}}';
-                end_date = '{{$commonDate['preg_year_e']}}';
-            }
-            $('#start_date').val(start_date);
-            $('#end_date').val(end_date);
-        }
-    </script>
 @endsection
 
 

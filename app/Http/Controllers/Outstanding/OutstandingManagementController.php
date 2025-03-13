@@ -30,8 +30,6 @@ class OutstandingManagementController extends Controller
 
         $data['orders'] = OutstandingOrderService::getOrders($search);
 
-        $data['commonDate'] =CommonCode::commonDate();
-
         $data['brands'] = DB::table('code_of_company_info')->select('brand_type_code', "brand_ini")->where('is_used', 1) -> get();
 
         return view('outstanding.orders', $data);
@@ -42,8 +40,6 @@ class OutstandingManagementController extends Controller
 
         $data['vendors'] = OutstandingVendorService::getVendors($search);
 
-        $data['commonDate'] =CommonCode::commonDate();
-
         $data['brands'] = DB::table('code_of_company_info')->select('brand_type_code', "brand_ini")->where('is_used', 1) -> get();
 
         return view('outstanding.vendors', $data);
@@ -53,10 +49,6 @@ class OutstandingManagementController extends Controller
         $search = $request -> except('page', 'standard');
 
         $data['clients'] = OutstandingClientService::getClients($search);
-
-//        dd($data['clients'][0]);
-
-        $data['commonDate'] =CommonCode::commonDate();
 
         $data['brands'] = DB::table('code_of_company_info')->select('brand_type_code', "brand_ini")->where('is_used', 1) -> get();
 

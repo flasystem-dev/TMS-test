@@ -257,3 +257,40 @@ function receipt_popup(url) {
     }
     open_win(url, "증빙", 600,600,50,50);
 }
+
+window.setCommonDate = function (data) {
+    window.commonDate = data;
+};
+
+window.DateSelector = {
+    select: function (type) {
+        if (!window.commonDate) {
+            console.error("공통 날짜 데이터(commonDate)가 설정되지 않았습니다.");
+            return;
+        }
+
+        let start_date = '';
+        let end_date = '';
+
+        switch (type) {
+            case '오늘': start_date = window.commonDate['today']; end_date = window.commonDate['today']; break;
+            case '어제': start_date = window.commonDate['yesterday']; end_date = window.commonDate['yesterday']; break;
+            case '내일': start_date = window.commonDate['tomorrow']; end_date = window.commonDate['tomorrow']; break;
+            case '이번주': start_date = window.commonDate['this_week']; end_date = window.commonDate['today']; break;
+            case '이번달': start_date = window.commonDate['this_month_s']; end_date = window.commonDate['this_month_e']; break;
+            case '지난주': start_date = window.commonDate['prev_week_s']; end_date = window.commonDate['prev_week_e']; break;
+            case '지난달': start_date = window.commonDate['prev_month_s']; end_date = window.commonDate['prev_month_e']; break;
+            case '지지난달': start_date = window.commonDate['2month_ago_s']; end_date = window.commonDate['2month_ago_e']; break;
+            case '3개월': start_date = window.commonDate['3monthAgo']; end_date = window.commonDate['today']; break;
+            case '6개월': start_date = window.commonDate['6monthAgo']; end_date = window.commonDate['today']; break;
+            case '금년': start_date = window.commonDate['this_year_s']; end_date = window.commonDate['this_year_e']; break;
+            case '전년': start_date = window.commonDate['prev_year_s']; end_date = window.commonDate['prev_year_e']; break;
+            default:
+                console.error("올바른 날짜 타입이 아닙니다:", type);
+                return;
+        }
+
+        document.getElementById('start_date').value = start_date;
+        document.getElementById('end_date').value = end_date;
+    }
+};

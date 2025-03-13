@@ -1,4 +1,6 @@
 <?php
+
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -93,5 +95,31 @@ if (!function_exists('formatPhoneNumber')) {
         }
 
         return $phone; // 형식에 맞지 않으면 원본 반환
+    }
+}
+
+if (!function_exists('commonDate')) {
+    function commonDate()
+    {
+        return [
+            'today' => Carbon::today()->toDateString(),
+            'yesterday' => Carbon::yesterday()->toDateString(),
+            'tomorrow' => Carbon::tomorrow()->toDateString(),
+            'this_week' => Carbon::now()->startOfWeek()->toDateString(),
+            'this_month_s' => Carbon::now()->startOfMonth()->toDateString(),
+            'this_month_e' => Carbon::now()->endOfMonth()->toDateString(),
+            'prev_week_s' => Carbon::now()->subWeek()->startOfWeek()->toDateString(),
+            'prev_week_e' => Carbon::now()->subWeek()->endOfWeek()->toDateString(),
+            'prev_month_s' => Carbon::now()->subMonth()->startOfMonth()->toDateString(),
+            'prev_month_e' => Carbon::now()->subMonth()->endOfMonth()->toDateString(),
+            '2month_ago_s' => Carbon::now()->subMonths(2)->startOfMonth()->toDateString(),
+            '2month_ago_e' => Carbon::now()->subMonths(2)->endOfMonth()->toDateString(),
+            '3monthAgo' => Carbon::now()->subMonths(3)->toDateString(),
+            '6monthAgo' => Carbon::now()->subMonths(6)->toDateString(),
+            'this_year_s' => Carbon::now()->startOfYear()->toDateString(),
+            'this_year_e' => Carbon::now()->endOfYear()->toDateString(),
+            'prev_year_s' => Carbon::now()->subYear()->startOfYear()->toDateString(),
+            'prev_year_e' => Carbon::now()->subYear()->endOfYear()->toDateString(),
+        ];
     }
 }

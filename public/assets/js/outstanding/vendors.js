@@ -77,7 +77,7 @@ document.querySelectorAll('.misu-orders').forEach(function(element){
             case 'client':
                 params.set('is_client', '1');
                 break;
-            case 'past':
+            case 'longTerm':
                 params.set('date_type', 'delivery_date');
                 params.set('end_date', getPreviousMonthLastDay());
                 break;
@@ -92,15 +92,3 @@ document.querySelectorAll('.misu-orders').forEach(function(element){
         window.open(newUrl, '_blank');
     })
 });
-
-// 전전달 마지막 날 가져오기
-function getPreviousMonthLastDay() {
-    let today = new Date();
-    let lastDayOfPreviousMonth = new Date(today.getFullYear(), today.getMonth() - 1, 0);
-
-    let year = lastDayOfPreviousMonth.getFullYear();
-    let month = String(lastDayOfPreviousMonth.getMonth() + 1).padStart(2, '0'); // 1~9월 앞에 0 추가
-    let day = String(lastDayOfPreviousMonth.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-}

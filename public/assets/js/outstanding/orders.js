@@ -26,6 +26,13 @@ function getCurrentDateTimeLocal() {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
+function order_detail(order_idx){
+    var url = main_url + '/order/order-detail/'+order_idx;
+
+    open_win(url,"주문서"+fix,1440,900,0,0);
+    fix++;
+}
+
 // 입괄 입금 모달 오픈 시 현재 시간 입력
 document.getElementById('deposit_completed').addEventListener('show.bs.modal', event => {
     document.getElementById('payment_payment_time').value = getCurrentDateTimeLocal();

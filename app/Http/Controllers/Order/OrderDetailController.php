@@ -380,6 +380,8 @@ class OrderDetailController extends Controller
 
         $order -> save();
 
+        OrderService::amountStateVerification($order->order_idx);
+
         Session::flash('update', 1);
         return true;
     }
